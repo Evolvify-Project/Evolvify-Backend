@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Entities
 {
-    public class Skill
+    public class Skill:BaseEntity<int>
     {
-        public int Id { get; set; }
         public string Name { get; set; }=string.Empty;
         public string Description { get; set; } = string.Empty;
-
         public ICollection<Module> Modules { get; set; } = new List<Module>();
 
     }

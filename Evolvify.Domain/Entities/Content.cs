@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Entities
 {
-    public class Content
+    public class Content: BaseEntity<int>
     {
-        public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Url { get; set; } = string.Empty;
         public string Text { get; set; } = string.Empty;
 
         public ContentTypes ContentType { get; set; }
-        public ICollection<Module> Modules { get; set; }
+        public ICollection<Module> Modules { get; set; }=new List<Module>();
 
     }
 }
