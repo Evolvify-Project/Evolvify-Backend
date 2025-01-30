@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Evolvify.Application\Evolvify.Application.csproj" />
+  </ItemGroup>
+
 </Project>
