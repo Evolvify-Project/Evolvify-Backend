@@ -1,4 +1,5 @@
 ﻿using Evolvify.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using Module = Evolvify.Domain.Entities.Module;
 
 namespace Evolvify.Infrastructure.Data.Context
 {
-    public class EvolvifyDbContext:DbContext
+    public class EvolvifyDbContext:IdentityDbContext<ApplicationUser>
     {
         public EvolvifyDbContext(DbContextOptions<EvolvifyDbContext> options):base(options)
         {
