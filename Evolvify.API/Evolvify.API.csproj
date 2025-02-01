@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -15,12 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Evolvify.Application\Evolvify.Application.csproj" />
-    <ProjectReference Include="..\Evolvify.Infrastructure\Evolvify.Infrastructure.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Evolvify.Application\Evolvify.Application.csproj" />
+    <ProjectReference Include="..\Evolvify.Infrastructure\Evolvify.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

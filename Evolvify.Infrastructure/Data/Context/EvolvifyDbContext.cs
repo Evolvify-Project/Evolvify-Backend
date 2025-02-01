@@ -11,11 +11,11 @@ using Module = Evolvify.Domain.Entities.Module;
 
 namespace Evolvify.Infrastructure.Data.Context
 {
-    public class EvolvifyDbContext:IdentityDbContext<ApplicationUser>
+    public class EvolvifyDbContext : IdentityDbContext<ApplicationUser>
     {
         public EvolvifyDbContext(DbContextOptions<EvolvifyDbContext> options):base(options)
         {
-           
+            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
