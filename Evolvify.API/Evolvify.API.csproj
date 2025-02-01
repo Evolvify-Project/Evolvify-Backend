@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Evolvify.Application\Evolvify.Application.csproj" />
     <ProjectReference Include="..\Evolvify.Infrastructure\Evolvify.Infrastructure.csproj" />
   </ItemGroup>
