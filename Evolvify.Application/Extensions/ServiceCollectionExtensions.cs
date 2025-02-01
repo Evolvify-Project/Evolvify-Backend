@@ -1,6 +1,9 @@
-﻿using FluentValidation;
+﻿using Evolvify.Application.Identity.Register;
+using Evolvify.Application.Token;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +22,9 @@ namespace Evolvify.Application.Extensions
 
             services.AddValidatorsFromAssembly(applicatonsAssembly)
                 .AddFluentValidationAutoValidation();
+
+            services.AddScoped<ITokenService, TokenService>();
+
         }
     }
 }
