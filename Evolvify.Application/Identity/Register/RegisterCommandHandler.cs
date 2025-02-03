@@ -2,6 +2,7 @@
 using Evolvify.Domain.Entities;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,13 +28,20 @@ namespace Evolvify.Application.Identity.Register
             var validationResult = await validator.ValidateAsync(request);
             if(!validationResult.IsValid)
             {
-                return new ApiResponse<string>(false,"Validation failed",null,validationResult.Errors.Select(e=>e.ErrorMessage).ToList());
+                return new ApiResponse<string>(
+                    false
+                    ,StatusCodes.Status400BadRequest
+                    ,"Validation failed"
+                    ,null
+                    ,validationResult.Errors
+                        .Select(e=>e.ErrorMessage).ToList()
+                );
             }
 
             var existingUser= await userManager.FindByEmailAsync(request.Email);  
             if(existingUser!=null)
             {
-                return new ApiResponse<string>(false,"Email already exists",null, new List<string> { "Email is already registered" });
+                return new ApiResponse<string>(false,StatusCodes.Status400BadRequest,"Email already exists",null, new List<string> { "Email is already registered" });
             }
 
             var newUser = new ApplicationUser
@@ -46,10 +54,10 @@ namespace Evolvify.Application.Identity.Register
 
             if(!result.Succeeded)
             {
-                return new ApiResponse<string>(false,"Failed to create user",null, result.Errors.Select(e=>e.Description).ToList());
+                return new ApiResponse<string>(false,StatusCodes.Status400BadRequest,"Failed to create user",null, result.Errors.Select(e=>e.Description).ToList());
             }
 
-            return new ApiResponse<string>(true,"User created successfully");
+            return new ApiResponse<string>(true,StatusCodes.Status200OK,"User created successfully");
 
 
         }

@@ -17,7 +17,7 @@ namespace Evolvify.Application.Extensions
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            var applicatonsAssembly=typeof(ServiceCollectionExtensions).Assembly;
+            var applicatonsAssembly=Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddValidatorsFromAssembly(applicatonsAssembly)

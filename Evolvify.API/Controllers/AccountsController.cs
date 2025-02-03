@@ -25,16 +25,7 @@ namespace Evolvify.API.Controllers
             {
                 return Ok(response);
             }
-            return BadRequest(new ProblemDetails
-            {
-                Status = StatusCodes.Status400BadRequest,
-                Title = "One or more errors occurred",
-                Detail = response.Message,
-                Extensions = { { "errors", response.Errors } }
-
-            });
-
-
+            return BadRequest(response);
         }
 
         [HttpPost("login")]
