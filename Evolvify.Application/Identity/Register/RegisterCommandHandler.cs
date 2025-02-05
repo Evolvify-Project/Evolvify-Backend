@@ -1,5 +1,6 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities;
+using Evolvify.Domain.Exceptions;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,27 +17,15 @@ namespace Evolvify.Application.Identity.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand,ApiResponse<string>>
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IValidator<RegisterCommand> validator;
 
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,IValidator<RegisterCommand> validator)
+        public RegisterCommandHandler(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
-            this.validator = validator;
+           
         }
         public async Task<ApiResponse<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         { 
-            var validationResult = await validator.ValidateAsync(request);
-            if(!validationResult.IsValid)
-            {
-                return new ApiResponse<string>(
-                    false
-                    ,StatusCodes.Status400BadRequest
-                    ,"Validation failed"
-                    ,null
-                    ,validationResult.Errors
-                        .Select(e=>e.ErrorMessage).ToList()
-                );
-            }
+           
 
             var existingUser= await userManager.FindByEmailAsync(request.Email);  
             if(existingUser!=null)

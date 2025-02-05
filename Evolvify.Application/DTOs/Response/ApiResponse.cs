@@ -22,6 +22,7 @@ namespace Evolvify.Application.DTOs.Response
             StatusCode = statusCode;
             Data = data!;
             Errors = errors ?? new List<string>();
+           
         }
 
        private string GetDefaultMessage(int statusCode)

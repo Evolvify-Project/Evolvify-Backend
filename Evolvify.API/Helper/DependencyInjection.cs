@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Text.Json;
 using Evolvify.Application.DTOs.Response;
+using Evolvify.API.Middlewares;
 
 namespace Evolvify.API.Helper
 {
@@ -17,7 +18,8 @@ namespace Evolvify.API.Helper
             services.AddBuildInService();
             services.AddSwaggerService();
             services.AddApplicationServices();
-            services.AddApiBehaviorServices();
+            services.AddValiadiationErrorHandlingServices();
+            services.Register();
             return services;
         }
         private static void AddIdentityService(this IServiceCollection services)
@@ -36,6 +38,10 @@ namespace Evolvify.API.Helper
         {
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+        }
+        private static void Register(this IServiceCollection services)
+        {
+            services.AddScoped<ExceptionMiddleware>();
         }
         private static void AddValiadiationErrorHandlingServices(this IServiceCollection services)
         {
