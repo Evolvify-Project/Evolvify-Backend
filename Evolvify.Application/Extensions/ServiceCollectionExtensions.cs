@@ -1,4 +1,5 @@
-﻿using Evolvify.Application.Identity.Register;
+﻿using Evolvify.Application.Email.EmailServices;
+using Evolvify.Application.Identity.Register;
 using Evolvify.Application.Token;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -24,6 +25,7 @@ namespace Evolvify.Application.Extensions
                 .AddFluentValidationAutoValidation();
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddTransient<IEmailService, EmailService>();
 
         }
     }
