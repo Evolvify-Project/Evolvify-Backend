@@ -1,4 +1,5 @@
 ﻿using Evolvify.Application.DTOs.Response;
+using Evolvify.Application.Email.EmailServices;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
 using FluentValidation;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,11 +19,12 @@ namespace Evolvify.Application.Identity.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand,ApiResponse<string>>
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEmailService emailService;
 
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager)
+        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,IEmailService emailService)
         {
             this.userManager = userManager;
-           
+            this.emailService = emailService;
         }
         public async Task<ApiResponse<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         { 
@@ -45,8 +48,12 @@ namespace Evolvify.Application.Identity.Register
             {
                 return new ApiResponse<string>(false,StatusCodes.Status400BadRequest,"Failed to create user",null, result.Errors.Select(e=>e.Description).ToList());
             }
+            
+            var code=await userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
-            return new ApiResponse<string>(true,StatusCodes.Status200OK,"User created successfully");
+              await emailService.SendEmailConfirmed(newUser.Email, code);
+
+            return new ApiResponse<string>(true,StatusCodes.Status200OK, "User registered successfully.Please check your email to confirm your account.");
 
 
         }

@@ -24,6 +24,7 @@ namespace Evolvify.Application.Extensions
 
             var applicatonsAssembly =Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
             services.AddValidatorsFromAssembly(applicatonsAssembly)
                 .AddFluentValidationAutoValidation();
 

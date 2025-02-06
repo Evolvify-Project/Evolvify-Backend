@@ -1,4 +1,5 @@
-﻿using Evolvify.Application.Identity.Login;
+﻿using Evolvify.Application.Identity.ConfirmEmail;
+using Evolvify.Application.Identity.Login;
 using Evolvify.Application.Identity.Register;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +29,17 @@ namespace Evolvify.API.Controllers
             return BadRequest(response);
         }
 
+        [HttpPost("EmailConfirmation")]
+        public async Task<IActionResult> EmailConfirmation([FromBody]ConfirmEmailCommand command)
+        {
+            var response = await mediator.Send(command);
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand command)
         {
@@ -36,17 +48,10 @@ namespace Evolvify.API.Controllers
             {
                 return Ok(response);
             }
-            return BadRequest(new ProblemDetails
-            {
-                Status = StatusCodes.Status400BadRequest,
-                Title = "One or more errors occurred",
-                Detail = response.Message,
-                Extensions = { { "errors", response.Errors } }
-
-            });
-          
-
+            return BadRequest(response);
 
         }
+
+       
     }
 }

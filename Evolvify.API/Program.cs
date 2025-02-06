@@ -16,7 +16,6 @@ namespace Evolvify.API
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDependency(builder.Configuration);
-            builder.Services.AddInfrastructure(builder.Configuration);
 
 
             var app = builder.Build();

@@ -10,5 +10,6 @@ namespace Evolvify.Application.Email.EmailServices
     public interface IEmailService
     {
         Task SendEmail(MailRequest mailRequest);
+        Task SendEmailConfirmed(string email, string token);
     } 
 }

@@ -7,6 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Text.Json;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.API.Middlewares;
+using Evolvify.Infrastructure.Extensions;
 
 namespace Evolvify.API.Helper
 {
@@ -14,22 +15,16 @@ namespace Evolvify.API.Helper
     {
         public static IServiceCollection AddDependency(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentityService();
             services.AddBuildInService();
             services.AddSwaggerService();
+            services.AddInfrastructure(configuration);
             services.AddApplicationServices(configuration);
             services.AddValiadiationErrorHandlingServices();
+
             services.Register();
             return services;
         }
-        private static void AddIdentityService(this IServiceCollection services)
-        {
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<EvolvifyDbContext>()
-                    .AddDefaultTokenProviders();
-
-
-        }
+       
 
         private static void AddBuildInService(this IServiceCollection services) =>
              services.AddControllers();

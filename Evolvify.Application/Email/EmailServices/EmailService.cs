@@ -57,5 +57,19 @@ namespace Evolvify.Application.Email.EmailServices
             smptp.Disconnect(true);
 
          }
+
+        public async Task SendEmailConfirmed(string email, string token)
+        {
+            var emailRequest = new MailRequest
+            {
+                Subject = "Confirm your email",
+                Body= "Thank you for registering with us. Please use This OTP to complete your registration process: "+token,
+                MailTo = email
+            };
+            await SendEmail(emailRequest);
+        }
+
+
+
     }
 }
