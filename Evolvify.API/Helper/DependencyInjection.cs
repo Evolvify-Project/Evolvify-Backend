@@ -17,7 +17,7 @@ namespace Evolvify.API.Helper
             services.AddIdentityService();
             services.AddBuildInService();
             services.AddSwaggerService();
-            services.AddApplicationServices();
+            services.AddApplicationServices(configuration);
             services.AddValiadiationErrorHandlingServices();
             services.Register();
             return services;

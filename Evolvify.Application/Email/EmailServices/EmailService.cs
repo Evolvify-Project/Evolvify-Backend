@@ -32,6 +32,21 @@ namespace Evolvify.Application.Email.EmailServices
             emailMessage.Subject=mailRequest.Subject;
 
             var emailBodyBuilder = new BodyBuilder();
+
+            if(mailRequest.attachment != null)
+            {
+                byte[] fileBytes;
+                foreach(var file in mailRequest.attachment)
+                {
+                    if (file.Length > 0)
+                    {
+                        using var ms=new MemoryStream();
+                        file.CopyTo(ms);
+                        fileBytes=ms.ToArray();
+                        emailBodyBuilder.Attachments.Add(file.FileName, fileBytes,ContentType.Parse(file.ContentType));
+                    }
+                }
+            }
             emailBodyBuilder.HtmlBody=mailRequest.Body;
             emailMessage.Body=emailBodyBuilder.ToMessageBody();
 
@@ -41,6 +56,6 @@ namespace Evolvify.Application.Email.EmailServices
             await smptp.SendAsync(emailMessage);
             smptp.Disconnect(true);
 
-        }
+         }
     }
 }

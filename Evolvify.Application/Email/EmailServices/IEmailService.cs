@@ -1,4 +1,4 @@
-﻿using Evolvify.Application.Email.MailSettings;
+﻿using Evolvify.Application.Email.EmailSettings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +10,5 @@ namespace Evolvify.Application.Email.EmailServices
     public interface IEmailService
     {
         Task SendEmail(MailRequest mailRequest);
-    }
+    } 
 }
