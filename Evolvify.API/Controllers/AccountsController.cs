@@ -1,6 +1,8 @@
 ﻿using Evolvify.Application.Identity.ConfirmEmail;
+using Evolvify.Application.Identity.ForgetPassword;
 using Evolvify.Application.Identity.Login;
 using Evolvify.Application.Identity.Register;
+using Evolvify.Application.Identity.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +54,20 @@ namespace Evolvify.API.Controllers
 
         }
 
-       
+        [HttpPost("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            //return response.Success ? Ok(response) : BadRequest(response);
+            return StatusCode(response.StatusCode, response);
+
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            return response.Success ? Ok(response) : BadRequest(response);
+        }
     }
 }
