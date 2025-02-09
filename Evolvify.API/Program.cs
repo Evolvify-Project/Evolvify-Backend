@@ -5,6 +5,7 @@ using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Evolvify.API
 {
@@ -15,12 +16,9 @@ namespace Evolvify.API
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDependency(builder.Configuration);
-            builder.Services.AddInfrastructure(builder.Configuration);
-            builder.Services.AddMediatR(configration =>
-            {
-                configration.RegisterServicesFromAssembly(typeof(Program).Assembly);
-            });
 
+            builder.Services.AddInfrastructure(builder.Configuration);
+           
             var app = builder.Build();
             app.ConfigureMiddlewareAsync();
             app.Run();

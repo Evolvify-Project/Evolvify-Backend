@@ -31,21 +31,27 @@ namespace Evolvify.Application.Identity.Login
                 return new ApiResponse<TokenResponse>(
 
                     success : false,
-                     message: "Invalid credentials",
+                    statusCode : 400,
+                    message: "Invalid credentials",
                     errors : new List<string>() { "Email or password is incorrect" }
                 );
-
                 
             }
-
             var result=await signInManager.PasswordSignInAsync(user, request.Password, false,false);
-            if (!result.Succeeded)
+            var confirmedEmail = await userManager.IsEmailConfirmedAsync(user);
+            if (!confirmedEmail)
             {
-                return new ApiResponse<TokenResponse>(false, "Invalid credentials", null, new List<string> { "Email or password is incorrect" });
+                return new ApiResponse<TokenResponse>(false, 400, "Email not confirmed", null, new List<string> { "Email not confirmed" });
             }
 
+            if (!result.Succeeded)
+            {
+                return new ApiResponse<TokenResponse>(false,400, "Invalid credentials", null, new List<string> { "Email or password is incorrect" });
+            }
+           
+
             var token = await tokenService.CreateToken(user, userManager);
-            return new ApiResponse<TokenResponse>(true, "Login successful", token);
+            return new ApiResponse<TokenResponse>(true,200, "Login successful", token);
 
 
 

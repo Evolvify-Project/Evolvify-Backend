@@ -1,5 +1,8 @@
-﻿using Evolvify.Application.Identity.Login;
+﻿using Evolvify.Application.Identity.ConfirmEmail;
+using Evolvify.Application.Identity.ForgetPassword;
+using Evolvify.Application.Identity.Login;
 using Evolvify.Application.Identity.Register;
+using Evolvify.Application.Identity.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,16 +28,18 @@ namespace Evolvify.API.Controllers
             {
                 return Ok(response);
             }
-            return BadRequest(new ProblemDetails
+            return BadRequest(response);
+        }
+
+        [HttpPost("EmailConfirmation")]
+        public async Task<IActionResult> EmailConfirmation([FromBody]ConfirmEmailCommand command)
+        {
+            var response = await mediator.Send(command);
+            if (response.Success)
             {
-                Status = StatusCodes.Status400BadRequest,
-                Title = "One or more errors occurred",
-                Detail = response.Message,
-                Extensions = { { "errors", response.Errors } }
-
-            });
-
-
+                return Ok(response);
+            }
+            return BadRequest(response);
         }
 
         [HttpPost("login")]
@@ -45,17 +50,24 @@ namespace Evolvify.API.Controllers
             {
                 return Ok(response);
             }
-            return BadRequest(new ProblemDetails
-            {
-                Status = StatusCodes.Status400BadRequest,
-                Title = "One or more errors occurred",
-                Detail = response.Message,
-                Extensions = { { "errors", response.Errors } }
+            return BadRequest(response);
 
-            });
-          
+        }
 
+        [HttpPost("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            //return response.Success ? Ok(response) : BadRequest(response);
+            return StatusCode(response.StatusCode, response);
 
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            return response.Success ? Ok(response) : BadRequest(response);
         }
     }
 }
