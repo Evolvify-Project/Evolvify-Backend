@@ -1,12 +1,12 @@
 ﻿using Evolvify.Domain.Entities;
-using Evolvify.Infrastructure.Repositories;
+using Evolvify.Domain.Interface.Repositories.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Infrastructure.UnitOfWork
+namespace Evolvify.Domain.Interface.UnitOfWork.Interface
 {
     public interface IUnitOfWork
     {

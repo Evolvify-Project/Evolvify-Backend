@@ -1,6 +1,8 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Repositories;
+using Evolvify.Domain.Interface.Repositories.Interface;
+using Evolvify.Domain.Interface.UnitOfWork.Interface;
 using System;
 using System.Collections;
 using System.Collections.Generic;

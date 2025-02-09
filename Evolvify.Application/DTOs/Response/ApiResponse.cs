@@ -9,16 +9,38 @@ namespace Evolvify.Application.DTOs.Response
     public class ApiResponse<T>
     {
         public bool Success { get; set; }
+        public int StatusCode { get; set; }
         public string Message { get; set; }
         public T Data { get; set; }
         public List<string> Errors { get; set; }
 
-        public ApiResponse(bool success, string message, T data = default, List<string> errors = null)
+       
+        public ApiResponse(bool success,int statusCode, string message, T? data = default, List<string>? errors = null)
         {
             Success = success;
-            Message = message;
-            Data = data;
+            Message = message?? GetDefaultMessage(statusCode);
+            StatusCode = statusCode;
+            Data = data!;
             Errors = errors ?? new List<string>();
+           
         }
+
+       private string GetDefaultMessage(int statusCode)
+        {
+            return statusCode switch
+            {
+                200 => "The request has succeeded.",
+                201 => "The request has succeeded and a new resource has been created as a result.",
+                204 => "The request has succeeded and there is no content to send in the response payload body.",
+                400 => "The server could not understand the request due to invalid syntax.",
+                401 => "The client must authenticate itself to get the requested response.",
+                403 => "The client does not have access rights to the content.",
+                404 => "The server can not find the requested resource.",
+                405 => "The method specified in the request is not allowed.",
+                500 => "The server has encountered a situation it doesn't know how to handle.",
+                _ => "An error occurred while processing the request."
+            };
+        }
+
     }
 }
