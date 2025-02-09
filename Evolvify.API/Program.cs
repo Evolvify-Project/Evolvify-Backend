@@ -16,7 +16,10 @@ namespace Evolvify.API
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDependency(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
-
+            builder.Services.AddMediatR(configration =>
+            {
+                configration.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            });
 
             var app = builder.Build();
             app.ConfigureMiddlewareAsync();
