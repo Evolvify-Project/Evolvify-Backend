@@ -2,12 +2,7 @@
 using Evolvify.Domain.Interfaces;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Repositories;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Evolvify.Infrastructure.UnitOfWork
 {

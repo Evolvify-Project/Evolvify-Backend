@@ -21,7 +21,7 @@ namespace Evolvify.API.Helper
             services.AddApplicationServices(configuration);
             services.AddValiadiationErrorHandlingServices();
 
-            services.Register();
+            services.MiddlewareService();
             return services;
         }
        
@@ -34,7 +34,7 @@ namespace Evolvify.API.Helper
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }
-        private static void Register(this IServiceCollection services)
+        private static void MiddlewareService(this IServiceCollection services)
         {
             services.AddScoped<ExceptionMiddleware>();
         }
