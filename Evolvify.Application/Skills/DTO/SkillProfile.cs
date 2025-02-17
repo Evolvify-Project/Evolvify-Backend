@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Evolvify.Application.Skills.Commands.UpdateSkill;
 using Evolvify.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace Evolvify.Application.Skills.DTO
         public SkillProfile()
         {
             CreateMap<Skill, SkillDto>();
+            CreateMap<UpdateSkillCommand, Skill>();
+
         }
     }
 }
