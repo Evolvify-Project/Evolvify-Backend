@@ -1,5 +1,5 @@
 ﻿using Evolvify.Domain.Entities;
-using Evolvify.Infrastructure.Repositories;
+using Evolvify.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,6 @@ namespace Evolvify.Infrastructure.UnitOfWork
     public interface IUnitOfWork
     {
         Task CompleteAsync();
-        ISkillRepo<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : BaseEntity<TKey>;
+        IGenericRepository<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : BaseEntity<TKey>;
     }
 }

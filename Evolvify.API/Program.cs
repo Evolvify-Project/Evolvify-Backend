@@ -11,16 +11,14 @@ namespace Evolvify.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDependency(builder.Configuration);
 
-            builder.Services.AddInfrastructure(builder.Configuration);
-           
             var app = builder.Build();
-            app.ConfigureMiddlewareAsync();
+            await app.ConfigureMiddlewareAsync();
             app.Run();
         }
     }

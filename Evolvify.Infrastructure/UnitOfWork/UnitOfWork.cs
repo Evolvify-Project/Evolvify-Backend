@@ -1,12 +1,8 @@
 ﻿using Evolvify.Domain.Entities;
+using Evolvify.Domain.Interfaces;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Repositories;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Evolvify.Infrastructure.UnitOfWork
 {
@@ -21,18 +17,19 @@ namespace Evolvify.Infrastructure.UnitOfWork
             _repositories = new Hashtable();
         }
 
-        public async Task CompleteAsync() => await _context.SaveChangesAsync();
+        public async Task CompleteAsync()=> await _context.SaveChangesAsync();
+       
 
-        public ISkillRepo<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : BaseEntity<TKey>
+        public IGenericRepository<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : BaseEntity<TKey>
         {
-            if (!_repositories.ContainsKey(typeof(TEntity).Name))
+            var type = typeof(TEntity).Name;
+            if (!_repositories.ContainsKey(type))
             {
-                var repository = new SkillRepo<TEntity, TKey>(_context);
-                _repositories.Add(typeof(TEntity).Name, repository);
+                var repository = new GenericRepository<TEntity,TKey>(_context);
+                _repositories.Add(type, repository);
             }
-
-            return _repositories[typeof(TEntity).Name] as ISkillRepo<TEntity, TKey>;
+            return (IGenericRepository<TEntity, TKey>)_repositories[type];
+           
         }
-
     }
 }
