@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding;
+using Evolvify.Infrastructure.UnitOfWork;
 
 public static class ServiceCollectionExtensions
 {
@@ -45,6 +46,7 @@ public static class ServiceCollectionExtensions
     private static void AddUserDefindService(this IServiceCollection services)
     {
        services.AddScoped<ISeeder,Seeder>();
+       services.AddScoped<IUnitOfWork,UnitOfWork>();
 
     }
 

@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
 using Evolvify.Application.Identity.Register;
+using Evolvify.Application.Skills.DTO;
 using Evolvify.Application.Token;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -32,6 +33,8 @@ namespace Evolvify.Application.Extensions
             services.AddTransient<IEmailService, EmailService>();
 
             services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
+
+            services.AddAutoMapper(applicatonsAssembly);
         }
     }
 }

@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Exceptions
 {
-    public class NotFoundException(string Entity,string id) : Exception($"{Entity} With Id => {id} is not found");
+    public class NotFoundException : Exception
+    {
+        public NotFoundException(string Entity, string id):base(($"{Entity} With Id => {id} is not found"))
+        {
+            
+        }
+
+        public NotFoundException(string message):base(message) 
+        {
+            
+        }
+    };
     
 }
