@@ -7,19 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Skills\Querys\**" />
+    <EmbeddedResource Remove="Skills\Querys\**" />
+    <None Remove="Skills\Querys\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Evolvify.Domain\Evolvify.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MailKit" Version="4.10.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Skills\Querys\" />
   </ItemGroup>
 
 </Project>

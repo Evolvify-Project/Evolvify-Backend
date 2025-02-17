@@ -25,13 +25,21 @@ namespace Evolvify.Application.DTOs.Response
            
         }
 
-       private string GetDefaultMessage(int statusCode)
+        public ApiResponse(T data)
+        {
+            Success = true;
+            Message = string.Empty;
+            StatusCode = 200;
+            Data = data;
+            Errors = new List<string>();
+        }
+
+
+        private string GetDefaultMessage(int statusCode)
         {
             return statusCode switch
             {
-                200 => "The request has succeeded.",
-                201 => "The request has succeeded and a new resource has been created as a result.",
-                204 => "The request has succeeded and there is no content to send in the response payload body.",
+              
                 400 => "The server could not understand the request due to invalid syntax.",
                 401 => "The client must authenticate itself to get the requested response.",
                 403 => "The client does not have access rights to the content.",
