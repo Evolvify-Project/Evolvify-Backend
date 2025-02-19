@@ -1,5 +1,8 @@
-﻿using Evolvify.Domain.Entities;
+﻿using Evolvify.Application.DTOs.Response;
+using Evolvify.Application.Modules.DTO;
+using Evolvify.Domain.Entities;
 using Evolvify.Domain.Enums;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.Command.UpdateModule
 {
-    public class UpdateModuleCommand
+    public class UpdateModuleCommand :IRequest
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
