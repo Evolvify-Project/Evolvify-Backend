@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Evolvify.Application.Modules.Command.UpdateModule;
+using Evolvify.Application.Modules.DTO;
 using Evolvify.Application.Skills.Commands.UpdateSkill;
 using Evolvify.Domain.Entities;
 using System;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Skills.DTO
 {
-    public class SkillProfile:Profile
+    public class ModuleProfile : Profile
     {
-        public SkillProfile()
+        public ModuleProfile()
         {
-            CreateMap<Skill, SkillDto>();
-            CreateMap<UpdateModuleCommand, Module>();
+            CreateMap<Module, ModuleDto>();
+            
 
         }
     }
