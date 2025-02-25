@@ -1,4 +1,5 @@
-﻿using Evolvify.Domain.Entities;
+﻿using Evolvify.Application.Modules.DTO;
+using Evolvify.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace Evolvify.Application.Skills.DTO
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public List<Module> Modules { get; set; }= new List<Module>();
+        public List<ModuleDto> Modules { get; set; }= new List<ModuleDto>();
     }
 }

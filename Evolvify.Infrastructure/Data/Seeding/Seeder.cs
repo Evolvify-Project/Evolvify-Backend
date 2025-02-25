@@ -31,8 +31,14 @@ namespace Evolvify.Infrastructure.Data.Seeding
             {
                 if (!context.Skills.Any())
                 {
-                    var skills =SkillSeeder.GetSkills();
+                    var skills = SkillSeeder.GetSkills();
                     await context.Skills.AddRangeAsync(skills);
+                    await context.SaveChangesAsync();
+                }
+                if (!context.Modules.Any())
+                {
+                    var modules = ModuleSeeder.GetModules();
+                    await context.Modules.AddRangeAsync(modules);
                     await context.SaveChangesAsync();
                 }
             }

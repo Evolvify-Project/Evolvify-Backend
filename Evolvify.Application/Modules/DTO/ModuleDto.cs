@@ -1,4 +1,5 @@
-﻿using Evolvify.Domain.Entities;
+﻿using Evolvify.Application.Contents.DTOs;
+using Evolvify.Domain.Entities;
 using Evolvify.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace Evolvify.Application.Modules.DTO
         public string Title { get; set; } = string.Empty;
         public Level Level { get; set; }
         public int SkillId { get; set; }
-        public Skill Skill { get; set; } = new Skill();
-        public ICollection<Content> Contents { get; set; } = new List<Content>();
+        public ICollection<ContentDto> Contents { get; set; } = new List<ContentDto>();
     }
 }

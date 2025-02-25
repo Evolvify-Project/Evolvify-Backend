@@ -34,7 +34,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("ModulesId");
 
-                    b.ToTable("ContentModule");
+                    b.ToTable("ContentModule", (string)null);
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.ApplicationUser", b =>
@@ -131,7 +131,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contents");
+                    b.ToTable("Contents", (string)null);
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Module", b =>
@@ -160,7 +160,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("Modules");
+                    b.ToTable("Modules", (string)null);
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Skill", b =>
@@ -184,7 +184,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

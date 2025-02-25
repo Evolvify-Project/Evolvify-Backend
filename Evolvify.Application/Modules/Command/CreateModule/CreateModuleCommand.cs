@@ -14,8 +14,8 @@ namespace Evolvify.Application.Modules.Command.CreateModule
     public class CreateModuleCommand : IRequest<ApiResponse<ModuleDto>>
     {
         public string Title { get; set; } = string.Empty;
+
         public Level Level { get; set; }
         public int SkillId { get; set; }
-        public Skill Skill { get; set; } = new Skill();
     }
 }

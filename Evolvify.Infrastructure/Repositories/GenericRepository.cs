@@ -23,7 +23,18 @@ namespace Evolvify.Infrastructure.Repositories
         }
         public async Task CreateAsync(TEntity entity)=> await _dbSet.AddAsync(entity);
         public void Delete(TEntity entity)=> _dbSet.Remove(entity);
-        public async Task<IEnumerable<TEntity>> GetAllAsync()=> await _dbSet.ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            if (typeof(TEntity) == typeof(Skill))
+            {
+                return await _context.Skills.Include(x => x.Modules).ThenInclude(Module => Module.Contents).ToListAsync() as IEnumerable<TEntity> ; 
+            }
+            if (typeof(TEntity) == typeof(Module))
+            {
+                return await _context.Modules.Include(x => x.Contents).ToListAsync() as IEnumerable<TEntity>;
+            }
+            return  await _dbSet.ToListAsync();
+        }
         public async Task<TEntity> GetByIdAsync(TKey id) => await _dbSet.FindAsync(id);
         public void Update(TEntity entity) => _dbSet.Update(entity);
        
