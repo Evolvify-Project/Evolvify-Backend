@@ -18,8 +18,12 @@ namespace Evolvify.Application.Token
         {
             var claims = new List<Claim>()
             {
+                new Claim(ClaimTypes.NameIdentifier,user.Id),
+
                 new Claim(ClaimTypes.Name,user.UserName),
+
                 new Claim(ClaimTypes.Email,user.Email),
+
             };
 
             var userRoles=await userManager.GetRolesAsync(user);
