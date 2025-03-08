@@ -1,21 +1,12 @@
 ﻿using Evolvify.Application.Common.User;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
-using Evolvify.Application.Identity.Register;
-using Evolvify.Application.Skills.DTO;
 using Evolvify.Application.Token;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Evolvify.Application.Extensions
 {

@@ -39,10 +39,10 @@ namespace Evolvify.Application.Identity.Login
             }
             var result=await signInManager.PasswordSignInAsync(user, request.Password, false,false);
             var confirmedEmail = await userManager.IsEmailConfirmedAsync(user);
-            if (!confirmedEmail)
-            {
-                return new ApiResponse<TokenResponse>(false, 400, "Email not confirmed", null, new List<string> { "Email not confirmed" });
-            }
+            //if (!confirmedEmail)
+            //{
+            //    return new ApiResponse<TokenResponse>(false, 400, "Email not confirmed", null, new List<string> { "Email not confirmed" });
+            //}
 
             if (!result.Succeeded)
             {

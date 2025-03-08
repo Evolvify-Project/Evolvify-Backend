@@ -20,7 +20,10 @@ namespace Evolvify.Infrastructure.Configurations.CommunityConfigurations
             builder.Property(p => p.Content)
                 .HasMaxLength(1000)
                 .IsRequired();
-  
+
+            builder.Property(p=>p.Id)
+                .HasDefaultValueSql("NEWID()");
+
         }
     }
 }

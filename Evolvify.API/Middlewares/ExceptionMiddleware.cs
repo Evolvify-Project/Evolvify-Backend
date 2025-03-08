@@ -25,6 +25,18 @@ namespace Evolvify.API.Middlewares
 
                 await context.Response.WriteAsJsonAsync(response);
             }
+            catch(UnAuthourizeException unAuthourize)
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+                var response = new ApiResponse<string>(
+                    success: false,
+                    statusCode: StatusCodes.Status401Unauthorized,
+                    message: unAuthourize.Message
+                );
+
+                await context.Response.WriteAsJsonAsync(response);
+            }
             catch (Exception ex)
             {
                 logger.LogError(ex, ex.Message);

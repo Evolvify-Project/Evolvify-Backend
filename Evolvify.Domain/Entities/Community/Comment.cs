@@ -15,7 +15,7 @@ namespace Evolvify.Domain.Entities.Community
         public ApplicationUser User { get; set; }
         public string UserId { get; set; } = string.Empty;
         public Post Post { get; set; }
-        public int PostId { get; set; }
+        public Guid PostId { get; set; }
         public ICollection<CommentLike> Likes { get; set; } = new List<CommentLike>();
         public ICollection<Reply> Replies { get; set; } = new List<Reply>();
 

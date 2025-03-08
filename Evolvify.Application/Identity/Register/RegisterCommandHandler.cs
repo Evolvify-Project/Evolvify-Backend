@@ -4,6 +4,7 @@ using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,11 +45,15 @@ namespace Evolvify.Application.Identity.Register
 
             var result = await userManager.CreateAsync(newUser, request.Password);
 
+            
+
+
             if(!result.Succeeded)
             {
                 return new ApiResponse<string>(false,StatusCodes.Status400BadRequest,"Failed to create user",null, result.Errors.Select(e=>e.Description).ToList());
             }
-            
+
+           
             var code=await userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
               await emailService.SendEmailConfirmed(newUser.Email, code);

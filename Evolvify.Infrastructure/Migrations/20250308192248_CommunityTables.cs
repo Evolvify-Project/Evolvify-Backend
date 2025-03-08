@@ -11,15 +11,29 @@ namespace Evolvify.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.RenameColumn(
+                name: "CreateAt",
+                table: "Skills",
+                newName: "CreatedAt");
+
+            migrationBuilder.RenameColumn(
+                name: "CreateAt",
+                table: "Modules",
+                newName: "CreatedAt");
+
+            migrationBuilder.RenameColumn(
+                name: "CreateAt",
+                table: "Contents",
+                newName: "CreatedAt");
+
             migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +55,7 @@ namespace Evolvify.Infrastructure.Migrations
                     Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: false)
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,7 +80,7 @@ namespace Evolvify.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PostId = table.Column<int>(type: "int", nullable: false),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -245,6 +259,21 @@ namespace Evolvify.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Posts");
+
+            migrationBuilder.RenameColumn(
+                name: "CreatedAt",
+                table: "Skills",
+                newName: "CreateAt");
+
+            migrationBuilder.RenameColumn(
+                name: "CreatedAt",
+                table: "Modules",
+                newName: "CreateAt");
+
+            migrationBuilder.RenameColumn(
+                name: "CreatedAt",
+                table: "Contents",
+                newName: "CreateAt");
         }
     }
 }
