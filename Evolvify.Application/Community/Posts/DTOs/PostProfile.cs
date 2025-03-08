@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Evolvify.Application.Community.Posts.Commands.UpdatePost;
 using Evolvify.Domain.Entities.Community;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,12 @@ namespace Evolvify.Application.Community.Posts.DTOs
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count));
+
+
+            CreateMap<UpdatePostCommand, Post>()
+                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content));
+           
+
         }
     }
 }

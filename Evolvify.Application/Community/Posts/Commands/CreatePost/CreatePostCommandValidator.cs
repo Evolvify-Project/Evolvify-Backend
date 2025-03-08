@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Community.Posts.Commands
+namespace Evolvify.Application.Community.Posts.Commands.CreatePost
 {
-    public class CreatePostCommandValidator: AbstractValidator<CreatePostCommand>
+    public class CreatePostCommandValidator : AbstractValidator<CreatePostCommand>
     {
         public CreatePostCommandValidator()
         {
