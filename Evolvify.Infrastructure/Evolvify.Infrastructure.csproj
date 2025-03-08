@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Evolvify.Application\Evolvify.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configurations\CommunityConfigurations\" />
-  </ItemGroup>
-
 </Project>
