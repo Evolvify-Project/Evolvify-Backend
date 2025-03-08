@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Community.Posts.Commands.DeletePost
 {
-    public record DeletePostCommand (Guid Id):IRequest
-    {
-    }
+    public record DeletePostCommand (Guid Id):IRequest;
+    
    
 }

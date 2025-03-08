@@ -1,6 +1,8 @@
 ﻿using Evolvify.Application.Community.Posts.Commands.CreatePost;
 using Evolvify.Application.Community.Posts.Commands.DeletePost;
 using Evolvify.Application.Community.Posts.Commands.UpdatePost;
+using Evolvify.Application.Community.Posts.Queries.GetAllPosts;
+using Evolvify.Application.Community.Posts.Queries.GetPostQuery;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,21 +18,34 @@ namespace Evolvify.API.Controllers
         {
             _mediator = mediator;
 
+        
+        }
+        [HttpGet("Post")]
+        public async Task<IActionResult> GetAllPosts()
+        {
+            var result = await _mediator.Send(new GetAllPostsQuery());
+            return Ok(result);
+        }
+
+        [HttpGet("Post/{id}")]
+        public async Task<IActionResult> GetPost([FromRoute]Guid id)
+        {
+            var result = await _mediator.Send(new GetPostQuery(id));
+            return Ok(result);
         }
 
         [HttpPost("Post")]
         public async Task<IActionResult> CreatePost([FromBody] CreatePostCommand command)
         {
             var result = await _mediator.Send(command);
-            //return CreatedAtAction("GetPost", new { id = result.Data.Id }, result);
-            return Created();
+            return CreatedAtAction("GetPost", new { id = result.Data.Id }, result);
+            
         }
 
         [HttpPut("Post/{id}")]
         public async Task<IActionResult> UpdatePost([FromRoute]Guid id, [FromBody]UpdatePostCommand command)
         {
-            command.Id = id;
-            await _mediator.Send(command);
+            await _mediator.Send(new UpdatePostCommand(id, command.Content));
             return NoContent();
         }
 

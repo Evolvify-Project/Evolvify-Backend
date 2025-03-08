@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Community.Posts.Commands.UpdatePost
 {
-    public record UpdatePostCommand(Guid Id, string Content) : IRequest
-    {
-       
-
-    }
+    public record UpdatePostCommand(Guid Id, string Content) : IRequest;
+    
 }
