@@ -21,6 +21,7 @@ namespace Evolvify.Application.Community.Posts.DTOs
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count))
+                .ForMember(dest=>dest.CommentsCount, opt => opt.MapFrom(src => src.Comments.Count))
                 .ReverseMap();
 
 

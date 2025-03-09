@@ -9,7 +9,7 @@ namespace Evolvify.Domain.Entities.Community.Likes
     public class CommentLike:Like
     {
         public Comment Comment { get; set; }
-        public int CommentId { get; set; }
+        public Guid CommentId { get; set; }
     }
     
 }

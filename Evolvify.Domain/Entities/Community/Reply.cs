@@ -16,7 +16,7 @@ namespace Evolvify.Domain.Entities.Community
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public Comment Comment { get; set; }
-        public int CommentId { get; set; }
+        public Guid CommentId { get; set; }
         public ICollection<ReplyLike> Likes { get; set; } = new List<ReplyLike>();
     }
 }

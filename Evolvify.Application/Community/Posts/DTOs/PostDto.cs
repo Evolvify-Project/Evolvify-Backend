@@ -16,7 +16,11 @@ namespace Evolvify.Application.Community.Posts.DTOs
         public string Content { get; set; } = string.Empty;
         public string CreatedAt { get; set; } = string.Empty;
         public string UserId { get; set; } = string.Empty;
-        public ICollection<CommentDto> Comments { get; set; } = new List<CommentDto>();
         public int LikesCount { get; set; }
+
+        public int CommentsCount { get; set; }
+
+        public ICollection<CommentDto> Comments { get; set; } = new List<CommentDto>();
+        
     }
 }

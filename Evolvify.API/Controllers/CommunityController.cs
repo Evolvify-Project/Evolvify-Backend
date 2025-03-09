@@ -1,9 +1,12 @@
-﻿using Evolvify.Application.Community.Posts.Commands.CreatePost;
+﻿using Evolvify.Application.Community.Comments.Commands.CreateComment;
+using Evolvify.Application.Community.Comments.DTOs;
+using Evolvify.Application.Community.Posts.Commands.CreatePost;
 using Evolvify.Application.Community.Posts.Commands.DeletePost;
 using Evolvify.Application.Community.Posts.Commands.UpdatePost;
 using Evolvify.Application.Community.Posts.Queries.GetAllPosts;
 using Evolvify.Application.Community.Posts.Queries.GetPostQuery;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +38,7 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpPost("Post")]
+        [Authorize]
         public async Task<IActionResult> CreatePost([FromBody] CreatePostCommand command)
         {
             var result = await _mediator.Send(command);
@@ -56,6 +60,13 @@ namespace Evolvify.API.Controllers
             return NoContent();
         }
 
+        [HttpPost("Post/{id}/Comment")]
+        public async Task<IActionResult> AddCommentOnPost([FromRoute]Guid id, [FromBody]AddCommentRequest request)
+        {
+            
+            var result = await _mediator.Send(new AddCommentOnPostCommand(id,request.Content));
+            return CreatedAtAction("GetPost", new { id = id }, result);
+        }
 
 
     }

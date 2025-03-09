@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Entities.Community
 {
-    public class Comment
-    {
-        public int Id { get; set; }
+    public class Comment:BaseEntity<Guid>
+    {   
         public string Content { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
         public ApplicationUser User { get; set; }
         public string UserId { get; set; } = string.Empty;
         public Post Post { get; set; }
