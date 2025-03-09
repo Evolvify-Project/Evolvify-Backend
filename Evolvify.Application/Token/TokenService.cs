@@ -1,6 +1,7 @@
 ﻿using Evolvify.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,17 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Token
 {
-    public class TokenService(IConfiguration configuration) : ITokenService
+    public class TokenService : ITokenService
     {
+        private readonly IConfiguration configuration;
+        private readonly JwtSettings jwtSettings;
+
+        public TokenService(IConfiguration configuration, IOptions<JwtSettings> options)
+        {
+            this.configuration = configuration;
+            jwtSettings = options.Value;
+        }
+        
         public async Task<TokenResponse> CreateToken(ApplicationUser user, UserManager<ApplicationUser> userManager)
         {
             var claims = new List<Claim>()
@@ -33,12 +43,12 @@ namespace Evolvify.Application.Token
                 claims.Add(new Claim( ClaimTypes.Role, role));
             }
 
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
 
             var token = new JwtSecurityToken(
-                issuer: configuration["JWT:Issuer"],
-                audience: configuration["JWT:Audience"],
-                expires: DateTime.Now.AddDays(double.Parse(configuration["JWT:TokenExpiry"])),
+                issuer: jwtSettings.Issuer,
+                audience: jwtSettings.Audience,
+                expires: DateTime.Now.AddDays(double.Parse(jwtSettings.TokenExpiry.ToString())),
                 claims: claims,
                 signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
             );
