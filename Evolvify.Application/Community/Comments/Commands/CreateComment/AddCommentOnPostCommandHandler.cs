@@ -31,7 +31,7 @@ public class AddCommentOnPostCommandHandler : IRequestHandler<AddCommentOnPostCo
 
         var userId = user.Id;
        
-        var post = _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
+        var post = await _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
 
         if(post == null)
         {

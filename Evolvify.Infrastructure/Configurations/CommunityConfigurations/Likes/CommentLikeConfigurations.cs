@@ -16,12 +16,15 @@ namespace Evolvify.Infrastructure.Configurations.CommunityConfigurations.Likes
             builder.HasOne(cl => cl.Comment)
                 .WithMany(c => c.Likes)
                 .HasForeignKey(cl => cl.CommentId)
-                .OnDelete(DeleteBehavior.Restrict)
-                ;
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(cl => cl.User)
                 .WithMany()
                 .HasForeignKey(cl => cl.UserId);
+
+            builder.Property(cl => cl.Id)
+                .HasDefaultValueSql("NEWID()");
+
             
         }
     }

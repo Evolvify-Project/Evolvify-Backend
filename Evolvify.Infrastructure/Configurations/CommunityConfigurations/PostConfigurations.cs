@@ -13,6 +13,8 @@ namespace Evolvify.Infrastructure.Configurations.CommunityConfigurations
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
+            builder.HasKey(p => p.Id)
+                ;
             builder.HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId);

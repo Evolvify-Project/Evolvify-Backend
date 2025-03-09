@@ -1,5 +1,9 @@
-﻿using Evolvify.Application.Community.Comments.Commands.CreateComment;
+﻿using Evolvify.Application.Community.Comments.Commands;
+using Evolvify.Application.Community.Comments.Commands.CreateComment;
+using Evolvify.Application.Community.Comments.Commands.DeleteComment;
+using Evolvify.Application.Community.Comments.Commands.UpdateComment;
 using Evolvify.Application.Community.Comments.DTOs;
+using Evolvify.Application.Community.Comments.Queries.GetAllCommentForPost;
 using Evolvify.Application.Community.Posts.Commands.CreatePost;
 using Evolvify.Application.Community.Posts.Commands.DeletePost;
 using Evolvify.Application.Community.Posts.Commands.UpdatePost;
@@ -73,6 +77,29 @@ namespace Evolvify.API.Controllers
             return CreatedAtAction("GetPost", new { id = id }, result);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("Post/{postId}/Comment/{commentId}")]
+        public async Task<IActionResult> DeleteCommentOnPost([FromRoute]Guid postId, [FromRoute]Guid commentId)
+        {
+            await _mediator.Send(new DeleteCommentOnPostCommand(postId, commentId));
+            return NoContent();
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("Post/{postId}/Comment/{commentId}")]
+        public async Task<IActionResult> UpdateCommentOnPost([FromRoute] Guid postId, [FromRoute] Guid commentId, [FromBody] UpdateCommentRequest request)
+        {
+            await _mediator.Send(new UpdateCommentOnPostCommand(postId, commentId, request.Content));
+            return NoContent();
+
+        }
+
+        [HttpGet("Post/{postId}/Comment")]
+        public async Task<IActionResult> GetAllCommentForPost([FromRoute] Guid postId)
+        {
+            var result = await _mediator.Send(new GetAllCommentForPostQuery(postId));
+            return Ok(result);
+        }
 
     }
 }

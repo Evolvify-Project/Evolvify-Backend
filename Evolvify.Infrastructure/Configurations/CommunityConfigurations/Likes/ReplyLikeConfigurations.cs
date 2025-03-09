@@ -22,6 +22,9 @@ namespace Evolvify.Infrastructure.Configurations.CommunityConfigurations.Likes
             builder.HasOne(rl => rl.User)
                 .WithMany()
                 .HasForeignKey(rl => rl.UserId);
+
+            builder.Property(cl => cl.Id)
+                .HasDefaultValueSql("NEWID()");
         }
     }
 }

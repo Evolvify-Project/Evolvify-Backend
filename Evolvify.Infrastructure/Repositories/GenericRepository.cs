@@ -46,7 +46,15 @@ namespace Evolvify.Infrastructure.Repositories
             }
             return  await _dbSet.ToListAsync();
         }
-        public async Task<TEntity> GetByIdAsync(TKey id) => await _dbSet.FindAsync(id);
+        public async Task<TEntity> GetByIdAsync(TKey id)
+        {
+            if(typeof(TEntity) == typeof(Post))
+            {
+                return await _context.Posts.Include(x => x.Comments).ThenInclude(Comment => Comment.Likes).FirstOrDefaultAsync(x => x.Id.Equals(id)) as TEntity;
+            }
+
+           return await _dbSet.FindAsync(id);
+        }
         public void Update(TEntity entity) => _dbSet.Update(entity);
        
     }

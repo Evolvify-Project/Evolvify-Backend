@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    [Migration("20250309120906_CommunityTables")]
+    [Migration("20250309213812_CommunityTables")]
     partial class CommunityTables
     {
         /// <inheritdoc />
@@ -138,11 +138,10 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.CommentLike", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<Guid>("CommentId")
                         .HasColumnType("uniqueidentifier");
@@ -165,11 +164,10 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.PostLike", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -192,11 +190,10 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.ReplyLike", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");

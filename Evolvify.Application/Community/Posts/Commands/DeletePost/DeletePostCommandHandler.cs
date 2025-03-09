@@ -25,11 +25,14 @@ namespace Evolvify.Application.Community.Posts.Commands.DeletePost
             {
                 throw new NotFoundException("Post Not Found");
             }
+
+            _unitOfWork.Repository<Comment, Guid>().DeleteRange(post.Comments);
+            _unitOfWork.Repository<Like, Guid>().DeleteRange(post.Likes);
             _unitOfWork.Repository<Post, Guid>().Delete(post);
+
+
             await _unitOfWork.CompleteAsync();
-
-
-            
+    
         }
     }
 }

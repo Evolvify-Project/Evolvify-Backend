@@ -135,11 +135,10 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.CommentLike", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<Guid>("CommentId")
                         .HasColumnType("uniqueidentifier");
@@ -162,11 +161,10 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.PostLike", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -189,11 +187,10 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.ReplyLike", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
