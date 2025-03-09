@@ -6,6 +6,7 @@ using Evolvify.Application.Community.Posts.Commands.UpdatePost;
 using Evolvify.Application.Community.Posts.Queries.GetAllPosts;
 using Evolvify.Application.Community.Posts.Queries.GetPostQuery;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace Evolvify.API.Controllers
 
         
         }
+
         [HttpGet("Post")]
         public async Task<IActionResult> GetAllPosts()
         {
@@ -37,8 +39,8 @@ namespace Evolvify.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("Post")]
-        [Authorize]
         public async Task<IActionResult> CreatePost([FromBody] CreatePostCommand command)
         {
             var result = await _mediator.Send(command);
@@ -46,6 +48,7 @@ namespace Evolvify.API.Controllers
             
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("Post/{id}")]
         public async Task<IActionResult> UpdatePost([FromRoute]Guid id, [FromBody]UpdatePostCommand command)
         {
@@ -53,6 +56,7 @@ namespace Evolvify.API.Controllers
             return NoContent();
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("Post/{id}")]
         public async Task<IActionResult> DeletePost([FromRoute]Guid id)
         {
@@ -60,6 +64,7 @@ namespace Evolvify.API.Controllers
             return NoContent();
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("Post/{id}/Comment")]
         public async Task<IActionResult> AddCommentOnPost([FromRoute]Guid id, [FromBody]AddCommentRequest request)
         {

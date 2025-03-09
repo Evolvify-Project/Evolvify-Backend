@@ -9,7 +9,7 @@ namespace Evolvify.Application.Community.Comments.DTOs
 {
     public class CommentDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Content { get; set; } = string.Empty;
         public string CreatedAt { get; set; } = string.Empty;
         public string UserId { get; set; } = string.Empty;

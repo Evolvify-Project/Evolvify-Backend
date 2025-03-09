@@ -13,6 +13,10 @@ namespace Evolvify.Infrastructure.Configurations.CommunityConfigurations
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
+            builder.Property(c => c.Id)
+                .HasDefaultValueSql("NEWID()");
+
+
             builder.HasOne(c => c.User)
                 .WithMany()
                 .HasForeignKey(c => c.UserId);

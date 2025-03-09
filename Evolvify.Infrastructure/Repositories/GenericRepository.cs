@@ -1,4 +1,5 @@
 ﻿using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Interfaces;
 using Evolvify.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,10 @@ namespace Evolvify.Infrastructure.Repositories
             if (typeof(TEntity) == typeof(Module))
             {
                 return await _context.Modules.Include(x => x.Contents).ToListAsync() as IEnumerable<TEntity>;
+            }
+            if (typeof(TEntity) == typeof(Post))
+            {
+                return await _context.Posts.Include(x => x.Comments).ThenInclude(Comment => Comment.Likes).ToListAsync() as IEnumerable<TEntity>;
             }
             return  await _dbSet.ToListAsync();
         }

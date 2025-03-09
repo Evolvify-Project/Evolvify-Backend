@@ -1,9 +1,5 @@
-﻿using Evolvify.Domain.Entities;
-using Evolvify.Infrastructure.Data.Context;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 namespace Evolvify.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,14 +7,23 @@ using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding;
 using Evolvify.Infrastructure.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 public static class ServiceCollectionExtensions
 {
+
+    
+
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContextService(configuration);
         services.AddIdentityService();
         services.AddUserDefindService();
+        services.AddAuthenticationService(configuration);
+        services.AddAuthorizationService();
+
         return services;
 
     }
@@ -48,6 +53,40 @@ public static class ServiceCollectionExtensions
        services.AddScoped<ISeeder,Seeder>();
        services.AddScoped<IUnitOfWork,UnitOfWork>();
 
+    }
+
+    
+
+    private static IServiceCollection AddAuthenticationService(this IServiceCollection services,IConfiguration configuration)
+    {
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer =configuration["JwtSettings:Issuer"],
+                    ValidAudience = configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Secret"]))
+                };
+
+
+            });
+
+        return services;
+        
+    }
+    private static IServiceCollection AddAuthorizationService(this IServiceCollection services)
+    {
+
+        services.AddAuthorization();
+
+        return services;
     }
 
 }
