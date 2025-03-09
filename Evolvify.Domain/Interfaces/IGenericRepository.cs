@@ -14,6 +14,7 @@ namespace Evolvify.Domain.Interfaces
         Task CreateAsync(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
+        void DeleteRange(IEnumerable<TEntity> entities);
 
     }
 }

@@ -24,6 +24,12 @@ namespace Evolvify.Infrastructure.Repositories
         }
         public async Task CreateAsync(TEntity entity)=> await _dbSet.AddAsync(entity);
         public void Delete(TEntity entity)=> _dbSet.Remove(entity);
+
+        public void DeleteRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.RemoveRange(entities);
+        }
+
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             if (typeof(TEntity) == typeof(Skill))
