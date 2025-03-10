@@ -56,9 +56,11 @@ namespace Evolvify.Application.Identity.Register
            
             var code=await userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
-              await emailService.SendEmailConfirmed(newUser.Email, code);
+              //await emailService.SendEmailConfirmed(newUser.Email, code);
 
-            return new ApiResponse<string>(true,StatusCodes.Status200OK, "User registered successfully.Please check your email to confirm your account.");
+            //return new ApiResponse<string>(true,StatusCodes.Status200OK, "User registered successfully.Please check your email to confirm your account.");
+
+            return new ApiResponse<string>(true,StatusCodes.Status200OK, $"User registered successfully.use this code to confirm your account [{code}]");
 
 
         }

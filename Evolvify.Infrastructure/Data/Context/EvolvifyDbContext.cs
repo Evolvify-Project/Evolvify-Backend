@@ -33,8 +33,7 @@ namespace Evolvify.Infrastructure.Data.Context
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
-        public DbSet<Reply> Replies { get; set; }
-        public DbSet<ReplyLike> ReplyLikes { get; set; }
+       
 
     }
 }

@@ -9,6 +9,7 @@ using Evolvify.Application.Community.Posts.Commands.DeletePost;
 using Evolvify.Application.Community.Posts.Commands.UpdatePost;
 using Evolvify.Application.Community.Posts.Queries.GetAllPosts;
 using Evolvify.Application.Community.Posts.Queries.GetPostQuery;
+using Evolvify.Application.Community.Replies.Commands.AddReply;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -74,7 +75,7 @@ namespace Evolvify.API.Controllers
         {
             
             var result = await _mediator.Send(new AddCommentOnPostCommand(id,request.Content));
-            return CreatedAtAction("GetPost", new { id = id }, result);
+            return Created();
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -99,6 +100,14 @@ namespace Evolvify.API.Controllers
         {
             var result = await _mediator.Send(new GetAllCommentForPostQuery(postId));
             return Ok(result);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("Comment/{commentId}/Reply")]
+        public async Task<IActionResult> AddReplyOnComment( [FromRoute] Guid commentId, [FromBody] AddCommentRequest request)
+        {
+            var result = await _mediator.Send(new AddReplyOnCommentCommand( commentId, request.Content));
+            return Created();
         }
 
     }

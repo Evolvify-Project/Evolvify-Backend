@@ -40,7 +40,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
-            //options.SignIn.RequireConfirmedEmail = true;
+            options.SignIn.RequireConfirmedEmail = true;
             options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider;
         })
                 .AddEntityFrameworkStores<EvolvifyDbContext>()

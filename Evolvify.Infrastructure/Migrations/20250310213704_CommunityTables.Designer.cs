@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    [Migration("20250309213812_CommunityTables")]
+    [Migration("20250310213704_CommunityTables")]
     partial class CommunityTables
     {
         /// <inheritdoc />
@@ -120,6 +120,9 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("ParentCommentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("PostId")
                         .HasColumnType("uniqueidentifier");
 
@@ -128,6 +131,8 @@ namespace Evolvify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentCommentId");
 
                     b.HasIndex("PostId");
 
@@ -188,32 +193,6 @@ namespace Evolvify.Infrastructure.Migrations
                     b.ToTable("PostLikes");
                 });
 
-            modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.ReplyLike", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReplyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReplyId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ReplyLikes");
-                });
-
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Post", b =>
                 {
                     b.Property<Guid>("Id")
@@ -238,38 +217,6 @@ namespace Evolvify.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("Evolvify.Domain.Entities.Community.Reply", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("CommentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Replies");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Content", b =>
@@ -507,6 +454,11 @@ namespace Evolvify.Infrastructure.Migrations
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Comment", b =>
                 {
+                    b.HasOne("Evolvify.Domain.Entities.Community.Comment", "ParentComment")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentCommentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Evolvify.Domain.Entities.Community.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
@@ -518,6 +470,8 @@ namespace Evolvify.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ParentComment");
 
                     b.Navigation("Post");
 
@@ -562,25 +516,6 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.ReplyLike", b =>
-                {
-                    b.HasOne("Evolvify.Domain.Entities.Community.Reply", "Reply")
-                        .WithMany("Likes")
-                        .HasForeignKey("ReplyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Evolvify.Domain.Entities.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Reply");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Post", b =>
                 {
                     b.HasOne("Evolvify.Domain.Entities.ApplicationUser", "User")
@@ -588,25 +523,6 @@ namespace Evolvify.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Evolvify.Domain.Entities.Community.Reply", b =>
-                {
-                    b.HasOne("Evolvify.Domain.Entities.Community.Comment", "Comment")
-                        .WithMany("Replies")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Evolvify.Domain.Entities.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
 
                     b.Navigation("User");
                 });
@@ -684,11 +600,6 @@ namespace Evolvify.Infrastructure.Migrations
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("Likes");
-                });
-
-            modelBuilder.Entity("Evolvify.Domain.Entities.Community.Reply", b =>
-                {
                     b.Navigation("Likes");
                 });
 

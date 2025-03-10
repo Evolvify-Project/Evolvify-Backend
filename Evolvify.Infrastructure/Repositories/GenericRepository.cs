@@ -42,7 +42,7 @@ namespace Evolvify.Infrastructure.Repositories
             }
             if (typeof(TEntity) == typeof(Post))
             {
-                return await _context.Posts.Include(x => x.Comments).ThenInclude(Comment => Comment.Likes).ToListAsync() as IEnumerable<TEntity>;
+                return await _context.Posts.Include(x => x.Comments).ThenInclude(Comment => Comment.Replies).ToListAsync() as IEnumerable<TEntity>;
             }
             return  await _dbSet.ToListAsync();
         }

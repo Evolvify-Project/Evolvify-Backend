@@ -28,9 +28,12 @@ namespace Evolvify.Infrastructure.Configurations.CommunityConfigurations
             builder.HasOne(c => c.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId)
-                .OnDelete(DeleteBehavior.Restrict)
-                ;
+                .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(c => c.ParentComment)
+                .WithMany(c => c.Replies)
+                .HasForeignKey(c => c.ParentCommentId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
