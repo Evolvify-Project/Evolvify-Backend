@@ -8,6 +8,9 @@ using System.Text.Json;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.API.Middlewares;
 using Evolvify.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Evolvify.API.Helper
 {
@@ -20,7 +23,6 @@ namespace Evolvify.API.Helper
             services.AddInfrastructure(configuration);
             services.AddApplicationServices(configuration);
             services.AddValiadiationErrorHandlingServices();
-
             services.MiddlewareService();
             return services;
         }
@@ -65,5 +67,7 @@ namespace Evolvify.API.Helper
 
             });
         }
+
+
     }
 }

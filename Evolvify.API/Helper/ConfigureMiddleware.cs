@@ -24,6 +24,9 @@ namespace Evolvify.API.Helper
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
+            app.UseAuthentication(); // ✅ مهم يكون قبل UseAuthorization
             app.UseAuthorization();
 
             app.MapControllers();

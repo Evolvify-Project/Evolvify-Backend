@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Evolvify.Domain.Entities.Community;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace Evolvify.Domain.Entities
 {
     public class ApplicationUser:IdentityUser
     {
+       
+      
     }
 }
