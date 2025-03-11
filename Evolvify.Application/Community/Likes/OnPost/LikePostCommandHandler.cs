@@ -30,11 +30,7 @@ namespace Evolvify.Application.Community.Likes.OnPost
         {
 
             var user=_userContext.GetCurrentUser();
-            if (user == null)
-            {
-                throw new UnauthorizedAccessException();
-            }
-
+            
 
             var post= await _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
             if (post == null)
