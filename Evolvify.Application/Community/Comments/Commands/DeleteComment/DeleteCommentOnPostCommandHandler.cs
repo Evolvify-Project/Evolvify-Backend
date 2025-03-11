@@ -1,4 +1,5 @@
 ﻿using Evolvify.Domain.Entities.Community;
+using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
@@ -13,6 +14,11 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
     public class DeleteCommentOnPostCommandHandler : IRequestHandler<DeleteCommentOnPostCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
+
+        public DeleteCommentOnPostCommandHandler(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
         public async Task Handle(DeleteCommentOnPostCommand request, CancellationToken cancellationToken)
         {
             var post = await _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
@@ -29,11 +35,33 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
             }
             else
             {
+                _unitOfWork.Repository<CommentLike, Guid>().DeleteRange(comment.Likes);
+                await _unitOfWork.CompleteAsync();
+
+                if (comment.Replies.Any())
+                {
+                    DeleteReplies(comment.Replies);
+                }
+
+                await _unitOfWork.CompleteAsync();
+
                 _unitOfWork.Repository<Comment, Guid>().Delete(comment);
                 await _unitOfWork.CompleteAsync();
+
             }
 
 
+        }
+        private void DeleteReplies(IEnumerable<Comment> replies)
+        {
+            foreach (var reply in replies)
+            {
+                if (reply.Replies.Any())
+                {
+                    DeleteReplies(reply.Replies); // حذف الردود المتداخلة (Recursive Delete)
+                }
+                _unitOfWork.Repository<Comment, Guid>().Delete(reply);
+            }
         }
     }
 }
