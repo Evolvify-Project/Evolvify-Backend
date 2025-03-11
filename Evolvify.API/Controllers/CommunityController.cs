@@ -4,6 +4,7 @@ using Evolvify.Application.Community.Comments.Commands.DeleteComment;
 using Evolvify.Application.Community.Comments.Commands.UpdateComment;
 using Evolvify.Application.Community.Comments.DTOs;
 using Evolvify.Application.Community.Comments.Queries.GetAllCommentForPost;
+using Evolvify.Application.Community.Likes.OnPost;
 using Evolvify.Application.Community.Posts.Commands.CreatePost;
 using Evolvify.Application.Community.Posts.Commands.DeletePost;
 using Evolvify.Application.Community.Posts.Commands.UpdatePost;
@@ -110,5 +111,13 @@ namespace Evolvify.API.Controllers
             return Created();
         }
 
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("Post/{postId}/Like")]
+        public async Task<IActionResult> LikePost([FromRoute] Guid postId)
+        {
+            var result = await _mediator.Send(new LikePostCommand(postId));
+            return Ok(result);
+        }
     }
 }

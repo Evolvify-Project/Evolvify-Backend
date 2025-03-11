@@ -42,7 +42,7 @@ namespace Evolvify.Infrastructure.Repositories
             }
             if (typeof(TEntity) == typeof(Post))
             {
-                return await _context.Posts.Include(x => x.Comments).ThenInclude(Comment => Comment.Replies).ToListAsync() as IEnumerable<TEntity>;
+                return await _context.Posts.Include(x => x.Likes).Include(x => x.Comments).ThenInclude(Comment => Comment.Replies).ToListAsync() as IEnumerable<TEntity>;
             }
             return  await _dbSet.ToListAsync();
         }
@@ -50,7 +50,7 @@ namespace Evolvify.Infrastructure.Repositories
         {
             if(typeof(TEntity) == typeof(Post))
             {
-                return await _context.Posts.Include(x => x.Comments).ThenInclude(Comment => Comment.Likes).FirstOrDefaultAsync(x => x.Id.Equals(id)) as TEntity;
+                return await _context.Posts.Include(x => x.Likes).Include(x => x.Comments).ThenInclude(Comment => Comment.Likes).FirstOrDefaultAsync(x => x.Id.Equals(id)) as TEntity;
             }
 
            return await _dbSet.FindAsync(id);
