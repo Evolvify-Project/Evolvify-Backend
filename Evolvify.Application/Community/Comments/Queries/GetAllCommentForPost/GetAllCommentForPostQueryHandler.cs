@@ -32,10 +32,12 @@ namespace Evolvify.Application.Community.Comments.Queries.GetAllCommentForPost
             {
                 throw new NotFoundException(nameof(Post),request.PostId.ToString());
             }
-               
-            if(post.Comments.Any())
+
+            var mainComments = post.Comments.Where(c => c.ParentCommentId == null).ToList();
+
+            if (mainComments.Any())
             {
-                var comments=_mapper.Map<IEnumerable<CommentDto>>(post.Comments);
+                var comments=_mapper.Map<IEnumerable<CommentDto>>(mainComments);
                 return new ApiResponse<IEnumerable<CommentDto>>(comments);
             }
 
