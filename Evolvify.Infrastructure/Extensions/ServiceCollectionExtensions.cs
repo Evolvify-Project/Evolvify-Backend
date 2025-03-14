@@ -10,6 +10,9 @@ using Evolvify.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
+using Evolvify.Application.DTOs.Response;
 
 public static class ServiceCollectionExtensions
 {
@@ -64,6 +67,7 @@ public static class ServiceCollectionExtensions
             
             .AddJwtBearer(options =>
             {
+                
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

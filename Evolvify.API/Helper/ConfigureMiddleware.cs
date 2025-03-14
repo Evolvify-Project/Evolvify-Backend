@@ -22,6 +22,7 @@ namespace Evolvify.API.Helper
             app.UseSwaggerUI();
             //}
 
+            app.UseCors("AllowAll");
             app.UseHttpsRedirection();
 
             app.UseRouting();
