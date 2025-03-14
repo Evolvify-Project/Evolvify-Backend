@@ -42,7 +42,6 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
                 {
                     DeleteReplies(comment.Replies);
                 }
-
                 await _unitOfWork.CompleteAsync();
 
                 _unitOfWork.Repository<Comment, Guid>().Delete(comment);
@@ -58,7 +57,7 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
             {
                 if (reply.Replies.Any())
                 {
-                    DeleteReplies(reply.Replies); // حذف الردود المتداخلة (Recursive Delete)
+                    DeleteReplies(reply.Replies);
                 }
                 _unitOfWork.Repository<Comment, Guid>().Delete(reply);
             }

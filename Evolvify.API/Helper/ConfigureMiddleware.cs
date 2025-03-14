@@ -16,17 +16,17 @@ namespace Evolvify.API.Helper
 
             app.UseMiddleware<ExceptionMiddleware>();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            //}
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthentication(); // ✅ مهم يكون قبل UseAuthorization
+            app.UseAuthentication(); 
             app.UseAuthorization();
 
             app.MapControllers();
