@@ -67,7 +67,19 @@ public static class ServiceCollectionExtensions
             
             .AddJwtBearer(options =>
             {
-                
+                options.Events = new JwtBearerEvents
+                {
+                    OnChallenge = async context =>
+                    {
+                        context.HandleResponse(); 
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        context.Response.ContentType = "application/json";
+
+                        var response = new ApiResponse<string>(false, StatusCodes.Status401Unauthorized, "Unauthorized! Please log in.",null);
+                        
+                        await context.Response.WriteAsJsonAsync(response);
+                    }
+                };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
