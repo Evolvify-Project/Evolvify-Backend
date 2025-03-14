@@ -10,6 +10,9 @@ using Evolvify.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
+using Evolvify.Application.DTOs.Response;
 
 public static class ServiceCollectionExtensions
 {
@@ -30,7 +33,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddDbContextService(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = configuration.GetConnectionString("Remote");
         services.AddDbContext<EvolvifyDbContext>(options => options.UseSqlServer(connectionString));
 
         return services;
@@ -64,6 +67,19 @@ public static class ServiceCollectionExtensions
             
             .AddJwtBearer(options =>
             {
+                options.Events = new JwtBearerEvents
+                {
+                    OnChallenge = async context =>
+                    {
+                        context.HandleResponse(); 
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        context.Response.ContentType = "application/json";
+
+                        var response = new ApiResponse<string>(false, StatusCodes.Status401Unauthorized, "Unauthorized! Please log in.",null);
+                        
+                        await context.Response.WriteAsJsonAsync(response);
+                    }
+                };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

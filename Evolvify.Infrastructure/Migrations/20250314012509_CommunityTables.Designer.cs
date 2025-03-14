@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    [Migration("20250310213704_CommunityTables")]
+    [Migration("20250314012509_CommunityTables")]
     partial class CommunityTables
     {
         /// <inheritdoc />

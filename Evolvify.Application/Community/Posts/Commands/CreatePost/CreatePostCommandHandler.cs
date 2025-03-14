@@ -28,12 +28,7 @@ namespace Evolvify.Application.Community.Posts.Commands.CreatePost
         {
             var user = _userContext.GetCurrentUser();
 
-            if (user.Id == null)
-            {
-                throw new UnAuthourizeException("User not found");
-            }
-
-
+           
             var post = new Post
             {
                 Content = request.Content,
