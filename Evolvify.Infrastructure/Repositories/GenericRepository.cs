@@ -1,7 +1,9 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Interfaces;
+using Evolvify.Domain.Specification;
 using Evolvify.Infrastructure.Data.Context;
+using Evolvify.Infrastructure.Specification;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -56,6 +58,17 @@ namespace Evolvify.Infrastructure.Repositories
            return await _dbSet.FindAsync(id);
         }
         public void Update(TEntity entity) => _dbSet.Update(entity);
+
+
+        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> spec)
+        {
+            return await ApplySpecification(spec).FirstOrDefaultAsync();
+        }
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity, TKey> spec)
+        {
+            return SpecificationEvaluator<TEntity, TKey>.GetQuery(_dbSet, spec);
+        }
        
     }
 }
