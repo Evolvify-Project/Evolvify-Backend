@@ -13,10 +13,8 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Community.Posts.Queries.GetPostQuery
 {
-    public record GetPostQuery(Guid Id): IRequest<ApiResponse<PostDto>>
-    {
-       
-    }
+    public record GetPostQuery(Guid Id): IRequest<ApiResponse<PostDto>>;
+    
     public class GetPostQueryHandler : IRequestHandler<GetPostQuery, ApiResponse<PostDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
