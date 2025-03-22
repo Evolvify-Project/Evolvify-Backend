@@ -1,4 +1,5 @@
 ﻿using Evolvify.Domain.Entities;
+using Evolvify.Domain.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Evolvify.Domain.Interfaces
         void Update(TEntity entity);
         void Delete(TEntity entity);
         void DeleteRange(IEnumerable<TEntity> entities);
+        Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> specification);
 
     }
 }

@@ -60,9 +60,9 @@ namespace Evolvify.Infrastructure.Repositories
         public void Update(TEntity entity) => _dbSet.Update(entity);
 
 
-        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> spec)
+        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> specification)
         {
-            return await ApplySpecification(spec).FirstOrDefaultAsync();
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity, TKey> spec)

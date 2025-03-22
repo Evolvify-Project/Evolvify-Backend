@@ -20,7 +20,19 @@ namespace Evolvify.Infrastructure.Specification
                 query = query.Where(specification.Criteria);
             }
 
-            query=specification.Includes.Aggregate(query,(currentQuery,Include)=>currentQuery.Include(Include));
+
+            foreach (var include in specification.Includes)
+            {
+                var IncludeQuery = query.Include(include);
+
+                if (specification.ThenIncludes.ContainsKey(include))
+                {
+                    foreach (var ThenInclude in specification.ThenIncludes[include])
+                    {
+                        query = IncludeQuery.ThenInclude(ThenInclude);
+                    }
+                }
+            }
 
             return query;
         }
