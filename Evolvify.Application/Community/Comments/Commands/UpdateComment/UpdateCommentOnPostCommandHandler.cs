@@ -1,5 +1,6 @@
 ﻿using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -20,7 +21,8 @@ namespace Evolvify.Application.Community.Comments.Commands.UpdateComment
         }
         public async Task Handle(UpdateCommentOnPostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.Repository<Post, Guid>().GetByIdAsync(request.PostId);
+            var spec = new PostSpecification(request.PostId);
+            var post = await _unitOfWork.Repository<Post, Guid>().GetByIdWithSpec(spec);
 
             if (post == null)
             {

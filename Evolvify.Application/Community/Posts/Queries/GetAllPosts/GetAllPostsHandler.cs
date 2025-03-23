@@ -3,6 +3,7 @@ using Evolvify.Application.Community.Posts.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -27,7 +28,8 @@ namespace Evolvify.Application.Community.Posts.Queries.GetAllPosts
 
         public async Task<ApiResponse<IEnumerable<PostDto>>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var posts=await _unitOfWork.Repository<Post,Guid>().GetAllAsync();
+            var spec = new PostSpecification();
+            var posts=await _unitOfWork.Repository<Post, Guid>().GetAllWithSpec(spec);
 
             if (posts == null)
             {

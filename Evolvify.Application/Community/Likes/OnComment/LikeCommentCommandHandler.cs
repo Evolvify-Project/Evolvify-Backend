@@ -3,6 +3,7 @@ using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +27,9 @@ namespace Evolvify.Application.Community.Likes.OnComment
         }
         public async Task<ApiResponse<bool>> Handle(LikeCommentCommand request, CancellationToken cancellationToken)
         {
-           var comment = await _unitOfWork.Repository<Comment, Guid>().GetByIdAsync(request.CommentId);
+            var spec = new CommentSpecification(request.CommentId);
+
+           var comment = await _unitOfWork.Repository<Comment, Guid>().GetByIdWithSpec(spec);
             if (comment == null)
             {
                 throw new NotFoundException(nameof(Comment), request.CommentId.ToString());

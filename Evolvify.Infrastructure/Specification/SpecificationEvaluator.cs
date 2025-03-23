@@ -22,11 +22,7 @@ namespace Evolvify.Infrastructure.Specification
                 query = query.Where(specification.Criteria);
             }
 
-            //foreach (var include in specification.Includes)
-            //{
-            //    query = query.Include(include);
-
-            //}
+            
 
             query = specification.IncludeStrings.Aggregate(query,
                 (currentQuery, includeExpression) => currentQuery.Include(includeExpression));

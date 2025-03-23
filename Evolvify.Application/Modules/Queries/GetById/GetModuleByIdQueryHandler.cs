@@ -5,6 +5,7 @@ using Evolvify.Application.Skills.DTO;
 using Evolvify.Application.Skills.Queries.GetById;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Modules;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -28,7 +29,8 @@ namespace Evolvify.Application.Modules.Queries.GetById
 
         public async Task<ApiResponse<ModuleDto>> Handle(GetModulrByIdQuery request, CancellationToken cancellationToken)
         {
-            var module = await unitOfWork.Repository<Module, int>().GetByIdAsync(request.Id);
+            var spec = new ModuleSpecification(request.Id);
+            var module = await unitOfWork.Repository<Module, int>().GetByIdWithSpec(spec);
             if (module == null)
             {
                 throw new NotFoundException(nameof(Module), request.Id.ToString());

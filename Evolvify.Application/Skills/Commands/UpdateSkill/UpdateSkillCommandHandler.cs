@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Skills;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -23,7 +24,8 @@ namespace Evolvify.Application.Skills.Commands.UpdateSkill
         }
         public async Task Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
         {
-            var skill = await unitOfWork.Repository<Skill,int>().GetByIdAsync(request.Id);
+            var spec = new SkillSpecification(request.Id);
+            var skill = await unitOfWork.Repository<Skill, int>().GetByIdWithSpec(spec);
             if (skill == null)
             {
                 throw new NotFoundException(nameof(Skill), request.Id.ToString());

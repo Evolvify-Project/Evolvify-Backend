@@ -4,6 +4,7 @@ using Evolvify.Application.Community.Comments.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 
@@ -30,8 +31,10 @@ public class AddCommentOnPostCommandHandler : IRequestHandler<AddCommentOnPostCo
         }
 
         var userId = user.Id;
+
+        var spec=new PostSpecification(request.PostId);
        
-        var post = await _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
+        var post = await _unitOfWork.Repository<Post,Guid>().GetByIdWithSpec(spec);
 
         if(post == null)
         {
