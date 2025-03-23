@@ -5,6 +5,7 @@ using Evolvify.Application.Community.Replies.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -36,7 +37,9 @@ namespace Evolvify.Application.Community.Replies.Commands.AddReply
                 throw new UnauthorizedAccessException("User not found");
             }
 
-            var comment = await _unitOfWork.Repository<Comment, Guid>().GetByIdAsync(request.CommentId);
+            var spec = new CommentSpecification(request.CommentId);
+
+            var comment = await _unitOfWork.Repository<Comment, Guid>().GetByIdWithSpec(spec);
 
             if(comment == null)
             {

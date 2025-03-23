@@ -3,6 +3,7 @@ using Evolvify.Application.Community.Comments.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -27,7 +28,9 @@ namespace Evolvify.Application.Community.Comments.Queries.GetAllCommentForPost
 
         public async Task<ApiResponse<IEnumerable<CommentDto>>> Handle(GetAllCommentForPostQuery request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.Repository<Post, Guid>().GetByIdAsync(request.PostId);
+
+            var spec = new PostSpecification(request.PostId);
+            var post = await _unitOfWork.Repository<Post, Guid>().GetByIdWithSpec(spec);
             if (post == null)
             {
                 throw new NotFoundException(nameof(Post),request.PostId.ToString());

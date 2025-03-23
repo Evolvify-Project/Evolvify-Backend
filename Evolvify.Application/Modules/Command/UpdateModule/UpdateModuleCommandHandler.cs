@@ -2,6 +2,7 @@
 using Evolvify.Application.Skills.Commands.UpdateSkill;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Modules;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -24,7 +25,8 @@ namespace Evolvify.Application.Modules.Command.UpdateModule
         }
         public async Task Handle(UpdateModuleCommand request, CancellationToken cancellationToken)
         {
-            var module = await unitOfWork.Repository<Module, int>().GetByIdAsync(request.Id);
+            var spec = new ModuleSpecification(request.Id);
+            var module = await unitOfWork.Repository<Module, int>().GetByIdWithSpec(spec);
             if (module == null)
             {
                 throw new NotFoundException(nameof(Module), request.Id.ToString());

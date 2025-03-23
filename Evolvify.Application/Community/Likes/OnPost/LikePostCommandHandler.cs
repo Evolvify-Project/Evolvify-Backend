@@ -3,6 +3,7 @@ using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -31,8 +32,8 @@ namespace Evolvify.Application.Community.Likes.OnPost
 
             var user=_userContext.GetCurrentUser();
             
-
-            var post= await _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
+            var spec = new PostSpecification(request.PostId);   
+            var post= await _unitOfWork.Repository<Post, Guid>().GetByIdWithSpec(spec);
             if (post == null)
             {
                 throw new NotFoundException(nameof(Post), request.PostId.ToString());

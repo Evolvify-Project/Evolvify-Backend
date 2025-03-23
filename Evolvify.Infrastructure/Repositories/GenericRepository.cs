@@ -32,37 +32,17 @@ namespace Evolvify.Infrastructure.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            if (typeof(TEntity) == typeof(Skill))
-            {
-                return await _context.Skills.Include(x => x.Modules).ThenInclude(Module => Module.Contents).ToListAsync() as IEnumerable<TEntity> ; 
-            }
-            if (typeof(TEntity) == typeof(Module))
-            {
-                return await _context.Modules.Include(x => x.Contents).ToListAsync() as IEnumerable<TEntity>;
-            }
-            if (typeof(TEntity) == typeof(Post))
-            {
-                return await _context.Posts.Include(x => x.Likes).Include(x => x.Comments).ThenInclude(Comment => Comment.Replies).ToListAsync() as IEnumerable<TEntity>;
-            }
-            return  await _dbSet.ToListAsync();
-        }
-        public async Task<TEntity> GetByIdAsync(TKey id)
-        {
-            if(typeof(TEntity) == typeof(Post))
-            {
-                return await _context.Posts.Include(x => x.Likes).Include(x => x.Comments).ThenInclude(Comment => Comment.Likes).FirstOrDefaultAsync(x => x.Id.Equals(id)) as TEntity;
-            }
-
-           return await _dbSet.FindAsync(id);
-        }
+      
         public void Update(TEntity entity) => _dbSet.Update(entity);
 
 
-        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> spec)
+        public async Task<IEnumerable<TEntity>> GetAllWithSpec(ISpecification<TEntity, TKey> specification)
         {
-            return await ApplySpecification(spec).FirstOrDefaultAsync();
+            return await ApplySpecification(specification).ToListAsync();
+        }
+        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> specification)
+        {
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity, TKey> spec)

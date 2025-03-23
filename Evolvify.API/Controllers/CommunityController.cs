@@ -71,13 +71,16 @@ namespace Evolvify.API.Controllers
             return NoContent();
         }
 
+       
+
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("Post/{id}/Comment")]
         public async Task<IActionResult> AddCommentOnPost([FromRoute]Guid id, [FromBody]AddCommentRequest request)
         {
             
             var result = await _mediator.Send(new AddCommentOnPostCommand(id,request.Content));
-            return Created();
+            return Created("", result);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -109,7 +112,7 @@ namespace Evolvify.API.Controllers
         public async Task<IActionResult> AddReplyOnComment( [FromRoute] Guid commentId, [FromBody] AddCommentRequest request)
         {
             var result = await _mediator.Send(new AddReplyOnCommentCommand( commentId, request.Content));
-            return Created();
+            return Created("", result);
         }
 
 

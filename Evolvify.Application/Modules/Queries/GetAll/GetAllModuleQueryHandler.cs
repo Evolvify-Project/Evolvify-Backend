@@ -4,6 +4,7 @@ using Evolvify.Application.Modules.DTO;
 using Evolvify.Application.Skills.DTO;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Modules;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -26,7 +27,8 @@ namespace Evolvify.Application.Modules.Queries.GetAll
         }
         public async Task<ApiResponse<IEnumerable<ModuleDto>>> Handle(GetAllModuleQuery request, CancellationToken cancellationToken)
         {
-            var module = await unitOfWork.Repository<Module, int>().GetAllAsync();
+            var spec = new ModuleSpecification();
+            var module = await unitOfWork.Repository<Module, int>().GetAllWithSpec(spec);
             if (module == null || !module.Any())
             {
                 throw new NotFoundException("Module Not Found !!!");

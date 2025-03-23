@@ -1,9 +1,11 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Specification;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +22,13 @@ namespace Evolvify.Infrastructure.Specification
                 query = query.Where(specification.Criteria);
             }
 
-            query=specification.Includes.Aggregate(query,(currentQuery,Include)=>currentQuery.Include(Include));
+            
+
+            query = specification.IncludeStrings.Aggregate(query,
+                (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
+
+            query = specification.Includes.Aggregate(query,
+               (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
 
             return query;
         }

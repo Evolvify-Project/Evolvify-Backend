@@ -1,6 +1,7 @@
 ﻿using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -21,7 +22,8 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
         }
         public async Task Handle(DeleteCommentOnPostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.Repository<Post,Guid>().GetByIdAsync(request.PostId);
+            var spec = new PostSpecification(request.PostId);
+            var post = await _unitOfWork.Repository<Post,Guid>().GetByIdWithSpec(spec);
             
             if (post == null)
             {
