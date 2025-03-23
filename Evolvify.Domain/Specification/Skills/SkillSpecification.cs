@@ -20,18 +20,19 @@ namespace Evolvify.Domain.Specification.Skills
         /// Calls the base specification with a condition matching the given ID.
         /// </summary>
         /// <param name="id">The ID of the Skill.</param>
-        public SkillSpecification(int id):base(S=>S.Id==id) 
+        public SkillSpecification(int id)
+            :base(S=>S.Id==id) 
         {
             ApplyInclude();
-
         }
 
         private void ApplyInclude()
         {
             AddInclude(S => S.Modules);
-            AddInclude(S => S.Modules);
-
+            AddInclude($"{nameof(Skill.Modules)}.{nameof(Module.Contents)}");
         }
+
+        
 
     }
 }

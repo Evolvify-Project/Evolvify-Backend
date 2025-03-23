@@ -4,6 +4,7 @@ using Evolvify.Application.Skills.DTO;
 using Evolvify.Application.Skills.Query.GetAll;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Skills;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System;
@@ -26,7 +27,8 @@ namespace Evolvify.Application.Skills.Queries.GetAll
         }
         public async Task<ApiResponse<IEnumerable<SkillDto>>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
-            var skills = await unitOfWork.Repository<Skill, int>().GetAllAsync();
+            var spec= new SkillSpecification();
+            var skills = await unitOfWork.Repository<Skill, int>().GetAllWithSpec(spec);
             if(skills==null || !skills.Any())
             {
                 throw new NotFoundException("Skills Not Found !!!");
