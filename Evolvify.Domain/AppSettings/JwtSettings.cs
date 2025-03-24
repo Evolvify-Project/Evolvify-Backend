@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Token
+namespace Evolvify.Domain.AppSettings
 {
     public class JwtSettings
     {

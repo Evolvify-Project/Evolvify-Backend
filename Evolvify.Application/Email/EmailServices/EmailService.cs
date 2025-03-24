@@ -1,4 +1,5 @@
 ﻿using Evolvify.Application.Email.EmailSettings;
+using Evolvify.Domain.AppSettings;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;

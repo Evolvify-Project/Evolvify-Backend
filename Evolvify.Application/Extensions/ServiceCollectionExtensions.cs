@@ -2,11 +2,13 @@
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
 using Evolvify.Application.Token;
+using Evolvify.Domain.AppSettings;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using JwtSettings = Evolvify.Domain.AppSettings.JwtSettings;
 
 namespace Evolvify.Application.Extensions
 {
@@ -28,6 +30,8 @@ namespace Evolvify.Application.Extensions
             services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
 
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+
+            services.Configure<SeedUsersSettings>(configuration.GetSection("SeedUsersSettings"));
 
             services.AddAutoMapper(applicatonsAssembly);
 
