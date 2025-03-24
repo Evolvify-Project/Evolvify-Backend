@@ -16,9 +16,6 @@ using Evolvify.Application.DTOs.Response;
 
 public static class ServiceCollectionExtensions
 {
-
-    
-
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContextService(configuration);
@@ -33,7 +30,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddDbContextService(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Remote");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<EvolvifyDbContext>(options => options.UseSqlServer(connectionString));
 
         return services;

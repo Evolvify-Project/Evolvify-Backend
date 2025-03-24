@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Email.EmailSettings
+namespace Evolvify.Domain.AppSettings
 {
-    public class MailSettings
+    public class SeedUsers
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Host { get; set; }
-        public string DisplayName { get; set; }
-        public int Port { get; set; }
+        public string Role { get; set; }
     }
+
+    public class SeedUsersSettings
+    {
+        public List<SeedUsers> SeedUsers { get; set; }
+    }
+
 }

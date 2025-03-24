@@ -21,12 +21,7 @@ namespace Evolvify.Infrastructure.Data.Seeding
 
         public async Task SeedAsync()
         {
-            if(context.Database.GetPendingMigrations().Any())
-            {
-               await context.Database.MigrateAsync();
-
-            }
-
+            
             if (await context.Database.CanConnectAsync())
             {
                 if (!context.Skills.Any())

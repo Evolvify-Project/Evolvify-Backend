@@ -1,5 +1,4 @@
-﻿using Evolvify.Application.Extensions;
-using Evolvify.Domain.Entities;
+﻿using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +11,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Evolvify.Domain.AppSettings;
+using Evolvify.Application.Extensions;
 
 namespace Evolvify.API.Helper
 {
