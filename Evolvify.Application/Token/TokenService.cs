@@ -1,4 +1,5 @@
-﻿using Evolvify.Domain.Entities;
+﻿using Evolvify.Domain.AppSettings;
+using Evolvify.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
