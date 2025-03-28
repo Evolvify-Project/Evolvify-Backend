@@ -39,8 +39,17 @@ namespace Evolvify.Infrastructure.Data.Seeding.Role
                 var user = new ApplicationUser
                 {
                     Email = seedUser.Email,
-                    UserName = seedUser.Email
+                    UserName = seedUser.Email,
+                    EmailConfirmed=true
+                    
                 };
+
+                var userExists = await userManager.FindByEmailAsync(seedUser.Email);
+
+                if(userExists!=null)
+                {
+                    continue;
+                }
 
                 var result = await userManager.CreateAsync(user, seedUser.Password);
 

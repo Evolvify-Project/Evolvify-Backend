@@ -30,7 +30,6 @@ namespace Evolvify.Application.Identity.Register
         public async Task<ApiResponse<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         { 
            
-
             var existingUser= await userManager.FindByEmailAsync(request.Email);  
             if(existingUser!=null)
             {
