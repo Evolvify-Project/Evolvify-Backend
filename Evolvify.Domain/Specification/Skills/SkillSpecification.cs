@@ -28,8 +28,8 @@ namespace Evolvify.Domain.Specification.Skills
 
         private void ApplyInclude()
         {
-            AddInclude(S => S.Modules);
-            AddInclude($"{nameof(Skill.Modules)}.{nameof(Module.Contents)}");
+            AddInclude(S => S.Courses);
+            AddInclude($"{nameof(Skill.Courses)}.{nameof(Course.Modules)}");
         }
 
         

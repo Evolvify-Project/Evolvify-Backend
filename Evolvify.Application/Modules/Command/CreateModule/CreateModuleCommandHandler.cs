@@ -30,9 +30,7 @@ namespace Evolvify.Application.Modules.Command.CreateModule
             var module = new Module
             {
                 Title = request.Title,
-                Level = request.Level,
-                SkillId = request.SkillId,
-
+              
             };
 
             await unitOfWork.Repository<Module, int>().CreateAsync(module);

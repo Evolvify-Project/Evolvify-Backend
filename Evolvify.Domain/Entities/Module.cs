@@ -10,9 +10,8 @@ namespace Evolvify.Domain.Entities
     public class Module:BaseEntity<int>
     {
         public string Title { get; set; } = string.Empty;
-        public Level Level { get; set; }
-        public int SkillId { get; set; }
-        public Skill Skill { get; set; }=new Skill();
+        public Course Course { get; set; } = new();
+        public int CourseId { get; set; }
         public ICollection<Content> Contents { get; set; } = new List<Content>();
 
     }
