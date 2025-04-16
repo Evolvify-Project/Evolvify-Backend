@@ -1,6 +1,7 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
+using Evolvify.Domain.Entities.Quiz;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,6 +34,15 @@ namespace Evolvify.Infrastructure.Data.Context
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
+
+        public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<UserAnswers> UserAnswers { get; set; }
+
+        public DbSet<QuizResult> QuizResults { get; set; }
+
+
        
 
     }

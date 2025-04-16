@@ -10,29 +10,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Infrastructure.Data.Seeding.Role
+namespace Evolvify.Infrastructure.Identity.Seeding.Role
 {
     public static class RoleSeeder
     {
 
-        public static async Task SeedRolesAsync(IServiceProvider serviceProvider,IOptions<SeedUsersSettings> seedUsersSettings)
+        public static async Task SeedRolesAsync(IServiceProvider serviceProvider, IOptions<SeedUsersSettings> seedUsersSettings)
         {
-            var roleManager=serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager=serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             //var users = configuration.GetSection("SeedUsers").Get<List<SeedUser>>();
 
 
-            string [] roles = new [] { "Admin", "Instructor", "User" };
+            string[] roles = new[] { "Admin", "Instructor", "User" };
 
             foreach (string role in roles)
             {
-                if(! await roleManager.RoleExistsAsync(role))
+                if (!await roleManager.RoleExistsAsync(role))
                 {
-                   await roleManager.CreateAsync(new IdentityRole(role));
+                    await roleManager.CreateAsync(new IdentityRole(role));
                 }
             }
 
-           var users=seedUsersSettings.Value.SeedUsers;
+            var users = seedUsersSettings.Value.SeedUsers;
 
             foreach (var seedUser in users)
             {
@@ -40,25 +40,25 @@ namespace Evolvify.Infrastructure.Data.Seeding.Role
                 {
                     Email = seedUser.Email,
                     UserName = seedUser.Email,
-                    EmailConfirmed=true
-                    
+                    EmailConfirmed = true
+
                 };
 
                 var userExists = await userManager.FindByEmailAsync(seedUser.Email);
 
-                if(userExists!=null)
+                if (userExists != null)
                 {
                     continue;
                 }
 
                 var result = await userManager.CreateAsync(user, seedUser.Password);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, seedUser.Role);
                 }
             }
-            
+
         }
     }
 }
