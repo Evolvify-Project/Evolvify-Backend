@@ -2,7 +2,7 @@
 using Evolvify.Domain.AppSettings;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding;
-using Evolvify.Infrastructure.Data.Seeding.Role;
+using Evolvify.Infrastructure.Identity.Seeding.Role;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
