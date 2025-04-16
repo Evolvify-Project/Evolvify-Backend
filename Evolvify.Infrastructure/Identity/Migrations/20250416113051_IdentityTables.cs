@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Evolvify.Infrastructure.Migrations
+namespace Evolvify.Infrastructure.Identity.Migrations
 {
     /// <inheritdoc />
     public partial class IdentityTables : Migration

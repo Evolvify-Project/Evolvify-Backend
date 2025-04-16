@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using System.Text.Json;
 using Evolvify.Application.DTOs.Response;
+using Evolvify.Infrastructure.Identity.Context;
 
 public static class ServiceCollectionExtensions
 {
@@ -30,8 +30,10 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddDbContextService(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Remote");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var identityConnectionString = configuration.GetConnectionString("IdentityConnection");
         services.AddDbContext<EvolvifyDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<EvolvifyIdentityDbContext>(options => options.UseSqlServer(identityConnectionString));
 
         return services;
     }
@@ -43,7 +45,7 @@ public static class ServiceCollectionExtensions
             options.SignIn.RequireConfirmedEmail = true;
             options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider;
         })
-                .AddEntityFrameworkStores<EvolvifyDbContext>()
+                .AddEntityFrameworkStores<EvolvifyIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
     }

@@ -14,12 +14,9 @@ namespace Evolvify.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Module> builder)
         {
-            builder.Property(m=>m.Level)
-                .HasConversion(level=>level.ToString(),level=>(Level)Enum.Parse(typeof(Level),level));
-
-            builder.HasOne(M => M.Skill)
+            builder.HasOne(M => M.Course)
                 .WithMany(S => S.Modules)
-                .HasForeignKey(M => M.SkillId);
+                .HasForeignKey(M => M.CourseId);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Evolvify.Domain.Entities
     {
         public string Name { get; set; }=string.Empty;
         public string Description { get; set; } = string.Empty;
-        public ICollection<Module> Modules { get; set; } = new List<Module>();
+        public ICollection<Course> Courses { get; set; } = new List<Course>();
 
     }
 }
