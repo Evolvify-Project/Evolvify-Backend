@@ -13,7 +13,7 @@ using Module = Evolvify.Domain.Entities.Module;
 
 namespace Evolvify.Infrastructure.Data.Context
 {
-    public class EvolvifyDbContext : IdentityDbContext<ApplicationUser>
+    public class EvolvifyDbContext : DbContext
     {
         public EvolvifyDbContext(DbContextOptions<EvolvifyDbContext> options):base(options)
         {
@@ -26,12 +26,15 @@ namespace Evolvify.Infrastructure.Data.Context
             base.OnModelCreating(modelBuilder);
         }
 
+
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Course> Courses  { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<Content> Contents { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
-        public DbSet<Post> Posts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
        
 
