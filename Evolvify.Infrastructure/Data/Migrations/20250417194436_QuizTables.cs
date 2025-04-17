@@ -12,7 +12,7 @@ namespace Evolvify.Infrastructure.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Quizzes",
+                name: "Quizs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,7 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quizzes", x => x.Id);
+                    table.PrimaryKey("PK_Quizs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,9 +40,9 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Questions_Quizzes_QuizId",
+                        name: "FK_Questions_Quizs_QuizId",
                         column: x => x.QuizId,
-                        principalTable: "Quizzes",
+                        principalTable: "Quizs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -62,15 +62,15 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("PK_QuizResults", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuizResults_AspNetUsers_UserId",
+                        name: "FK_QuizResults_ApplicationUser_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "ApplicationUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuizResults_Quizzes_QuizId",
+                        name: "FK_QuizResults_Quizs_QuizId",
                         column: x => x.QuizId,
-                        principalTable: "Quizzes",
+                        principalTable: "Quizs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -103,7 +103,7 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     QuestionId = table.Column<int>(type: "int", nullable: false),
                     AnswerId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -118,11 +118,17 @@ namespace Evolvify.Infrastructure.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_UserAnswers_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "ApplicationUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_UserAnswers_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -154,6 +160,11 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 name: "IX_UserAnswers_QuestionId",
                 table: "UserAnswers",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserAnswers_UserId",
+                table: "UserAnswers",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -172,7 +183,7 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Quizzes");
+                name: "Quizs");
         }
     }
 }
