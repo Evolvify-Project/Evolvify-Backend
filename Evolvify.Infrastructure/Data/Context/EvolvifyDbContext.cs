@@ -1,6 +1,7 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
+using Evolvify.Domain.Entities.Progress;
 using Evolvify.Domain.Entities.Quiz;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,9 @@ namespace Evolvify.Infrastructure.Data.Context
         public DbSet<QuizResult> QuizResults { get; set; }
 
         public DbSet<UserAnswers> UserAnswers { get; set; }
+
+        public DbSet<ModuleProgress> ModuleProgresses { get; set; }
+        public DbSet<CourseProgress> CourseProgresses { get; set; }
 
        
 
