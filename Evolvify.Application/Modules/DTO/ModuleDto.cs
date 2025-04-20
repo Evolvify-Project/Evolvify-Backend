@@ -13,8 +13,7 @@ namespace Evolvify.Application.Modules.DTO
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
-        public Level Level { get; set; }
-        public int SkillId { get; set; }
+        public int CourseId { get; set; }
         public ICollection<ContentDto> Contents { get; set; } = new List<ContentDto>();
     }
 }
