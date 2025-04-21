@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Courses.Queries.GetAll
 {
-    public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, ApiResponse<IEnumerable<CourseDto>>>
+    public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, ApiResponse<IEnumerable<CoursesListDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Evolvify.Application.Courses.Queries.GetAll
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ApiResponse<IEnumerable<CourseDto>>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<IEnumerable<CoursesListDto>>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
         {
             var spec = new CourseSpecification();
             var courses = await _unitOfWork.Repository<Course, int>().GetAllWithSpec(spec);
@@ -33,9 +33,9 @@ namespace Evolvify.Application.Courses.Queries.GetAll
                 throw new NotFoundException("Course Not Found !!!");
             }
 
-            var courseDto=_mapper.Map<IEnumerable<CourseDto>>(courses);
+            var courseDto=_mapper.Map<IEnumerable<CoursesListDto>>(courses);
 
-            return new ApiResponse<IEnumerable<CourseDto>>(courseDto);
+            return new ApiResponse<IEnumerable<CoursesListDto>>(courseDto);
             
         }
     }

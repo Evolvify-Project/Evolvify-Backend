@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Courses.DTOs
 {
-    public class CourseDto
+    public class CoursesListDto
     {
+
         public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public int SkillId { get; set; }
-        public ICollection<ModuleDto> Modules { get; set; } = new List<ModuleDto>();
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public string Category { get; set; }
+        public string Level { get; set; }
+        public string Duration { get; set; } // in minutes
     }
 }

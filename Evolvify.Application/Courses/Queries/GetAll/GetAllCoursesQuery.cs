@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Courses.Queries.GetAll
 {
-    public class GetAllCoursesQuery : IRequest<ApiResponse<IEnumerable<CourseDto>>>
+    public class GetAllCoursesQuery : IRequest<ApiResponse<IEnumerable<CoursesListDto>>>
     {
 
     }

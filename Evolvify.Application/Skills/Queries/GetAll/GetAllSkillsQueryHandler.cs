@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Skills.Queries.GetAll
 {
-    public class GetAllSkillsQueryHandler : IRequestHandler<GetAllSkillsQuery, ApiResponse<IEnumerable<SkillDto>>>
+    public class GetAllSkillsQueryHandler : IRequestHandler<GetAllSkillsQuery, ApiResponse<IEnumerable<SkillsListDto>>>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -25,7 +25,7 @@ namespace Evolvify.Application.Skills.Queries.GetAll
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task<ApiResponse<IEnumerable<SkillDto>>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<IEnumerable<SkillsListDto>>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
             var spec= new SkillSpecification();
             var skills = await unitOfWork.Repository<Skill, int>().GetAllWithSpec(spec);
@@ -34,9 +34,9 @@ namespace Evolvify.Application.Skills.Queries.GetAll
                 throw new NotFoundException("Skills Not Found !!!");
             }
 
-            var skillDto=mapper.Map<IEnumerable< SkillDto>>(skills);
+            var skillDto=mapper.Map<IEnumerable<SkillsListDto>>(skills);
 
-            return new ApiResponse<IEnumerable<SkillDto>>(skillDto);
+            return new ApiResponse<IEnumerable<SkillsListDto>>(skillDto);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Evolvify.Application.Skills.DTO
         public SkillProfile()
         {
             CreateMap<Skill, SkillDto>();
+            CreateMap<Skill, SkillsListDto>();
             CreateMap<UpdateModuleCommand, Module>();
 
         }
