@@ -21,13 +21,18 @@ namespace Evolvify.Infrastructure.Data.Seeding
 
         public async Task SeedAsync()
         {
-            
             if (await context.Database.CanConnectAsync())
             {
                 if (!context.Skills.Any())
                 {
                     var skills = SkillSeeder.GetSkills();
                     await context.Skills.AddRangeAsync(skills);
+                    await context.SaveChangesAsync();
+                }
+                if (!context.Courses.Any())
+                {
+                    var courses=CourseSeeder.GetCourses();
+                    await context.Courses.AddRangeAsync(courses);
                     await context.SaveChangesAsync();
                 }
                 if (!context.Modules.Any())
