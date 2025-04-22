@@ -11,6 +11,7 @@ namespace Evolvify.Domain.Enums
         Video,
         Text,
         Article,
-        PDF
+        PDF,
+        Quiz
     }
 }

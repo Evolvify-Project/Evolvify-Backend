@@ -20,6 +20,7 @@ namespace Evolvify.Domain.Specification.Courses
 
         private void ApplyInclude()
         {
+            AddInclude(C => C.Skill);
             AddInclude(C => C.Modules);
             AddInclude($"{nameof(Course.Modules)}.{nameof(Module.Contents)}");
         }
