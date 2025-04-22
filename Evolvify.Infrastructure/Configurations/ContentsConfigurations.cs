@@ -17,6 +17,11 @@ namespace Evolvify.Infrastructure.Configurations
         {
             builder.Property(m => m.ContentType)
                 .HasConversion(ContentType => ContentType.ToString(), ContentType => (ContentTypes)Enum.Parse(typeof(ContentTypes), ContentType));
+
+            builder.HasOne(m => m.Module)
+                .WithMany(m => m.Contents)
+                .HasForeignKey(m => m.ModuleId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

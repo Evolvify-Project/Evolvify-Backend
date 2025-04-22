@@ -4,6 +4,7 @@ using Evolvify.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    partial class EvolvifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250420231942_EditCourseTable")]
+    partial class EditCourseTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace Evolvify.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ContentModule", b =>
+                {
+                    b.Property<int>("ContentsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModulesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContentsId", "ModulesId");
+
+                    b.HasIndex("ModulesId");
+
+                    b.ToTable("ContentModule");
+                });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.ApplicationUser", b =>
                 {
@@ -203,10 +221,8 @@ namespace Evolvify.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -214,11 +230,10 @@ namespace Evolvify.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ModuleId");
 
                     b.ToTable("Contents");
                 });
@@ -499,6 +514,21 @@ namespace Evolvify.Infrastructure.Data.Migrations
                     b.ToTable("Skills");
                 });
 
+            modelBuilder.Entity("ContentModule", b =>
+                {
+                    b.HasOne("Evolvify.Domain.Entities.Content", null)
+                        .WithMany()
+                        .HasForeignKey("ContentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Evolvify.Domain.Entities.Module", null)
+                        .WithMany()
+                        .HasForeignKey("ModulesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Comment", b =>
                 {
                     b.HasOne("Evolvify.Domain.Entities.Community.Comment", "ParentComment")
@@ -572,17 +602,6 @@ namespace Evolvify.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Evolvify.Domain.Entities.Content", b =>
-                {
-                    b.HasOne("Evolvify.Domain.Entities.Module", "Module")
-                        .WithMany("Contents")
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Module");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Course", b =>
@@ -730,11 +749,6 @@ namespace Evolvify.Infrastructure.Data.Migrations
             modelBuilder.Entity("Evolvify.Domain.Entities.Course", b =>
                 {
                     b.Navigation("Modules");
-                });
-
-            modelBuilder.Entity("Evolvify.Domain.Entities.Module", b =>
-                {
-                    b.Navigation("Contents");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.Question", b =>

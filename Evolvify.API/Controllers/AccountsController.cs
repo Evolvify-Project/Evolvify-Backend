@@ -31,17 +31,7 @@ namespace Evolvify.API.Controllers
             return BadRequest(response);
         }
 
-        [HttpPost("EmailConfirmation")]
-        public async Task<IActionResult> EmailConfirmation([FromBody]ConfirmEmailCommand command)
-        {
-            var response = await mediator.Send(command);
-            if (response.Success)
-            {
-                return Ok(response);
-            }
-            return BadRequest(response);
-        }
-
+      
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand command)
         {

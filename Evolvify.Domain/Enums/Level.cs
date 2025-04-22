@@ -8,10 +8,10 @@ namespace Evolvify.Domain.Enums
 {
     public enum Level
     {
-        Beginner,
+        Beginner =1,
 
-        Intermediate,
+        Intermediate =2,
 
-        Advanced
+        Advanced=3
     }
 }

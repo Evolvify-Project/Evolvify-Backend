@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Skills.Query.GetAll
 {
-    public class GetAllSkillsQuery : IRequest<ApiResponse<IEnumerable<SkillDto>>>
+    public class GetAllSkillsQuery : IRequest<ApiResponse<IEnumerable<SkillsListDto>>>
     {
     }
 }

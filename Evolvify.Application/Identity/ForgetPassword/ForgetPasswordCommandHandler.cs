@@ -41,7 +41,7 @@ namespace Evolvify.Application.Identity.ForgetPassword
             };
 
             await emailService.SendEmail(mail);
-            return new ApiResponse<bool>(true,StatusCodes.Status200OK,"Reset password link sent to your email");
+            return new ApiResponse<bool>(true,StatusCodes.Status200OK,$"Reset password link sent to your email {token}");
 
         }
     }
