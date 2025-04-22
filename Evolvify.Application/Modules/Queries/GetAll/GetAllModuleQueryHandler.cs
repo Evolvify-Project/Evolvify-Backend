@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.Queries.GetAll
 {
-    public class GetAllModuleQueryHandler : IRequestHandler<GetAllModuleQuery , ApiResponse<IEnumerable<ModuleDto>>>
+    public class GetAllModuleQueryHandler : IRequestHandler<GetAllModuleQuery , ApiResponse<IEnumerable<ModulesListDto>>>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -25,7 +25,7 @@ namespace Evolvify.Application.Modules.Queries.GetAll
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task<ApiResponse<IEnumerable<ModuleDto>>> Handle(GetAllModuleQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<IEnumerable<ModulesListDto>>> Handle(GetAllModuleQuery request, CancellationToken cancellationToken)
         {
             var spec = new ModuleSpecification();
             var module = await unitOfWork.Repository<Module, int>().GetAllWithSpec(spec);
@@ -34,9 +34,9 @@ namespace Evolvify.Application.Modules.Queries.GetAll
                 throw new NotFoundException("Module Not Found !!!");
             }
 
-            var moduleDtos = mapper.Map<IEnumerable<ModuleDto>>(module);
+            var moduleDtos = mapper.Map<IEnumerable<ModulesListDto>>(module);
 
-            return new ApiResponse<IEnumerable<ModuleDto>>(moduleDtos);
+            return new ApiResponse<IEnumerable<ModulesListDto>>(moduleDtos);
         }
     }
 }

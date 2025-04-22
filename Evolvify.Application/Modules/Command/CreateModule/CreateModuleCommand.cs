@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.Command.CreateModule
 {
-    public class CreateModuleCommand : IRequest<ApiResponse<ModuleDto>>
+    public class CreateModuleCommand : IRequest<ApiResponse<ModuleDetailsDto>>
     {
         public string Title { get; set; } = string.Empty;
 

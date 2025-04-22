@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.DTO
 {
-    public class ModuleDto
+    public class ModuleDetailsDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

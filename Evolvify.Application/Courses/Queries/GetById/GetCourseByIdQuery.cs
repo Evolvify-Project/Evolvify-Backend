@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Courses.Queries.GetAll
+namespace Evolvify.Application.Courses.Queries.GetById
 {
-    public record GetAllCoursesQuery : IRequest<ApiResponse<IEnumerable<CoursesListDto>>>
+    
+    public record GetCourseByIdQuery(int Id) : IRequest<ApiResponse<CourseDetialsDto>>
     {
-
     }
-   
 }

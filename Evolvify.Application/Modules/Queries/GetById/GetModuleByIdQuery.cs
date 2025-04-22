@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Evolvify.Application.Modules.Queries.GetById
 {
 
-    public class GetModulrByIdQuery : IRequest<ApiResponse<ModuleDto>>
+    public class GetModulrByIdQuery : IRequest<ApiResponse<ModuleDetailsDto>>
     {
         public int Id { get; set; }
 

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.Queries.GetById
 {
-    public class GetModuleByIdQueryHandler : IRequestHandler<GetModulrByIdQuery, ApiResponse<ModuleDto>>
+    public class GetModuleByIdQueryHandler : IRequestHandler<GetModulrByIdQuery, ApiResponse<ModuleDetailsDto>>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -27,7 +27,7 @@ namespace Evolvify.Application.Modules.Queries.GetById
             this.mapper = mapper;
         }
 
-        public async Task<ApiResponse<ModuleDto>> Handle(GetModulrByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<ModuleDetailsDto>> Handle(GetModulrByIdQuery request, CancellationToken cancellationToken)
         {
             var spec = new ModuleSpecification(request.Id);
             var module = await unitOfWork.Repository<Module, int>().GetByIdWithSpec(spec);
@@ -35,7 +35,7 @@ namespace Evolvify.Application.Modules.Queries.GetById
             {
                 throw new NotFoundException(nameof(Module), request.Id.ToString());
             }
-            return new ApiResponse<ModuleDto>(mapper.Map<ModuleDto>(module));
+            return new ApiResponse<ModuleDetailsDto>(mapper.Map<ModuleDetailsDto>(module));
 
         }
 

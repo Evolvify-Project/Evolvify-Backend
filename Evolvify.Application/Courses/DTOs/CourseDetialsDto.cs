@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Evolvify.Application.Modules.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,9 @@ namespace Evolvify.Application.Courses.DTOs
         public string ImageUrl { get; set; }
         public string Category { get; set; }
         public string Level { get; set; }
-        public int Duration { get; set; } // in minutes
+        public string Duration { get; set; } // in minutes
+        public int NumberOfModules { get; set; }
+
+        public ICollection<ModulesListDto> Modules { get; set; } = new List<ModulesListDto>();
     }
 }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.Command.CreateModule
 {
-    public class CreateModuleCommandHandler : IRequestHandler<CreateModuleCommand, ApiResponse<ModuleDto>>
+    public class CreateModuleCommandHandler : IRequestHandler<CreateModuleCommand, ApiResponse<ModuleDetailsDto>>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -25,7 +25,7 @@ namespace Evolvify.Application.Modules.Command.CreateModule
             this.mapper = mapper;
         }
 
-        public async Task<ApiResponse<ModuleDto>> Handle(CreateModuleCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<ModuleDetailsDto>> Handle(CreateModuleCommand request, CancellationToken cancellationToken)
         {
             var module = new Module
             {
@@ -36,7 +36,7 @@ namespace Evolvify.Application.Modules.Command.CreateModule
             await unitOfWork.Repository<Module, int>().CreateAsync(module);
             await unitOfWork.CompleteAsync();
 
-            return new ApiResponse<ModuleDto>(mapper.Map<ModuleDto>(module));
+            return new ApiResponse<ModuleDetailsDto>(mapper.Map<ModuleDetailsDto>(module));
 
         }
 

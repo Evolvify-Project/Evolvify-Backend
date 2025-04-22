@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Skills.Queries.GetById
 {
-    public record GetSkillByIdQuery(int Id):IRequest<ApiResponse<SkillDto>>;
+
+    public record GetSkillByIdQuery(int Id) : IRequest<ApiResponse<SkillDto>>
+    {
+    }
    
 }
