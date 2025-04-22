@@ -44,19 +44,7 @@ namespace Evolvify.Application.Identity.Login
                 return new ApiResponse<TokenResponse>(false, 400, "Invalid credentials", null, new List<string> { "Email or password is incorrect" });
             }
 
-            var confirmedEmail = await userManager.IsEmailConfirmedAsync(user);
-            if (!confirmedEmail)
-            {
-
-                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-
-
-                return new ApiResponse<TokenResponse>(false, 400, $"please confirm your email, use this code to confirm your email {code}", null, new List<string> { "Email is not confirmed" });
-            }
-
-            
-           
-
+          
             var token = await tokenService.CreateToken(user, userManager);
             return new ApiResponse<TokenResponse>(true,200, "Login successful", token);
 
