@@ -11,7 +11,7 @@ namespace Evolvify.Application.Identity.ResetPassword
     public class ResetPasswordCommand:IRequest<ApiResponse<bool>>
     {
         public string Email { get; set; } = string.Empty;
-        public string Token { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
 }
