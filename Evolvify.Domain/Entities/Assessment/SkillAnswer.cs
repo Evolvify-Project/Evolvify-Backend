@@ -31,6 +31,7 @@ namespace Evolvify.Domain.Entities.Assessment
         [JsonPropertyName("communication")]
         public SectionAnswer Communication { get; set; }
 
+        [JsonPropertyName("time_management")]
         public SectionAnswer Time_Management { get; set; }
 
         [JsonPropertyName("presentation")]

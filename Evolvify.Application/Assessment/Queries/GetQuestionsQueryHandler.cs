@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Assessment.Queries
 {
-    public class GetQuestionsQueryHandler:IRequestHandler<GetQuestionsQuery, ApiResponse<SkillQuestions>>
+    public class GetQuestionsQueryHandler:IRequestHandler<GetQuestionsQuery, ApiResponse<List<SkillQuestions>>>
     {
        private readonly IIAssessmentApiService _huggingFaceApiService;
         public GetQuestionsQueryHandler(IIAssessmentApiService huggingFaceApiService)
         {
             _huggingFaceApiService = huggingFaceApiService;
         }
-        public async Task<ApiResponse<SkillQuestions>> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<List<SkillQuestions>>> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
         {
            var question=await _huggingFaceApiService.GetQuestionsAsync();
             
@@ -26,7 +26,7 @@ namespace Evolvify.Application.Assessment.Queries
             {
                throw new NotFoundException ("Questions not found");
             }
-            return new ApiResponse<SkillQuestions>(question);
+            return new ApiResponse<List<SkillQuestions>>(question);
            
           
         }

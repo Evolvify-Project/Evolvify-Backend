@@ -27,7 +27,8 @@ namespace Evolvify.Application.Assessment.Service
 
         public async Task<PredictionResponse> GetPredictionAsync(SkillAnswer answers)
         {
-           
+
+
             var response = await _httpClient.PostAsJsonAsync(ApiUrl, answers);
             
             response.EnsureSuccessStatusCode();
@@ -44,13 +45,13 @@ namespace Evolvify.Application.Assessment.Service
             return predictionResponse;
         }
 
-        public async Task<SkillQuestions> GetQuestionsAsync()
+        public async Task<List<SkillQuestions>> GetQuestionsAsync()
         {
             var response = await _httpClient.GetAsync("https://moodydev-Assessment.hf.space/questions");
             response.EnsureSuccessStatusCode();
 
             var responseString = await response.Content.ReadAsStringAsync();
-            var questions = JsonConvert.DeserializeObject<SkillQuestions>(responseString);
+            var questions = JsonConvert.DeserializeObject<List<SkillQuestions>>(responseString);
 
             if (questions == null)
             {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Assessment.Queries
 {
-    public class GetQuestionsQuery:IRequest<ApiResponse<SkillQuestions>>
+    public class GetQuestionsQuery:IRequest<ApiResponse<List<SkillQuestions>>>
     {
     }
 }

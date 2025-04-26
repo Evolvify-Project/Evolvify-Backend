@@ -18,7 +18,7 @@ namespace Evolvify.Application.Assessment.Service
     public interface IIAssessmentApiService
     {
         Task<PredictionResponse> GetPredictionAsync(SkillAnswer answers);
-        Task<SkillQuestions> GetQuestionsAsync();
+        Task<List<SkillQuestions>> GetQuestionsAsync();
 
     }
 }
