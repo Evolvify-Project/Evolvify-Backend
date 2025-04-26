@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Evolvify.Application.DTOs.Response;
+using Evolvify.Application.Assessment.Service;
 
 public static class ServiceCollectionExtensions
 {
@@ -22,8 +23,17 @@ public static class ServiceCollectionExtensions
         services.AddUserDefindService();
         services.AddAuthenticationService(configuration);
         services.AddAuthorizationService();
+        services.AddHttpClientService();
+
 
         return services;
+
+    }
+
+    private static void AddHttpClientService(this IServiceCollection services)
+    {
+        services.AddHttpClient();
+       
 
     }
 

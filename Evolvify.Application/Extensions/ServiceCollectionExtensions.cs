@@ -1,4 +1,5 @@
-﻿using Evolvify.Application.Common.User;
+﻿using Evolvify.Application.Assessment.Service;
+using Evolvify.Application.Common.User;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
 using Evolvify.Application.Token;
@@ -25,6 +26,8 @@ namespace Evolvify.Application.Extensions
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<IIAssessmentApiService, AssessmentApiService>();
+
             services.AddTransient<IEmailService, EmailService>();
 
             services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
