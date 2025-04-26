@@ -15,7 +15,8 @@ namespace Evolvify.Infrastructure.Configurations.QuizConfigurations
         {
             builder.HasOne(UA => UA.Question)
                 .WithMany()
-                .HasForeignKey(UA => UA.QuestionId);
+                .HasForeignKey(UA => UA.QuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(UA => UA.Answer)
                 .WithMany()

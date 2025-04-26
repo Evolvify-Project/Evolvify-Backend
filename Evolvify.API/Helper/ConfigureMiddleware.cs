@@ -2,8 +2,7 @@
 using Evolvify.Domain.AppSettings;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding;
-using Evolvify.Infrastructure.Identity.Context;
-using Evolvify.Infrastructure.Identity.Seeding.Role;
+using Evolvify.Infrastructure.Data.Seeding.Role;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -25,12 +24,7 @@ namespace Evolvify.API.Helper
                 await context.Database.MigrateAsync();
             }
 
-            var identityContext = services.GetRequiredService<EvolvifyIdentityDbContext>();
-            var identityPendingMigrations = await identityContext.Database.GetPendingMigrationsAsync();
-            if (identityPendingMigrations.Any())
-            {
-                await identityContext.Database.MigrateAsync();
-            }
+           
 
             var Ioptions = services.GetRequiredService<IOptions<SeedUsersSettings>>();
             var configuration = services.GetRequiredService<IConfiguration>();
