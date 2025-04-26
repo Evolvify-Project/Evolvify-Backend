@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Skills.DTO;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace Evolvify.Application.Skills.Commands.CreateSkill
     {
         public string Name { get; set; }=string.Empty;
         public string Description { get; set; } = string.Empty;
+        public string SkillImage { get; set; } = string.Empty;
     }
 }
