@@ -30,14 +30,15 @@ namespace Evolvify.Application.Community.Posts.Queries.GetAllPosts
         {
             var spec = new PostSpecification();
             var posts=await _unitOfWork.Repository<Post, Guid>().GetAllWithSpec(spec);
+            
 
             if (posts == null)
             {
                 throw new NotFoundException("Posts not found");
             }
-
             var postDtos = _mapper.Map<IEnumerable<PostDto>>(posts);
-
+           
+                       
             return new ApiResponse<IEnumerable<PostDto>>(postDtos);
 
 
