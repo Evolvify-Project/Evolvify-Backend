@@ -25,7 +25,13 @@ namespace Evolvify.Application.Identity.ResetPassword
             {
                 return new ApiResponse<bool>(false, 404, "Invalid user");
             }
+            if (request.Password != request.ConfirmPassword)
+            {
+                return new ApiResponse<bool>(false, 400, "Password and confirm password do not match");
+            }
+            
             var result = await userManager.ResetPasswordAsync(user, request.Code, request.Password);
+
             if(!result.Succeeded)
             {
                 return new ApiResponse<bool>(false, 400, "Password reset failed", errors: result.Errors.Select(e => e.Description).ToList());
