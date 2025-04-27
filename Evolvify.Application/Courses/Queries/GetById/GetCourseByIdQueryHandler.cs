@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Courses.Queries.GetById
 {
-    public class GetCourseByIdQueryHandler : IRequestHandler<GetCourseByIdQuery, ApiResponse<CourseDetialsDto>>
+    public class GetCourseByIdQueryHandler : IRequestHandler<GetCourseByIdQuery, ApiResponse<CourseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace Evolvify.Application.Courses.Queries.GetById
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ApiResponse<CourseDetialsDto>> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<CourseDto>> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
         {
             var spec = new CourseSpecification(request.Id);
             var course = await _unitOfWork.Repository<Course, int>().GetByIdWithSpec(spec);
@@ -32,7 +32,7 @@ namespace Evolvify.Application.Courses.Queries.GetById
             {
                 throw new NotFoundException(nameof(Course), request.Id.ToString());
             }
-            return new ApiResponse<CourseDetialsDto>(_mapper.Map<CourseDetialsDto>(course));
+            return new ApiResponse<CourseDto>(_mapper.Map<CourseDto>(course));
         }
 
     }

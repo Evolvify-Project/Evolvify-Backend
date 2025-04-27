@@ -28,7 +28,9 @@ namespace Evolvify.Application.Skills.Commands.CreateSkill
             var skill = new Skill
             {
                 Name = request.Name,
-                Description = request.Description
+                Description = request.Description,
+                SkillImage= request.SkillImage, 
+
             };
 
            await unitOfWork.Repository<Skill,int>().CreateAsync(skill);
