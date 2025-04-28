@@ -2,6 +2,8 @@
 using Evolvify.Application.Assessment.Queries;
 using Evolvify.Domain.Entities.Assessment;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,7 @@ namespace Evolvify.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AssessmentsController : ControllerBase
     {
         private readonly IMediator _mediator;

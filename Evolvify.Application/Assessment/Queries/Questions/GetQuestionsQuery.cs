@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Assessment.Queries
+namespace Evolvify.Application.Assessment.Queries.Questions
 {
-    public class GetQuestionsQuery:IRequest<ApiResponse<List<SkillQuestions>>>
+    public class GetQuestionsQuery : IRequest<ApiResponse<List<SkillQuestions>>>
     {
     }
 }
