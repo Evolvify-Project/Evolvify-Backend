@@ -15,7 +15,7 @@ namespace Evolvify.Application.Courses.Commands.CreateCourse
     {
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty ;
-        public IFormFile ImageUrl { get; set; }     
+        public IFormFile? ImageUrl { get; set; }     
         public string Category { get; set; } = string.Empty;
         public string Level { get; set; } = string.Empty;
 

@@ -1,4 +1,7 @@
-﻿using Evolvify.Application.Modules.Command.CreateModule;
+﻿using Evolvify.Application.Community.Posts.Queries.GetAllPosts;
+using Evolvify.Application.Courses.Queries.GetAll;
+using Evolvify.Application.Courses.Queries.GetById;
+using Evolvify.Application.Modules.Command.CreateModule;
 using Evolvify.Application.Modules.Command.DeleteModule;
 using Evolvify.Application.Modules.Command.UpdateModule;
 using Evolvify.Application.Modules.Queries.GetAll;
@@ -8,9 +11,14 @@ using Evolvify.Application.Skills.Commands.DeleteSkill;
 using Evolvify.Application.Skills.Commands.UpdateSkill;
 using Evolvify.Application.Skills.Queries.GetById;
 using Evolvify.Application.Skills.Query.GetAll;
+using Evolvify.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
+using System.Net;
 
 namespace Evolvify.API.Controllers
 {
@@ -64,6 +72,26 @@ namespace Evolvify.API.Controllers
 
             return NoContent();
         }
+
+        
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("Get/Course")]
+        public async Task<IActionResult> GetAllCourse()
+        {
+            var result = await mediator.Send(new GetAllCoursesQuery());
+            return Ok(result);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("Get/Course/{id}")]
+        public async Task<IActionResult> GetCourseById(int id)
+        {
+            var result = await mediator.Send(new GetCourseByIdQuery(id));
+            return Ok(result);
+        }
+
+
+
 
     }
 }

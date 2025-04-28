@@ -4,7 +4,6 @@ using Evolvify.Application.Skills.Commands.UpdateSkill;
 using Evolvify.Application.Skills.Queries.GetById;
 using Evolvify.Application.Skills.Query.GetAll;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Evolvify.API.Controllers
@@ -41,7 +40,7 @@ namespace Evolvify.API.Controllers
         {
             var response = await mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetSkill), new { id = response.Data.Id }, null);
+            return CreatedAtAction(nameof(GetSkill), new { id = response.Data.Id}, null);
         }
 
         [HttpPut("{id}")]

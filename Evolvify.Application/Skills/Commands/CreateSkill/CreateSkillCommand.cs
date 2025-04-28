@@ -14,6 +14,6 @@ namespace Evolvify.Application.Skills.Commands.CreateSkill
     {
         public string Name { get; set; }=string.Empty;
         public string Description { get; set; } = string.Empty;
-        public string SkillImage { get; set; } = string.Empty;
+        public IFormFile? SkillImage { get; set; } 
     }
 }
