@@ -39,7 +39,7 @@ namespace Evolvify.Infrastructure.Data.Seeding.Role
                 var user = new ApplicationUser
                 {
                     Email = seedUser.Email,
-                    Username = seedUser.Email,
+                    UserName = seedUser.Email,
                     EmailConfirmed=true
                     
                 };

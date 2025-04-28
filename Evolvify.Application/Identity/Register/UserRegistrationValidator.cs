@@ -11,7 +11,7 @@ namespace Evolvify.Application.Identity.Register
     {
         public UserRegistrationValidator()
         {
-            RuleFor(x => x.Username).NotEmpty().WithMessage("Username is required");
+            RuleFor(x => x.UserName).NotEmpty().WithMessage("UserName is required");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required");
             RuleFor(x => x.Email).EmailAddress().WithMessage("Email is not valid");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required");
