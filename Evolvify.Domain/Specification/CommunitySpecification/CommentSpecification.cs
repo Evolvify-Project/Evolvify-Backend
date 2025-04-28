@@ -22,10 +22,9 @@ namespace Evolvify.Domain.Specification.CommunitySpecification
 
         private void ApplyInclude()
         {
+            AddInclude(C => C.User);
             AddInclude(C => C.Likes);
             AddInclude(C => C.Replies);
-
-           
         }
     }
 }
