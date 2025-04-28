@@ -51,7 +51,7 @@ namespace Evolvify.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("NormalizedUserName")
+                    b.Property<string>("NormalizedUsername")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -70,7 +70,7 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -79,10 +79,10 @@ namespace Evolvify.Infrastructure.Migrations
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
+                    b.HasIndex("NormalizedUsername")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UsernameIndex")
+                        .HasFilter("[NormalizedUsername] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });

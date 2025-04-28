@@ -12,6 +12,7 @@ using Evolvify.Application.Community.Posts.Commands.UpdatePost;
 using Evolvify.Application.Community.Posts.Queries.GetAllPosts;
 using Evolvify.Application.Community.Posts.Queries.GetPostQuery;
 using Evolvify.Application.Community.Replies.Commands.AddReply;
+using Evolvify.Application.Community.Replies.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -113,6 +114,14 @@ namespace Evolvify.API.Controllers
         {
             var result = await _mediator.Send(new AddReplyOnCommentCommand( commentId, request.Content));
             return Created("", result);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("Comment/{commentId}/Reply")]
+        public async Task<IActionResult> GetAllReplyForComment([FromRoute] Guid commentId)
+        {
+            var result = await _mediator.Send(new GetAllReplyForCommentQuery(commentId));
+            return Ok(result);
         }
 
 

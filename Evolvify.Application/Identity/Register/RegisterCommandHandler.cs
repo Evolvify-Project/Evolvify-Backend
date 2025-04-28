@@ -38,7 +38,7 @@ namespace Evolvify.Application.Identity.Register
 
             var newUser = new ApplicationUser
             {
-                UserName = request.Username,
+                Username = request.Username,
                 Email = request.Email
             };
 

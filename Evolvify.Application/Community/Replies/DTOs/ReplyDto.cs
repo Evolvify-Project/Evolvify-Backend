@@ -12,7 +12,7 @@ namespace Evolvify.Application.Community.Replies.DTOs
     {
         public string Id { get; set; } = string.Empty;
         public string UserId { get; set; } = string.Empty;
-        public string UserName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
         public string CreatedAt { get; set; } = string.Empty;
         public string ParentCommentId { get; set; } = string.Empty;
