@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Skills.Commands.CreateSkill;
 using Evolvify.Application.Skills.Commands.DeleteSkill;
 using Evolvify.Application.Skills.Commands.UpdateSkill;
+using Evolvify.Application.Skills.Images;
 using Evolvify.Application.Skills.Queries.GetById;
 using Evolvify.Application.Skills.Query.GetAll;
 using MediatR;
@@ -59,5 +60,36 @@ namespace Evolvify.API.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("UploadImage"), DisableRequestSizeLimit]
+        public async Task<IActionResult> UploadImage([FromForm] UploadImage model)
+        {
+            if(model.Image == null && model.Image.Length == 0 )
+            {
+                return BadRequest("Invalid Upload");
+            }
+
+            var FolderName = Path.Combine("Resourse", "AllFiles");
+            var PathToSave = Path.Combine(Directory.GetCurrentDirectory(), FolderName);
+
+            if(!Directory.Exists(PathToSave))
+            {
+                Directory.CreateDirectory(PathToSave);
+            }
+            var fileName = model.Image.FileName;
+            var fullpath = Path.Combine(PathToSave, fileName);  
+            var dbpath = Path.Combine(FolderName, fileName);
+
+            if(System.IO.File.Exists(fullpath))
+            {
+                return BadRequest("Image already Exists");
+            }
+            using (var stream = new FileStream(fullpath,FileMode.Create))
+            {
+                model.Image.CopyTo(stream);
+            }
+            return Ok( new {dbpath});
+        }
+
     }
 }
