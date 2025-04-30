@@ -8,6 +8,7 @@ using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.Skills;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
@@ -19,19 +20,26 @@ namespace Evolvify.Application.Assessment.Commands
 {
     public class SubmitAnswersCommandHandler : IRequestHandler<SubmitAnswersCommand, ApiResponse<PredictionResponse>>
     {
-        private readonly IIAssessmentApiService _huggingFaceApiService;
+        private readonly IAssessmentApiService _iAssessmentApiService;
         private readonly IUserContext _userContext;
         private readonly IUnitOfWork _unitOfWork;
        
-        public SubmitAnswersCommandHandler(IIAssessmentApiService huggingFaceApiService, IUserContext userContext, IUnitOfWork unitOfWork)
+        public SubmitAnswersCommandHandler(IAssessmentApiService iAssessmentApiService, IUserContext userContext, IUnitOfWork unitOfWork)
         {
             _userContext = userContext;
             _unitOfWork = unitOfWork;
-            _huggingFaceApiService = huggingFaceApiService;
+            _iAssessmentApiService = iAssessmentApiService;
         }
         public async Task<ApiResponse<PredictionResponse>> Handle(SubmitAnswersCommand request, CancellationToken cancellationToken)
         {
-             var result = await _huggingFaceApiService.GetPredictionAsync(request.SkillAnswer);
+            var userId = _userContext.GetCurrentUser().Id;
+            var assessmentResult = await _unitOfWork.AssessmentResultRepository.GetAllByUserId(userId);
+            if (assessmentResult != null && assessmentResult.Any())
+            {
+                   return new ApiResponse<PredictionResponse>(false, StatusCodes.Status400BadRequest, "Assessment already completed.",null); 
+            }
+
+             var result = await _iAssessmentApiService.GetPredictionAsync(request.SkillAnswer);
 
             if (result == null)
             {
@@ -49,14 +57,14 @@ namespace Evolvify.Application.Assessment.Commands
                 {
                     throw new NotFoundException($"Skill with name {skillResult.Skill} not found.");
                 }
-                var assessmentResult = new AssessmentResult
+                var AssessmentData = new AssessmentResult
                 {
                     SkillId = skillId.Value,
                     UserId = UserId,
                     Level = Enum.Parse<Level>(skillResult.Level)
                 };
 
-               listOfResults.Add(assessmentResult);
+               listOfResults.Add(AssessmentData);
 
             }
 

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Assessment.Service
 {
-    public interface IIAssessmentApiService
+    public interface IAssessmentApiService
     {
         Task<PredictionResponse> GetPredictionAsync(SkillAnswer answers);
         Task<List<SkillQuestions>> GetQuestionsAsync();

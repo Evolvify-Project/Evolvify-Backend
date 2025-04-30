@@ -20,6 +20,10 @@ namespace Evolvify.API.Middlewares
             {
                 await HandleExceptionAsync(context, StatusCodes.Status404NotFound, notFound.Message);
             }
+            catch (AssessmentAlreadyCompletedException assessmentAlreadyCompleted)
+            {
+                await HandleExceptionAsync(context, StatusCodes.Status200OK, assessmentAlreadyCompleted.Message);
+            }
             catch (UnauthorizedAccessException unauthorized)
             {
                 await HandleExceptionAsync(context, StatusCodes.Status401Unauthorized, unauthorized.Message);
@@ -28,7 +32,7 @@ namespace Evolvify.API.Middlewares
             catch (Exception ex)
             {
                 logger.LogError(ex, "An unexpected error occurred: {Message}", ex.Message);
-                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, "An internal server error occurred.");
+                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError,ex.Message);
             }
         }
 

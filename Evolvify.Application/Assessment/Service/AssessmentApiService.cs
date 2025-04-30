@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Assessment.Service
 {
-    public class AssessmentApiService : IIAssessmentApiService
+    public class AssessmentApiService : IAssessmentApiService
     {
         private readonly HttpClient _httpClient;
         private const string ApiUrl = "https://moodydev-Assessment.hf.space/predict";
