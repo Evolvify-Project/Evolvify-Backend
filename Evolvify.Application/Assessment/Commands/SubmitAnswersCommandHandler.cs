@@ -37,13 +37,14 @@ namespace Evolvify.Application.Assessment.Commands
             {
                 throw new NotFoundException("Prediction result not found. ");
             }
-
+            var listOfResults=new List<AssessmentResult>();
             var UserId=_userContext.GetCurrentUser().Id;
+
             foreach (var skillResult in result.Results)
             {
                 var spec = new SkillSpecification();
                 var skill = await _unitOfWork.Repository<Skill, int>().GetAllWithSpec(spec);
-                var skillId = skill.FirstOrDefault(x => x.Name == skillResult.Skill)?.Id;
+                var skillId = skill.FirstOrDefault(x => x.Name.ToLower() == skillResult.Skill.ToLower())?.Id;
                 if (skillId == null)
                 {
                     throw new NotFoundException($"Skill with name {skillResult.Skill} not found.");
@@ -55,9 +56,12 @@ namespace Evolvify.Application.Assessment.Commands
                     Level = Enum.Parse<Level>(skillResult.Level)
                 };
 
-                await _unitOfWork.Repository<AssessmentResult, int>().CreateAsync(assessmentResult);
+               listOfResults.Add(assessmentResult);
 
             }
+
+            await _unitOfWork.AssessmentResultRepository.AddRangeAsync(listOfResults);
+
             await _unitOfWork.CompleteAsync();
 
             return new ApiResponse<PredictionResponse>(result);
