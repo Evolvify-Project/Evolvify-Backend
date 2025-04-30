@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Entities.Assessment
 {
-    public class AssessmentResult: BaseEntity<int>
+    public class AssessmentResult
     {
         public int SkillId { get; set; }
         public Skill Skill { get; set; }
