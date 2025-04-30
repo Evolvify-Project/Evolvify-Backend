@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assessment\Queries\RecommendedCourses\" />
     <Folder Include="Common\AppSettings\" />
   </ItemGroup>
 
