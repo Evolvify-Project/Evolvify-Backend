@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Evolvify.Application.Common.User;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
@@ -16,9 +17,12 @@ namespace Evolvify.Application.Community.Posts.Commands.UpdatePost
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUserContext _userContext;
 
-        public UpdatePostCommandHandler(IUnitOfWork unitOfWork,IMapper mapper)
+        public UpdatePostCommandHandler(IUnitOfWork unitOfWork,IMapper mapper,IUserContext userContext)
         {
+            _userContext = userContext;
+        
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -30,6 +34,13 @@ namespace Evolvify.Application.Community.Posts.Commands.UpdatePost
             if (post == null)
             {
                 throw new NotFoundException("Post Not Found");
+            }
+            var userId = _userContext.GetCurrentUser().Id;
+            
+
+            if (post.UserId != userId)
+            {
+                throw new ForbiddenException("update", "post");
             }
 
             _mapper.Map(request, post);

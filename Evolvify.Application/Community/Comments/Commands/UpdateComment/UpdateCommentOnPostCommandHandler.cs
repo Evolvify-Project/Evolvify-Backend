@@ -1,4 +1,5 @@
-﻿using Evolvify.Domain.Entities.Community;
+﻿using Evolvify.Application.Common.User;
+using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
@@ -14,8 +15,11 @@ namespace Evolvify.Application.Community.Comments.Commands.UpdateComment
     public class UpdateCommentOnPostCommandHandler : IRequestHandler<UpdateCommentOnPostCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UpdateCommentOnPostCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IUserContext _userContext;
+        public UpdateCommentOnPostCommandHandler(IUnitOfWork unitOfWork, IUserContext userContext)
         {
+            _userContext = userContext;
+          
             _unitOfWork = unitOfWork;
             
         }
@@ -35,6 +39,14 @@ namespace Evolvify.Application.Community.Comments.Commands.UpdateComment
                    throw new NotFoundException(nameof(Comment), request.CommentId.ToString());
             }
 
+            var userId = _userContext.GetCurrentUser().Id;
+
+            if (comment.UserId != userId)
+            {
+                throw new ForbiddenException("update", "comment");
+            }
+            
+            
             comment.Content = request.Content;
 
             await _unitOfWork.CompleteAsync();

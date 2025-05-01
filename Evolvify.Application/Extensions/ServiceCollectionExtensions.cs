@@ -26,7 +26,7 @@ namespace Evolvify.Application.Extensions
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserContext, UserContext>();
-            services.AddScoped<IIAssessmentApiService, AssessmentApiService>();
+            services.AddScoped<IAssessmentApiService, AssessmentApiService>();
 
             services.AddTransient<IEmailService, EmailService>();
 

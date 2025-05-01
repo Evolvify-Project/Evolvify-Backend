@@ -1,5 +1,6 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Interfaces;
+using Evolvify.Domain.Interfaces.AssessmentResultInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,10 @@ namespace Evolvify.Infrastructure.UnitOfWork
 {
     public interface IUnitOfWork
     {
+
         Task CompleteAsync();
         IGenericRepository<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : BaseEntity<TKey>;
+
+        IAssessmentResultRepository AssessmentResultRepository { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Evolvify.Domain.Entities.Community;
+﻿using Evolvify.Application.Common.User;
+using Evolvify.Domain.Constants;
+using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
@@ -15,9 +17,12 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
     public class DeleteCommentOnPostCommandHandler : IRequestHandler<DeleteCommentOnPostCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserContext _userContext;
 
-        public DeleteCommentOnPostCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteCommentOnPostCommandHandler(IUnitOfWork unitOfWork,IUserContext userContext)
         {
+            _userContext = userContext;
+        
             _unitOfWork = unitOfWork;
         }
         public async Task Handle(DeleteCommentOnPostCommand request, CancellationToken cancellationToken)
@@ -34,22 +39,30 @@ namespace Evolvify.Application.Community.Comments.Commands.DeleteComment
             if (comment == null)
             {
                 throw new NotFoundException(nameof(Comment), request.CommentId.ToString());
+           
             }
-            else
+
+            var userId = _userContext.GetCurrentUser().Id;
+            var role = _userContext.GetCurrentUser().Role;
+            if (comment.UserId != userId && role != UserRole.Admin)
             {
-                _unitOfWork.Repository<CommentLike, Guid>().DeleteRange(comment.Likes);
-                await _unitOfWork.CompleteAsync();
-
-                if (comment.Replies.Any())
-                {
-                    DeleteReplies(comment.Replies);
-                }
-                await _unitOfWork.CompleteAsync();
-
-                _unitOfWork.Repository<Comment, Guid>().Delete(comment);
-                await _unitOfWork.CompleteAsync();
-
+                throw new ForbiddenException("delete", "comment");
             }
+           
+           
+            _unitOfWork.Repository<CommentLike, Guid>().DeleteRange(comment.Likes);
+            await _unitOfWork.CompleteAsync();
+
+            if (comment.Replies.Any())
+            {
+                DeleteReplies(comment.Replies);
+            }
+            await _unitOfWork.CompleteAsync();
+
+            _unitOfWork.Repository<Comment, Guid>().Delete(comment);
+            await _unitOfWork.CompleteAsync();
+
+            
 
 
         }

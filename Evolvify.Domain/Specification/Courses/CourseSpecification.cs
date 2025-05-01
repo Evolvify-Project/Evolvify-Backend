@@ -1,4 +1,5 @@
 ﻿using Evolvify.Domain.Entities;
+using Evolvify.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,10 @@ namespace Evolvify.Domain.Specification.Courses
             ApplyInclude();
         }
         public CourseSpecification(int id):base(C=>C.Id==id) 
+        {
+            ApplyInclude();
+        }
+        public CourseSpecification(int skillId, Level level) : base(C => C.SkillId == skillId && C.Level == level)
         {
             ApplyInclude();
         }

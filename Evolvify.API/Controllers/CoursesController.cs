@@ -1,6 +1,10 @@
-﻿using Evolvify.Application.Courses.Queries.GetAll;
+﻿using Evolvify.Application.Assessment.Queries.RecommendedCourses;
+using Evolvify.Application.Assessment.Queries.RecommendedCourses.DTOs;
+using Evolvify.Application.Courses.Queries.GetAll;
 using Evolvify.Application.Courses.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,5 +34,15 @@ namespace Evolvify.API.Controllers
             var result =await _mediator.Send(new GetCourseByIdQuery(id));
             return Ok(result);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("recommended")]
+        public async Task<IActionResult> GetRecommendedCourses()
+        {
+            var result = await _mediator.Send(new GetRecommendedCoursesQuery());
+            return Ok(result);
+        }
+
+
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Interfaces;
+using Evolvify.Domain.Interfaces.AssessmentResultInterface;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Repositories;
+using Evolvify.Infrastructure.Repositories.AssessmentResultRepository;
 using System.Collections;
 
 namespace Evolvify.Infrastructure.UnitOfWork
@@ -11,14 +13,18 @@ namespace Evolvify.Infrastructure.UnitOfWork
 
         private readonly EvolvifyDbContext _context;
         private Hashtable _repositories;
+        public IAssessmentResultRepository AssessmentResultRepository { get; set; }
+
         public UnitOfWork(EvolvifyDbContext context)
         {
             _context = context;
             _repositories = new Hashtable();
+            AssessmentResultRepository = new AssessmentResultRepository(context);
         }
 
         public async Task CompleteAsync()=> await _context.SaveChangesAsync();
        
+
 
         public IGenericRepository<TEntity, TKey> Repository<TEntity, TKey>() where TEntity : BaseEntity<TKey>
         {

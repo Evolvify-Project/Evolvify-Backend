@@ -1,4 +1,6 @@
-﻿using Evolvify.Domain.Entities.Community;
+﻿using Evolvify.Application.Common.User;
+using Evolvify.Domain.Constants;
+using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
@@ -14,9 +16,12 @@ namespace Evolvify.Application.Community.Posts.Commands.DeletePost
     public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DeletePostCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IUserContext _userContext;
+
+        public DeletePostCommandHandler(IUnitOfWork unitOfWork,IUserContext userContext)
         {
             _unitOfWork = unitOfWork;
+            _userContext = userContext;
             
         }
         public async Task Handle(DeletePostCommand request, CancellationToken cancellationToken)
@@ -28,6 +33,14 @@ namespace Evolvify.Application.Community.Posts.Commands.DeletePost
             {
                 throw new NotFoundException("Post Not Found");
             }
+
+            var userId=_userContext.GetCurrentUser().Id;
+            var role = _userContext.GetCurrentUser().Role;
+            if (post.UserId != userId && role !=UserRole.Admin)
+            {
+                throw new ForbiddenException("delete", "post");
+            }
+            
 
             _unitOfWork.Repository<Comment, Guid>().DeleteRange(post.Comments);
             _unitOfWork.Repository<Like, Guid>().DeleteRange(post.Likes);

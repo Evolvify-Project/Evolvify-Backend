@@ -8,7 +8,7 @@ namespace Evolvify.Application.Common.User
 {
     public record CurrentUser(string Id,
         string? Name, string Email,
-        IEnumerable<string> Role
+        string Role
         ) 
     {
 

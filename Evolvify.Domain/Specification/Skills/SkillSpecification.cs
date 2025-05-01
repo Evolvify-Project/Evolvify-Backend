@@ -15,11 +15,6 @@ namespace Evolvify.Domain.Specification.Skills
             ApplyInclude();
         }
 
-        /// <summary>
-        /// Constructor to filter Skills by a specific ID.
-        /// Calls the base specification with a condition matching the given ID.
-        /// </summary>
-        /// <param name="id">The ID of the Skill.</param>
         public SkillSpecification(int id)
             :base(S=>S.Id==id) 
         {
