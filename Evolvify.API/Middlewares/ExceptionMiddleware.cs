@@ -24,9 +24,19 @@ namespace Evolvify.API.Middlewares
             {
                 await HandleExceptionAsync(context, StatusCodes.Status200OK, assessmentAlreadyCompleted.Message);
             }
+            catch (ForbiddenException forbidden)
+            {
+                await HandleExceptionAsync(context, StatusCodes.Status403Forbidden, forbidden.Message);
+            }
+           
             catch (UnauthorizedAccessException unauthorized)
             {
                 await HandleExceptionAsync(context, StatusCodes.Status401Unauthorized, unauthorized.Message);
+            }
+            catch (JsonException jsonEx)
+            {
+                logger.LogError(jsonEx, "JSON error occurred: {Message}", jsonEx.Message);
+                await HandleExceptionAsync(context, StatusCodes.Status400BadRequest,jsonEx.Message);
             }
            
             catch (Exception ex)

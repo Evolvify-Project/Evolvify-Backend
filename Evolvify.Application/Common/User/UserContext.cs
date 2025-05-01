@@ -28,7 +28,7 @@ namespace Evolvify.Application.Common.User
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var userName = user.FindFirst(ClaimTypes.Name)?.Value;
             var email = user.FindFirst(ClaimTypes.Email)?.Value;
-            var roles = user.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+            var roles = user.FindFirst(ClaimTypes.Role)?.Value;
             
             return new CurrentUser(userId, userName, email, roles);
                 
