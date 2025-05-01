@@ -13,7 +13,8 @@ namespace Evolvify.Domain.Specification
         public Expression<Func<TEntity, bool>> Criteria { get; set; } = null;
         public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new List<Expression<Func<TEntity, object>>>();
         public List<string> IncludeStrings { get; } = new List<string>();
-
+        public Expression<Func<TEntity, object>> OrderBy { get ; set ; }
+        public Expression<Func<TEntity, object>> OrderByDescending { get; set ; }
 
         public BaseSpecification()
         {
@@ -32,6 +33,14 @@ namespace Evolvify.Domain.Specification
         protected virtual void AddInclude(string includeString)
         {
             IncludeStrings.Add(includeString);
+        }
+        public void AddOrderBy(Expression<Func<TEntity, object>> expression)
+        {
+            OrderBy = expression;
+        }
+        public void AddOrderByDescending(Expression<Func<TEntity, object>> expression)
+        {
+            OrderByDescending = expression;
         }
 
     }

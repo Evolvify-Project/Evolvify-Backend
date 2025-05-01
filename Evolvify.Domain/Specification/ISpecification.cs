@@ -12,6 +12,8 @@ namespace Evolvify.Domain.Specification
     {
         Expression<Func<TEntity, bool>> Criteria { get; set; }
         List<Expression<Func<TEntity, object>>> Includes { get; set; }
+        Expression<Func<TEntity, object>> OrderBy { get; set; }
+        Expression<Func<TEntity, object>> OrderByDescending { get; set; }
         List<string> IncludeStrings { get; }
 
 

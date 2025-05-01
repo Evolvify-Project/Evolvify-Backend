@@ -17,7 +17,7 @@ namespace Evolvify.Application.Community.Posts.DTOs
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content))
                 .ForMember(dest => dest.CreatedAt,
-                     opt => opt.MapFrom(src => src.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")))
+                     opt => opt.MapFrom(src => src.CreatedAt.ToString("yyyy-MM-dd hh:mm:ss tt")))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 //.ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments.Where(c => c.ParentCommentId == null)))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count))

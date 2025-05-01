@@ -12,6 +12,7 @@ namespace Evolvify.Domain.Specification.CommunitySpecification
         public PostSpecification()
         {
             ApplyInclude();
+            ApplyOrderBy();
         }
 
         public PostSpecification(Guid id):base(P=>P.Id==id) 
@@ -24,6 +25,10 @@ namespace Evolvify.Domain.Specification.CommunitySpecification
             AddInclude(p=>p.User);
             AddInclude(P=>P.Comments);
             AddInclude(P=>P.Likes);
+        }
+       public void ApplyOrderBy()
+        {
+            AddOrderByDescending(p=>p.CreatedAt);
         }
 
     }

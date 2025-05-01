@@ -29,6 +29,18 @@ namespace Evolvify.Infrastructure.Specification
             query = specification.IncludeStrings.Aggregate(query,
                (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
 
+            
+            if (specification.OrderBy != null)
+            {
+                query = query.OrderBy(specification.OrderBy);
+
+            }
+           
+            if (specification.OrderBy==null && specification.OrderByDescending != null)
+            {
+                query = query.OrderByDescending(specification.OrderByDescending);
+            }
+
             return query;
         }
     }
