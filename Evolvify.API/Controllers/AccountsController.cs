@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Identity.ConfirmEmail;
 using Evolvify.Application.Identity.ForgetPassword;
 using Evolvify.Application.Identity.Login;
+using Evolvify.Application.Identity.ProfileImage;
 using Evolvify.Application.Identity.Register;
 using Evolvify.Application.Identity.ResetPassword;
 using MediatR;
@@ -58,6 +59,13 @@ namespace Evolvify.API.Controllers
         {
             var response = await mediator.Send(command);
             return response.Success ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPost("upload-image")]
+        public async Task<IActionResult> UploadUserImage([FromForm] UploadProfilePictureCommand command)
+        {
+            var result = await mediator.Send(command);
+            return result ? Ok("Image uploaded successfully.") : BadRequest("Upload failed.");
         }
     }
 }
