@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Evolvify.Application.Identity.ProfileImage
 {
@@ -32,15 +33,27 @@ namespace Evolvify.Application.Identity.ProfileImage
             if (user == null || request.ImageFile == null)
                 return false;
 
-            using (var memoryStream = new MemoryStream())
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "profile-images");
+
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(request.ImageFile.FileName)}";
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await request.ImageFile.CopyToAsync(memoryStream);
-                var imageBytes = memoryStream.ToArray();
-                user.ProfileImage =  Convert.ToBase64String(imageBytes);
+                await request.ImageFile.CopyToAsync(stream);
             }
+
+            
+            string imageUrl = $"/profile-images/{fileName}";
+
+            user.ProfileImage = imageUrl;
 
             var result = await _userManager.UpdateAsync(user);
             return result.Succeeded;
         }
+
     }
 }

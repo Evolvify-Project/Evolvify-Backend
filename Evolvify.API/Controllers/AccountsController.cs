@@ -62,10 +62,25 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpPost("upload-image")]
-        public async Task<IActionResult> UploadUserImage([FromForm] UploadProfilePictureCommand command)
+        public async Task<IActionResult> Upload(IFormFile imageFile)
         {
-            var result = await mediator.Send(command);
-            return result ? Ok("Image uploaded successfully.") : BadRequest("Upload failed.");
+            if (imageFile == null || imageFile.Length == 0)
+                return BadRequest();
+
+            
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+            var filePath = Path.Combine(folderPath, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+            var imageUrl = $"/images/{fileName}";
+            return Ok(new { url = imageUrl });
         }
     }
 }
