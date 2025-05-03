@@ -11,7 +11,7 @@ namespace Evolvify.Domain.Entities
 {
     public class ApplicationUser:IdentityUser
     {
-        public string ProfileImage { get; set; } = string.Empty;
-
+       
+      
     }
 }
