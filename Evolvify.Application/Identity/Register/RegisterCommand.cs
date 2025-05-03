@@ -1,5 +1,7 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Metadata;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +17,7 @@ namespace Evolvify.Application.Identity.Register
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string ConfirmPassword { get; set; } = string.Empty;
+        public IFormFile? ProfileImage { get; set; } 
 
     }
 }
