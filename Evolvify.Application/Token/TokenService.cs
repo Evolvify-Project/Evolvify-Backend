@@ -29,11 +29,9 @@ namespace Evolvify.Application.Token
         {
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier,user.Id),
-
-                new Claim(ClaimTypes.Name,user.UserName),
-
-                new Claim(ClaimTypes.Email,user.Email),
+               new Claim("id", user.Id),
+                new Claim("name", user.UserName),
+                new Claim("email", user.Email),
 
             };
 
@@ -41,7 +39,7 @@ namespace Evolvify.Application.Token
 
             foreach (var role in userRoles)
             {
-                claims.Add(new Claim( ClaimTypes.Role, role));
+                claims.Add(new Claim("role", role));
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
@@ -51,7 +49,8 @@ namespace Evolvify.Application.Token
                 audience: jwtSettings.Audience,
                 expires: DateTime.Now.AddDays(double.Parse(jwtSettings.TokenExpiry.ToString())),
                 claims: claims,
-                signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
+                //signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
+                signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256)
             );
 
             return new TokenResponse()
