@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Identity.ConfirmEmail;
 using Evolvify.Application.Identity.ForgetPassword;
 using Evolvify.Application.Identity.Login;
+using Evolvify.Application.Identity.ProfileImage;
 using Evolvify.Application.Identity.Register;
 using Evolvify.Application.Identity.ResetPassword;
 using MediatR;
@@ -58,6 +59,28 @@ namespace Evolvify.API.Controllers
         {
             var response = await mediator.Send(command);
             return response.Success ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPost("upload-image")]
+        public async Task<IActionResult> Upload(IFormFile imageFile)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+                return BadRequest();
+
+            
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+            var filePath = Path.Combine(folderPath, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+            var imageUrl = $"/images/{fileName}";
+            return Ok(new { url = imageUrl });
         }
     }
 }
