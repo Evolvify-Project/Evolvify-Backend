@@ -1,4 +1,5 @@
 ﻿using Evolvify.Application.Common.User;
+using Evolvify.Domain.Constants;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
@@ -40,8 +41,11 @@ namespace Evolvify.Application.Community.Comments.Commands.UpdateComment
             }
 
             var userId = _userContext.GetCurrentUser().Id;
+            var role = _userContext.GetCurrentUser().Role;
 
-            if (comment.UserId != userId)
+
+
+            if (comment.UserId != userId && role !=UserRole.Admin)
             {
                 throw new ForbiddenException("update", "comment");
             }
