@@ -37,5 +37,14 @@ namespace Evolvify.Application.Common.Services
            
 
        }
+        public void DeleteImage(string imageUrl)
+        {
+            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageUrl.TrimStart('/'));
+
+            if (File.Exists(imagePath))
+            {
+                File.Delete(imagePath);
+            }
+        }
     }
 }

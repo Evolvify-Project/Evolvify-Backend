@@ -24,22 +24,24 @@ namespace Evolvify.Application.Token
             this.configuration = configuration;
             jwtSettings = options.Value;
         }
-        
+
         public async Task<TokenResponse> CreateToken(ApplicationUser user, UserManager<ApplicationUser> userManager)
         {
             var claims = new List<Claim>()
             {
-               new Claim("id", user.Id),
-                new Claim("name", user.UserName),
-                new Claim("email", user.Email),
+                new Claim(ClaimTypes.NameIdentifier,user.Id),
+
+                new Claim(ClaimTypes.Name,user.UserName),
+
+                new Claim(ClaimTypes.Email,user.Email),
 
             };
 
-            var userRoles=await userManager.GetRolesAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
 
             foreach (var role in userRoles)
             {
-                claims.Add(new Claim("role", role));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
@@ -49,18 +51,17 @@ namespace Evolvify.Application.Token
                 audience: jwtSettings.Audience,
                 expires: DateTime.Now.AddDays(double.Parse(jwtSettings.TokenExpiry.ToString())),
                 claims: claims,
-                //signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
-                signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256)
+                signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
             );
 
             return new TokenResponse()
             {
                 TokenType = "Bearer",
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                ExpiresIn = token.ValidTo, 
-                RefreshToken = Guid.NewGuid().ToString() 
+                ExpiresIn = token.ValidTo,
+                RefreshToken = Guid.NewGuid().ToString()
             };
-              
+
         }
     }
 }

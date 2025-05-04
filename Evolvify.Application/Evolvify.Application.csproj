@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\AppSettings\**" />
     <Compile Remove="Skills\Querys\**" />
+    <EmbeddedResource Remove="Common\AppSettings\**" />
     <EmbeddedResource Remove="Skills\Querys\**" />
+    <None Remove="Common\AppSettings\**" />
     <None Remove="Skills\Querys\**" />
   </ItemGroup>
 
@@ -24,10 +27,6 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\AppSettings\" />
   </ItemGroup>
 
 </Project>

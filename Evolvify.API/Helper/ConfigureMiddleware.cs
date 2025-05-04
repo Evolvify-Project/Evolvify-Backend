@@ -47,9 +47,11 @@ namespace Evolvify.API.Helper
 
             app.UseRouting();
 
+            
             app.UseAuthentication(); 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
             app.MapControllers();
 
 

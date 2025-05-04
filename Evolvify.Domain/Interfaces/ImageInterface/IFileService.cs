@@ -10,5 +10,6 @@ namespace Evolvify.Domain.Interfaces.ImageInterface
     public interface IFileService
     {
         Task<string> UploadImage(IFormFile image);
+        void DeleteImage(string imageUrl);
     }
 }
