@@ -3,7 +3,7 @@ using Evolvify.Application.Identity.ForgetPassword;
 using Evolvify.Application.Identity.Login;
 using Evolvify.Application.Identity.Register;
 using Evolvify.Application.Identity.ResetPassword;
-using Evolvify.Application.Identity.UserProfile.Commands.UpdateUser;
+using Evolvify.Application.Identity.UserProfile.Commands.UpdateProfileImage;
 using Evolvify.Application.Identity.UserProfile.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -75,11 +75,11 @@ namespace Evolvify.API.Controllers
       
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserCommand command)
+        [HttpPut("UpdateProfileImage")]
+        public async Task<IActionResult> UpdateProfileImage([FromForm] UpdateProfileImageCommand command)
         {
-             await mediator.Send(command);
-            return NoContent();
+            var result= await mediator.Send(command);
+            return Ok(result);
         }
 
 

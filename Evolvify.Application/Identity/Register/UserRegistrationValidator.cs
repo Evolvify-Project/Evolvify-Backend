@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Identity.Register
 {
-    public class UserRegistrationValidator: AbstractValidator<RegisterCommand>
+    public class UpdateProfileImageValidator: AbstractValidator<RegisterCommand>
     {
         private readonly string[] _allowedExtensions = { ".jpg", ".jpeg", ".png" };
         private const long MaxSize = 2 * 1024 * 1024;
-        public UserRegistrationValidator()
+        public UpdateProfileImageValidator()
         {
             RuleFor(x => x.UserName).NotEmpty().WithMessage("UserName is required");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required");
