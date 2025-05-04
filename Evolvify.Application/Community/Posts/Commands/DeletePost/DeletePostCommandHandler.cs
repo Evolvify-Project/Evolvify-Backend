@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Common.User;
 using Evolvify.Domain.Constants;
 using Evolvify.Domain.Entities.Community;
+using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
@@ -43,7 +44,7 @@ namespace Evolvify.Application.Community.Posts.Commands.DeletePost
             
 
             _unitOfWork.Repository<Comment, Guid>().DeleteRange(post.Comments);
-            _unitOfWork.Repository<Like, Guid>().DeleteRange(post.Likes);
+            _unitOfWork.Repository<PostLike, Guid>().DeleteRange(post.Likes);
             _unitOfWork.Repository<Post, Guid>().Delete(post);
 
 

@@ -24,7 +24,7 @@ namespace Evolvify.Application.Token
             this.configuration = configuration;
             jwtSettings = options.Value;
         }
-        
+
         public async Task<TokenResponse> CreateToken(ApplicationUser user, UserManager<ApplicationUser> userManager)
         {
             var claims = new List<Claim>()
@@ -37,11 +37,11 @@ namespace Evolvify.Application.Token
 
             };
 
-            var userRoles=await userManager.GetRolesAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
 
             foreach (var role in userRoles)
             {
-                claims.Add(new Claim( ClaimTypes.Role, role));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
@@ -58,10 +58,10 @@ namespace Evolvify.Application.Token
             {
                 TokenType = "Bearer",
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                ExpiresIn = token.ValidTo, 
-                RefreshToken = Guid.NewGuid().ToString() 
+                ExpiresIn = token.ValidTo,
+                RefreshToken = Guid.NewGuid().ToString()
             };
-              
+
         }
     }
 }

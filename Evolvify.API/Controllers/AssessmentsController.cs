@@ -1,5 +1,6 @@
 ﻿using Evolvify.Application.Assessment.Commands;
 using Evolvify.Application.Assessment.Queries;
+using Evolvify.Application.Assessment.Queries.AssessmentResult;
 using Evolvify.Application.Assessment.Queries.Questions;
 using Evolvify.Domain.Entities.Assessment;
 using MediatR;
@@ -34,6 +35,13 @@ namespace Evolvify.API.Controllers
             return Ok(result);
         }
 
-        
+        [HttpGet("Result")]
+        public async Task<IActionResult> GetAssessmentResult()
+        {
+            var result = await _mediator.Send(new GetAssessmentResultQuery());
+            return Ok(result);
+        }
+
+
     }
 }

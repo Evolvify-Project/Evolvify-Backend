@@ -1,7 +1,9 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
+using Evolvify.Domain.Constants;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Interfaces.ImageInterface;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -21,9 +23,11 @@ namespace Evolvify.Application.Identity.Register
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IEmailService emailService;
+        private readonly IFileService fileService;
 
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,IEmailService emailService)
+        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,IEmailService emailService, IFileService fileService)
         {
+            this.fileService = fileService;
             this.userManager = userManager;
             this.emailService = emailService;
         }
@@ -39,13 +43,14 @@ namespace Evolvify.Application.Identity.Register
             var newUser = new ApplicationUser
             {
                 UserName = request.UserName,
-                Email = request.Email
+                Email = request.Email,
+                ProfileImageUrl = request.ProfileImage != null ? await fileService.UploadImage(request.ProfileImage) : null,
             };
+
 
             var result = await userManager.CreateAsync(newUser, request.Password);
 
-            
-
+            var roleResult = await userManager.AddToRoleAsync(newUser, UserRole.User);
 
             if(!result.Succeeded)
             {

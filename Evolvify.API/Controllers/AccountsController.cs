@@ -3,7 +3,11 @@ using Evolvify.Application.Identity.ForgetPassword;
 using Evolvify.Application.Identity.Login;
 using Evolvify.Application.Identity.Register;
 using Evolvify.Application.Identity.ResetPassword;
+using Evolvify.Application.Identity.UserProfile.Commands.UpdateProfileImage;
+using Evolvify.Application.Identity.UserProfile.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +25,7 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterCommand command)
+        public async Task<IActionResult> Register([FromForm]RegisterCommand command)
         {
             var response = await mediator.Send(command);
             if (response.Success)
@@ -59,5 +63,26 @@ namespace Evolvify.API.Controllers
             var response = await mediator.Send(command);
             return response.Success ? Ok(response) : BadRequest(response);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("userProfile")]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            var response = await mediator.Send(new GetUserProfileQuery());
+            return Ok(response);
+        }
+
+      
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("UpdateProfileImage")]
+        public async Task<IActionResult> UpdateProfileImage([FromForm] UpdateProfileImageCommand command)
+        {
+            var result= await mediator.Send(command);
+            return Ok(result);
+        }
+
+
+
     }
 }

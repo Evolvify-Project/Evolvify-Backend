@@ -24,7 +24,6 @@ namespace Evolvify.API.Helper
             services.AddSwaggerService();
             services.AddInfrastructure(configuration);
             services.AddApplicationServices(configuration);
-            services.AddValiadiationErrorHandlingServices();
             services.MiddlewareService();
             services.AddCorsServices();
             return services;
@@ -88,34 +87,7 @@ namespace Evolvify.API.Helper
         {
             services.AddScoped<ExceptionMiddleware>();
         }
-        private static void AddValiadiationErrorHandlingServices(this IServiceCollection services)
-        {
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-
-                options.InvalidModelStateResponseFactory = actionContext =>
-                {
-                    var errors = actionContext.ModelState
-                        .Where(e => e.Value.Errors.Count > 0)
-                        .SelectMany(x => x.Value.Errors)
-                        .Select(x => x.ErrorMessage).ToList();
-
-                    var result = new ApiResponse<string>(
-                        success: false,
-                        statusCode: 400,
-                        message: "Validation errors",
-                        errors: errors
-                        );
-
-
-                    return new BadRequestObjectResult(result);
-                };
-
-
-
-            });
-        }
-
+      
 
     }
 }

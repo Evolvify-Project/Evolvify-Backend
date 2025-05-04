@@ -11,7 +11,6 @@ namespace Evolvify.Domain.Entities.Assessment
         public string QuestionId { get; set; }
         public string Code { get; set; } 
         public string QuestionText { get; set; } = string.Empty;
-
         public Options Choices { get; set; } 
     }
 
