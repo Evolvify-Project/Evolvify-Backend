@@ -15,6 +15,7 @@ namespace Evolvify.Application.Community.Posts.DTOs
         public string Id { get; set; }
         public string Content { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
+        public string ProfileImage {  get; set; } = string.Empty;
         public string CreatedAt { get; set; } = string.Empty;
         public string UserId { get; set; } = string.Empty;
         public int LikesCount { get; set; }

@@ -72,8 +72,6 @@ namespace Evolvify.API.Controllers
             return Ok(response);
         }
 
-      
-
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("UpdateProfileImage")]
         public async Task<IActionResult> UpdateProfileImage([FromForm] UpdateProfileImageCommand command)
@@ -81,8 +79,5 @@ namespace Evolvify.API.Controllers
             var result= await mediator.Send(command);
             return Ok(result);
         }
-
-
-
     }
 }

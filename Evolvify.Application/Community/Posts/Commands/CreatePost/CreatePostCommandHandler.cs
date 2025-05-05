@@ -4,6 +4,7 @@ using Evolvify.Application.Community.Posts.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
 using System.Net;
@@ -37,7 +38,10 @@ namespace Evolvify.Application.Community.Posts.Commands.CreatePost
             await _unitOfWork.Repository<Post, Guid>().CreateAsync(post);
             await _unitOfWork.CompleteAsync();
 
-            var postDto = _mapper.Map<PostDto>(post);
+            var spec=new PostSpecification(post.Id);
+            var PostSpec = await _unitOfWork.Repository<Post, Guid>().GetByIdWithSpec(spec);
+
+            var postDto = _mapper.Map<PostDto>(PostSpec);
 
             return new ApiResponse<PostDto>(postDto);
 
