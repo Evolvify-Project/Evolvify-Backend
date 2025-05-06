@@ -25,7 +25,7 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm]RegisterCommand command)
+        public async Task<IActionResult> Register(RegisterCommand command)
         {
             var response = await mediator.Send(command);
             if (response.Success)
