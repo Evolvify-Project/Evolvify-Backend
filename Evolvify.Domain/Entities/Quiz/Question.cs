@@ -8,6 +8,7 @@ namespace Evolvify.Domain.Entities.Quiz
 {
     public class Question:BaseEntity<int>
     {
+        public int QuestionNumber { get; set; }
         public string QuestionText { get; set; } = string.Empty;
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; } = new Quiz();
