@@ -23,11 +23,9 @@ namespace Evolvify.Application.Identity.Register
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IEmailService emailService;
-        private readonly IFileService fileService;
 
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,IEmailService emailService, IFileService fileService)
+        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,IEmailService emailService)
         {
-            this.fileService = fileService;
             this.userManager = userManager;
             this.emailService = emailService;
         }
@@ -44,7 +42,6 @@ namespace Evolvify.Application.Identity.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
-                ProfileImageUrl = request.ProfileImage != null ? await fileService.UploadImage(request.ProfileImage) : null,
             };
 
 
