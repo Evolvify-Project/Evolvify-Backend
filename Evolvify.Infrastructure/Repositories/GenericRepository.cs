@@ -25,6 +25,7 @@ namespace Evolvify.Infrastructure.Repositories
             _dbSet=_context.Set<TEntity>();
         }
         public async Task CreateAsync(TEntity entity)=> await _dbSet.AddAsync(entity);
+        public async Task CreateAsync(IEnumerable<TEntity> entities) => await _dbSet.AddRangeAsync(entities);
         public void Delete(TEntity entity)=> _dbSet.Remove(entity);
 
         public void DeleteRange(IEnumerable<TEntity> entities)

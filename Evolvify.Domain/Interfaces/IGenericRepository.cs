@@ -1,5 +1,6 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Domain.Specification;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Evolvify.Domain.Interfaces
     {
       
         Task CreateAsync(TEntity entity);
+        Task CreateAsync(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         void Delete(TEntity entity);
         void DeleteRange(IEnumerable<TEntity> entities);
