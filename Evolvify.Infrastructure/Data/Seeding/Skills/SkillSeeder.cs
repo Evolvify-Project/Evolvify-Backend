@@ -16,13 +16,13 @@ namespace Evolvify.Infrastructure.Data.Seeding.Skills
             {
                 new Skill()
                 {
-                    Name = "Communication Skills",
+                    Name = "Communication",
                     Description = "The ability to clearly express ideas, actively listen, and engage in effective verbal and written communication.",
 
                 },
                 new Skill
                 {
-                    Name="Interview Skills",
+                    Name="Interview",
                     Description="Techniques and strategies for confidently handling job interviews, answering questions effectively, and presenting oneself professionally.",
 
 
@@ -35,7 +35,7 @@ namespace Evolvify.Infrastructure.Data.Seeding.Skills
                 },
                 new Skill
                 {
-                    Name="Presentation Skills",
+                    Name="Presentation",
                     Description="The capability to create and deliver engaging presentations with confidence, clarity, and impact."
                 },
                 new Skill

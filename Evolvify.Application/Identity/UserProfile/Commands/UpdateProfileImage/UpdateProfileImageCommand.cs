@@ -12,7 +12,6 @@ namespace Evolvify.Application.Identity.UserProfile.Commands.UpdateProfileImage;
 
 public class UpdateProfileImageCommand : IRequest<ApiResponse<string>>
 {
-    [Required]
     public IFormFile Image { get; set; } 
 }
 

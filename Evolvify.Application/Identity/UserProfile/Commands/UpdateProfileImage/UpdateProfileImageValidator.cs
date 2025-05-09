@@ -15,12 +15,17 @@ namespace Evolvify.Application.Identity.UserProfile.Commands.UpdateProfileImage
 
         public UpdateProfileImageValidator()
         {
-            RuleFor(x=>x.Image).NotEmpty().WithMessage("Image is Required")
-                .Must(F=>_allowedExtensions.Contains(Path.GetExtension(F.FileName).ToLower()))
-                .WithMessage("Image must be in jpg, jpeg or png format");
+           
 
-            RuleFor(x=>x.Image).Must(F=>F.Length<=MaxSize)
-                .WithMessage("Image size must be less than 2MB");
+            RuleFor(x => x.Image)
+                .Must(F => _allowedExtensions.Contains(Path.GetExtension(F.FileName).ToLower()))
+                .WithMessage("Image must be in jpg, jpeg or png format")
+                .When(x => x.Image != null); 
+
+            RuleFor(x => x.Image)
+                .Must(F => F.Length <= MaxSize)
+                .WithMessage("Image size must be less than 2MB")
+                .When(x => x.Image != null); 
         }
 
     }

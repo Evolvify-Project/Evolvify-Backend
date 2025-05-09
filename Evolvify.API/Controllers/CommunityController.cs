@@ -58,9 +58,9 @@ namespace Evolvify.API.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("Post/{id}")]
-        public async Task<IActionResult> UpdatePost([FromRoute]Guid id, [FromBody]UpdatePostCommand command)
+        public async Task<IActionResult> UpdatePost([FromRoute]Guid id, string Content)
         {
-            await _mediator.Send(new UpdatePostCommand(id, command.Content));
+            await _mediator.Send(new UpdatePostCommand(id,Content));
             return NoContent();
         }
 
