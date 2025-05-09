@@ -12,6 +12,8 @@ namespace Evolvify.Application.Courses.Queries.GetAll
     public record GetAllCoursesQuery : IRequest<ApiResponse<IEnumerable<CoursesListDto>>>
     {
         public string? SortBy { get; set; }
+        public int? SkillId { get; set; }
+        public int? Level { get; set; }
     }
    
 }

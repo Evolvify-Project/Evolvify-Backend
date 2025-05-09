@@ -11,10 +11,12 @@ namespace Evolvify.Domain.Specification.Courses
 {
     public class CourseSpecification:BaseSpecification<Course,int>
     {
-        public CourseSpecification(string? sort)
+        public CourseSpecification(CourseParameters parameters):base(C => 
+            (parameters.SkillId == null || C.SkillId == parameters.SkillId) &&
+            (parameters.Level == null || (int)C.Level == parameters.Level))
         {
             ApplyInclude();
-            ApplySort(sort?.ToLower());
+            ApplySort(parameters.SortBy?.ToLower());
         }
         public CourseSpecification(int id):base(C=>C.Id==id) 
         {
