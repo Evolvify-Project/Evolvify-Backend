@@ -25,7 +25,7 @@ namespace Evolvify.Application.Courses.Queries.GetAll
         }
         public async Task<ApiResponse<IEnumerable<CoursesListDto>>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
         {
-            var spec = new CourseSpecification();
+            var spec = new CourseSpecification(request.SortBy);
             var courses = await _unitOfWork.Repository<Course, int>().GetAllWithSpec(spec);
 
             if (!courses.Any())

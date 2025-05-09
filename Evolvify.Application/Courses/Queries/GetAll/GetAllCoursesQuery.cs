@@ -11,7 +11,7 @@ namespace Evolvify.Application.Courses.Queries.GetAll
 {
     public record GetAllCoursesQuery : IRequest<ApiResponse<IEnumerable<CoursesListDto>>>
     {
-
+        public string? SortBy { get; set; }
     }
    
 }
