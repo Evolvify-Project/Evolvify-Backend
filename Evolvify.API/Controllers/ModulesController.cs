@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Evolvify.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Course/{CourseId}/[controller]")]
     [ApiController]
     public class ModulesController : ControllerBase
     {
@@ -24,18 +24,20 @@ namespace Evolvify.API.Controllers
         {
             this.mediator = mediator;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetModule()
+        public async Task<IActionResult> GetModuleForCourse([FromRoute] int CourseId)
         {
-            var response = await mediator.Send(new GetAllModuleQuery());
+            var response = await mediator.Send(new GetAllModuleQuery(CourseId));
 
             return response.Success ? Ok(response) : NotFound(response);
         }
+       
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetModule([FromRoute] int id)
+        [HttpGet("{ModuleId}")]
+        public async Task<IActionResult> GetModule([FromRoute]int CourseId, [FromRoute] int ModuleId)
         {
-            var response = await mediator.Send(new GetModulrByIdQuery(id));
+            var response = await mediator.Send(new GetModulrByIdQuery(CourseId, ModuleId));
 
             return response.Success ? Ok(response) : NotFound(response);
         }

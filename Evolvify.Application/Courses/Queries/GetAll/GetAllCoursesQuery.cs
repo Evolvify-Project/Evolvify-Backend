@@ -12,6 +12,7 @@ namespace Evolvify.Application.Courses.Queries.GetAll
 {
     public record GetAllCoursesQuery : IRequest<PaginationResponse<IEnumerable<CoursesListDto>>>
     {
+        public string? Search { get; set; } 
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
         public string? SortBy { get; set; }

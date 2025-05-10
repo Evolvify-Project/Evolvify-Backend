@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Modules.Queries.GetAll
 {
-    public class GetAllModuleQuery : IRequest<ApiResponse<IEnumerable<ModulesListDto>>>
+    public record GetAllModuleQuery(int CourseId) : IRequest<ApiResponse<IEnumerable<ModulesListDto>>>
     {
     }
 }
