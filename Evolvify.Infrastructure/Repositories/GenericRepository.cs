@@ -36,6 +36,8 @@ namespace Evolvify.Infrastructure.Repositories
             _dbSet.RemoveRange(entities);
         }
 
+
+
       
         public void Update(TEntity entity) => _dbSet.Update(entity);
 
@@ -49,10 +51,16 @@ namespace Evolvify.Infrastructure.Repositories
             return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
+        public async Task<int> CountAsync(ISpecification<TEntity, TKey> specification)
+        {
+            return await ApplySpecification(specification).CountAsync();
+        }
+
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity, TKey> spec)
         {
             return SpecificationEvaluator<TEntity, TKey>.GetQuery(_dbSet, spec);
         }
-       
+
+        
     }
 }

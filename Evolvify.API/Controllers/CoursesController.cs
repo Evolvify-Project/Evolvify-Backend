@@ -22,9 +22,9 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]GetAllCoursesQuery query)
         {
-            var result = await _mediator.Send(new GetAllCoursesQuery());
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 
