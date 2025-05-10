@@ -5,6 +5,7 @@ using Evolvify.Application.Skills.DTO;
 using Evolvify.Application.Skills.Queries.GetById;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Courses;
 using Evolvify.Domain.Specification.Modules;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
@@ -29,14 +30,21 @@ namespace Evolvify.Application.Modules.Queries.GetById
 
         public async Task<ApiResponse<ModuleDetailsDto>> Handle(GetModulrByIdQuery request, CancellationToken cancellationToken)
         {
-            var spec = new ModuleSpecification(request.Id);
-            var module = await unitOfWork.Repository<Module, int>().GetByIdWithSpec(spec);
+            
+            var spec=new CourseSpecification(request.CourseId);
+            var course = await unitOfWork.Repository<Course, int>().GetByIdWithSpec(spec);
+            if (course == null)
+            {
+                throw new NotFoundException($"Course with id {request.CourseId} not found");
+            }
+            
+            var module = course.Modules.FirstOrDefault(m => m.Id == request.ModuleId);
             if (module == null)
             {
-                throw new NotFoundException(nameof(Module), request.Id.ToString());
+                throw new NotFoundException($"Module with id {request.ModuleId} not found");
             }
-            return new ApiResponse<ModuleDetailsDto>(mapper.Map<ModuleDetailsDto>(module));
-
+            var moduleDto = mapper.Map<ModuleDetailsDto>(module);
+            return new ApiResponse<ModuleDetailsDto>(moduleDto);
         }
 
     }

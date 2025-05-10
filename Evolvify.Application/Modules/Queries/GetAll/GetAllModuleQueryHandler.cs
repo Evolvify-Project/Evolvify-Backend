@@ -4,6 +4,7 @@ using Evolvify.Application.Modules.DTO;
 using Evolvify.Application.Skills.DTO;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Courses;
 using Evolvify.Domain.Specification.Modules;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
@@ -27,12 +28,14 @@ namespace Evolvify.Application.Modules.Queries.GetAll
         }
         public async Task<ApiResponse<IEnumerable<ModulesListDto>>> Handle(GetAllModuleQuery request, CancellationToken cancellationToken)
         {
-            var spec = new ModuleSpecification();
-            var module = await unitOfWork.Repository<Module, int>().GetAllWithSpec(spec);
-            if (module == null || !module.Any())
+            var spec = new CourseSpecification(request.CourseId);
+            var course = await unitOfWork.Repository<Course, int>().GetByIdWithSpec(spec);
+            if (course == null)
             {
-                throw new NotFoundException("Module Not Found !!!");
+                throw new NotFoundException($"Course with id {request.CourseId} not found");
             }
+            
+            var module=course.Modules;
 
             var moduleDtos = mapper.Map<IEnumerable<ModulesListDto>>(module);
 

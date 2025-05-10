@@ -14,6 +14,6 @@ namespace Evolvify.Application.Contents.DTOs
         public string Title { get; set; } = string.Empty;
         public string Url { get; set; } = string.Empty;
         public string Text { get; set; } = string.Empty;
-        public ContentTypes ContentType { get; set; }
+        public string ContentType { get; set; }=string.Empty;
     }
 }
