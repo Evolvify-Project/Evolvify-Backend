@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Entities
 {
-    public class ApplicationUser:IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        
         public string? ProfileImageUrl { get; set; }
-
     }
 }
