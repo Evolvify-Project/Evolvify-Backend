@@ -10,6 +10,7 @@ namespace Evolvify.Domain.Specification.Courses
     public class CoursesWithCountSpecification:BaseSpecification<Course,int>
     {
         public CoursesWithCountSpecification(CourseParameters parameters) : base(C =>
+           (string.IsNullOrEmpty(parameters.Search) || C.Title.ToLower().Contains(parameters.Search.ToLower())) &&
            (parameters.SkillId == null || C.SkillId == parameters.SkillId) &&
            (parameters.Level == null || (int)C.Level == parameters.Level))
         {
