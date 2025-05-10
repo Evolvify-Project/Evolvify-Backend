@@ -11,5 +11,7 @@ namespace Evolvify.Domain.Specification.Courses
         public string? SortBy { get; set; }
         public int? SkillId { get; set; }
         public int? Level { get; set; }
+        public int PageNumber { get; set; } 
+        public int PageSize { get; set; } 
     }
 }

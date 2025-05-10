@@ -16,6 +16,5 @@ namespace Evolvify.Domain.Entities.Progress
         public bool IsCompleted { get; set; }
         public DateTime? CompletedAt { get; set; }
 
-        
     }
 }
