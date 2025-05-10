@@ -46,10 +46,10 @@ namespace Evolvify.Domain.Specification
             OrderByDescending = expression;
         }
 
-        public void ApplyPaging(int skip, int take)
+        public void ApplyPaging(int PageIndex, int PageSize)
         {
-            Skip = skip;
-            Take = take;
+            Skip = PageSize * (PageIndex - 1);
+            Take = PageSize;
             IsPagingEnabled = true;
         }
     }

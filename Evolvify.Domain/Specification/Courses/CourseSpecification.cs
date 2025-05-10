@@ -18,7 +18,7 @@ namespace Evolvify.Domain.Specification.Courses
         {
             ApplyInclude();
             ApplySort(parameters.SortBy?.ToLower());
-            ApplyPaging(parameters.PageSize*(parameters.PageNumber - 1), parameters.PageSize);
+            ApplyPaging(parameters.PageNumber,parameters.PageSize);
         }
 
         public CourseSpecification(int id):base(C=>C.Id==id) 

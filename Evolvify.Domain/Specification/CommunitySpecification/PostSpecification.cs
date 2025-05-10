@@ -9,11 +9,15 @@ namespace Evolvify.Domain.Specification.CommunitySpecification
 {
     public class PostSpecification :BaseSpecification<Post,Guid>
     {
-        public PostSpecification()
+        public PostSpecification(int pageNumber, int pageSize):base()
         {
             ApplyInclude();
             ApplyOrderBy();
+            ApplyPaging(pageNumber, pageSize);
         }
+        
+
+        
 
         public PostSpecification(Guid id):base(P=>P.Id==id) 
         {

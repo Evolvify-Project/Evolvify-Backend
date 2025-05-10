@@ -34,9 +34,9 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpGet("Post")]
-        public async Task<IActionResult> GetAllPosts()
+        public async Task<IActionResult> GetAllPosts([FromQuery]GetAllPostsQuery query)
         {
-            var result = await _mediator.Send(new GetAllPostsQuery());
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 
