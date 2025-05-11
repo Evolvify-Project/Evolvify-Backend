@@ -26,7 +26,11 @@ namespace Evolvify.Infrastructure.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<ModuleProgress>()
+                .HasKey(mp => new { mp.UserId, mp.ModuleId });
 
+            modelBuilder.Entity<CourseProgress>()
+                .HasKey(cp => new { cp.UserId, cp.CourseId });
             base.OnModelCreating(modelBuilder);
         }
 

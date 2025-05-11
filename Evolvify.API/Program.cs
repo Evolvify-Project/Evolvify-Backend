@@ -1,8 +1,11 @@
 
 using Evolvify.API.Helper;
+using Evolvify.Application.Common.User;
 using Evolvify.Domain.Entities;
+using Evolvify.Domain.Interfaces;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Extensions;
+using Evolvify.Infrastructure.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +22,9 @@ namespace Evolvify.API
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDependency(builder.Configuration);
-
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<IUserContext, UserContext>();
+            builder.Services.AddScoped<IProgressService, ProgressService>();
             var app = builder.Build();
            
             await app.ConfigureMiddlewareAsync();

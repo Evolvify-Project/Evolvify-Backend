@@ -1,7 +1,9 @@
 ﻿using Evolvify.Application.Assessment.Queries.RecommendedCourses;
 using Evolvify.Application.Assessment.Queries.RecommendedCourses.DTOs;
+using Evolvify.Application.CompleteMedule;
 using Evolvify.Application.Courses.Queries.GetAll;
 using Evolvify.Application.Courses.Queries.GetById;
+using Evolvify.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +17,11 @@ namespace Evolvify.API.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly IMediator _mediator;
-
-        public CoursesController(IMediator mediator)
+        private readonly IProgressService _progressService;
+        public CoursesController(IMediator mediator , IProgressService progressService)
         {
             _mediator = mediator;
+            _progressService = progressService;
         }
 
         [HttpGet]
@@ -42,7 +45,19 @@ namespace Evolvify.API.Controllers
             var result = await _mediator.Send(new GetRecommendedCoursesQuery());
             return Ok(result);
         }
+        [HttpPost("complete-module")]
+        public async Task<IActionResult> CompleteModule([FromBody] CompleteModuleRequest request)
+        {
+            var result = await _progressService.CompleteModuleAsync(request.Module_Id, request.Course_Id);
+            return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
+        }
 
+        [HttpGet("progress/{courseId}")]
+        public async Task<IActionResult> GetCourseProgress(int courseId)
+        {
+            var result = await _progressService.GetCourseProgressAsync(courseId);
+            return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
+        }
 
     }
 }

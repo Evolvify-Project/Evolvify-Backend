@@ -20,12 +20,18 @@ namespace Evolvify.Application.Common.User
         {
 
             var user = httpContextAccessor?.HttpContext?.User;
-            if (user == null)
+            if (user == null || !user.Identity?.IsAuthenticated == true)
             {
                 return null;
             }
 
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return null;
+            }
+
+            
             var UserName = user.FindFirst(ClaimTypes.Name)?.Value;
             var email = user.FindFirst(ClaimTypes.Email)?.Value;
             var roles = user.FindFirst(ClaimTypes.Role)?.Value;
