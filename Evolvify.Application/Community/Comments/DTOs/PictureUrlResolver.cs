@@ -24,8 +24,10 @@ namespace Evolvify.Application.Community.Comments.DTOs
         public string Resolve(Comment source, CommentDto destination, string destMember, ResolutionContext context)
         {
             
+
+
             // Check if ProfileImageUrl is null or empty
-            if (string.IsNullOrEmpty(source.User.ProfileImageUrl))
+            if (string.IsNullOrEmpty(source?.User?.ProfileImageUrl??string.Empty))
             {
                 return string.Empty; // Return empty string if no image
             }

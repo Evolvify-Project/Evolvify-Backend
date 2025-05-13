@@ -59,7 +59,12 @@ namespace Evolvify.Application.Community.Replies.Commands.AddReply
             await _unitOfWork.Repository<Comment, Guid>().CreateAsync(reply);
             await _unitOfWork.CompleteAsync();
 
-            var replyDto=_mapper.Map<ReplyDto>(reply);
+            // Fetch the reply with includes
+            var replySpec = new CommentSpecification(reply.Id);
+            var replyWithIncludes = await _unitOfWork.Repository<Comment, Guid>().GetByIdWithSpec(replySpec);
+            
+            var replyDto = _mapper.Map<ReplyDto>(replyWithIncludes);
+
             return new ApiResponse<ReplyDto>(replyDto);
         }
     }

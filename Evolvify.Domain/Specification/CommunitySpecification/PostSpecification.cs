@@ -28,6 +28,7 @@ namespace Evolvify.Domain.Specification.CommunitySpecification
         {
             AddInclude(p=>p.User);
             AddInclude(P=>P.Comments);
+            AddInclude("Comments.User");
             AddInclude(P=>P.Likes);
         }
         public void ApplyOrderBy()

@@ -48,10 +48,17 @@ public class AddCommentOnPostCommandHandler : IRequestHandler<AddCommentOnPostCo
         };
 
           await  _unitOfWork.Repository<Comment,Guid>().CreateAsync(comment);
-
          await _unitOfWork.CompleteAsync();
 
-        var commentDto = _mapper.Map<CommentDto>(comment);
+        // Fetch the comment with includes
+
+        var commentWithIncludes = post.Comments.FirstOrDefault(c => c.Id == comment.Id);
+            
+        if (commentWithIncludes == null)
+        {
+            throw new NotFoundException("Comment not found");
+        }
+        var commentDto = _mapper.Map<CommentDto>(commentWithIncludes);
 
         return new ApiResponse<CommentDto>(commentDto);
         

@@ -40,6 +40,8 @@ namespace Evolvify.Application.Community.Comments.Queries.GetAllCommentForPost
 
             if (mainComments.Any())
             {
+                
+
                 var comments=_mapper.Map<IEnumerable<CommentDto>>(mainComments);
                 return new ApiResponse<IEnumerable<CommentDto>>(comments);
             }

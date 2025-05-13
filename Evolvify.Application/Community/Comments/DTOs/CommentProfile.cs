@@ -23,10 +23,10 @@ namespace Evolvify.Application.Community.Comments.DTOs
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count))
                 .ForMember(dest => dest.RepliesCount, opt => opt.MapFrom(src => src.Replies.Count))
-                .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<PictureUrlResolver>())
-                .ReverseMap();
+                .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<PictureUrlResolver>());
 
-            CreateMap<Comment,ReplyDto>()
+
+            CreateMap<Comment, ReplyDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
@@ -35,9 +35,8 @@ namespace Evolvify.Application.Community.Comments.DTOs
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count))
                 .ForMember(dest => dest.Replys, opt => opt.MapFrom(src => src.Replies))
-                .ForMember(dest => dest.RepliesCount, opt=>opt.MapFrom(src=>src.Replies.Count))
-                .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<Replies.DTOs.PictureUrlResolver>())
-                .ReverseMap();
+                .ForMember(dest => dest.RepliesCount, opt => opt.MapFrom(src => src.Replies.Count))
+                .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<Replies.DTOs.PictureUrlResolver>());
 
                 
         }
