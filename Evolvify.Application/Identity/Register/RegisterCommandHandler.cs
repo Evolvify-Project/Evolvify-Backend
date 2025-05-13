@@ -42,6 +42,7 @@ namespace Evolvify.Application.Identity.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
             };
 
 
