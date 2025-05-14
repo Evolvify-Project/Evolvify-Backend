@@ -17,7 +17,7 @@ namespace Evolvify.Application.Common.Services
             _webHostEnvironment = webHostEnvironment;
         }
         public async Task<string> UploadImage(IFormFile image)
-       {
+        {
             var imageName=$"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
 
             var FolderPath=Path.Combine(_webHostEnvironment.WebRootPath,"Images","ProfileImage");

@@ -5,7 +5,7 @@ using Evolvify.Domain.Entities.Community;
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace Evolvify.Application.Community.Posts.DTOs
+namespace Evolvify.Application.Community.Posts.Mapping
 {
     public class PictureUrlResolver : IValueResolver<Post, PostDto, string>
     {
@@ -20,7 +20,7 @@ namespace Evolvify.Application.Community.Posts.DTOs
         // Resolve the ProfileImageUrl to a complete URL
         public string Resolve(Post source, PostDto destination, string destMember, ResolutionContext context)
         {
-            
+
             // Check if ProfileImageUrl is null or empty
             if (string.IsNullOrEmpty(source.User.ProfileImageUrl))
             {

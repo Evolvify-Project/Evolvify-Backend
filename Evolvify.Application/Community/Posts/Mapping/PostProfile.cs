@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Evolvify.Application.Common.User;
 using Evolvify.Application.Community.Posts.Commands.UpdatePost;
+using Evolvify.Application.Community.Posts.DTOs;
 using Evolvify.Domain.Entities.Community;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Community.Posts.DTOs
+namespace Evolvify.Application.Community.Posts.Mapping
 {
-    public class PostProfile: Profile
+    public class PostProfile : Profile
     {
         public PostProfile()
         {
@@ -21,14 +23,13 @@ namespace Evolvify.Application.Community.Posts.DTOs
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 //.ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments.Where(c => c.ParentCommentId == null)))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count))
-                .ForMember(dest=>dest.CommentsCount, opt => opt.MapFrom(src => src.Comments.Where(c=>c.ParentCommentId==null).Count()))
+                .ForMember(dest => dest.IsLiked, opt => opt.MapFrom<IsLikedResolver>())
+                .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Comments.Where(c => c.ParentCommentId == null).Count()))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
                 .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<PictureUrlResolver>())
                 .ReverseMap();
             CreateMap<UpdatePostCommand, Post>()
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content));
-           
-
         }
     }
 }
