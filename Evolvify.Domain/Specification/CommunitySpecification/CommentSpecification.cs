@@ -25,6 +25,8 @@ namespace Evolvify.Domain.Specification.CommunitySpecification
             AddInclude(C => C.User);
             AddInclude(C => C.Likes);
             AddInclude(C => C.Replies);
+            AddInclude("Replies.User");
+
         }
     }
 }

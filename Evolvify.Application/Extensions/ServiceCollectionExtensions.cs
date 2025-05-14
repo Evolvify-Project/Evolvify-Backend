@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Assessment.Service;
 using Evolvify.Application.Common.Services;
 using Evolvify.Application.Common.User;
+using Evolvify.Application.Community.Posts.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
@@ -35,6 +36,7 @@ namespace Evolvify.Application.Extensions
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<IAssessmentApiService, AssessmentApiService>();
             services.AddScoped<IFileService, FileService>();
+           
 
             services.AddTransient<IEmailService, EmailService>();
 

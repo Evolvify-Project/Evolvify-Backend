@@ -28,7 +28,7 @@ namespace Evolvify.Application.Community.Replies.Queries
             var spec=new CommentSpecification(request.CommentId);
             var comments = await _unitOfWork.Repository<Comment, Guid>().GetAllWithSpec(spec);
 
-            var replies = comments.SelectMany(c => c.Replies);
+            var replies = comments.SelectMany(c => c.Replies).ToList();
 
             var replyDtos = _mapper.Map<IEnumerable<ReplyDto>>(replies);
 
