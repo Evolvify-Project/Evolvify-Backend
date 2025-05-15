@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Evolvify.Application.Community.Comments.DTOs;
-
 using Evolvify.Application.Community.Posts.DTOs;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Entities.Community;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 using System;
 
-namespace Evolvify.Application.Community.Comments.DTOs
+namespace Evolvify.Application.Community.Comments.Mapping
 {
     public class PictureUrlResolver : IValueResolver<Comment, CommentDto, string>
     {
@@ -23,11 +22,11 @@ namespace Evolvify.Application.Community.Comments.DTOs
         // Resolve the ProfileImageUrl to a complete URL
         public string Resolve(Comment source, CommentDto destination, string destMember, ResolutionContext context)
         {
-            
+
 
 
             // Check if ProfileImageUrl is null or empty
-            if (string.IsNullOrEmpty(source?.User?.ProfileImageUrl??string.Empty))
+            if (string.IsNullOrEmpty(source?.User?.ProfileImageUrl ?? string.Empty))
             {
                 return string.Empty; // Return empty string if no image
             }

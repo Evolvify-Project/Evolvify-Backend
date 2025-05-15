@@ -20,7 +20,6 @@ namespace Evolvify.Application.Community.Posts.Mapping
         }
         public bool Resolve(Post source, PostDto destination, bool destMember, ResolutionContext context)
         {
-           
             // Check if the current user has liked the post
             return source.Likes.Any(l => l.UserId == userContext.GetCurrentUser().Id);
 

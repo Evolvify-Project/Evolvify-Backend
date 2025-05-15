@@ -33,6 +33,7 @@ namespace Evolvify.API.Controllers
         
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("Post")]
         public async Task<IActionResult> GetAllPosts([FromQuery]GetAllPostsQuery query)
         {
@@ -132,6 +133,7 @@ namespace Evolvify.API.Controllers
             var result = await _mediator.Send(new LikePostCommand(postId));
             return Ok(result);
         }
+
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("Comment/{commentId}/Like")]

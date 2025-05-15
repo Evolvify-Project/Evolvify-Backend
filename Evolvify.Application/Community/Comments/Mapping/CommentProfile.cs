@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Evolvify.Application.Common;
+using Evolvify.Application.Community.Comments.DTOs;
 using Evolvify.Application.Community.Replies.DTOs;
 using Evolvify.Domain.Entities;
 using Evolvify.Domain.Entities.Community;
@@ -9,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Community.Comments.DTOs
+namespace Evolvify.Application.Community.Comments.Mapping
 {
-    public class CommentProfile:Profile
+    public class CommentProfile : Profile
     {
         public CommentProfile()
         {
@@ -38,7 +39,7 @@ namespace Evolvify.Application.Community.Comments.DTOs
                 .ForMember(dest => dest.RepliesCount, opt => opt.MapFrom(src => src.Replies.Count))
                 .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<Replies.DTOs.PictureUrlResolver>());
 
-                
+
         }
     }
 }

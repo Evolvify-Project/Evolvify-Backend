@@ -2,6 +2,7 @@
 using Evolvify.Application.Community.Replies.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Domain.Entities.Community;
+using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.CommunitySpecification;
 using Evolvify.Infrastructure.UnitOfWork;
 using MediatR;
@@ -31,6 +32,10 @@ namespace Evolvify.Application.Community.Replies.Queries
             var replies = comments.SelectMany(c => c.Replies).ToList();
 
             var replyDtos = _mapper.Map<IEnumerable<ReplyDto>>(replies);
+            if (replyDtos == null || !replyDtos.Any())
+            {
+                throw new NotFoundException("Replies not found");
+            }
 
             return new ApiResponse<IEnumerable<ReplyDto>>(replyDtos);
            
