@@ -32,11 +32,7 @@ namespace Evolvify.Application.Community.Replies.Queries
             var replies = comments.SelectMany(c => c.Replies).ToList();
 
             var replyDtos = _mapper.Map<IEnumerable<ReplyDto>>(replies);
-            if (replyDtos == null || !replyDtos.Any())
-            {
-                throw new NotFoundException("Replies not found");
-            }
-
+           
             return new ApiResponse<IEnumerable<ReplyDto>>(replyDtos);
            
         }

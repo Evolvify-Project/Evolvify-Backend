@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Evolvify.Application.Identity.UserProfile.DTOs;
 using Evolvify.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace Evolvify.Application.Identity.UserProfile.DTOs
+namespace Evolvify.Application.Identity.UserProfile.Mapping
 {
-    public class PictureUrlResolver : IValueResolver<ApplicationUser, UserProfileDto, string>
+    public class PictureUrlResolver<TDestination> : IValueResolver<ApplicationUser, TDestination, string?>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -16,7 +17,7 @@ namespace Evolvify.Application.Identity.UserProfile.DTOs
         }
 
         // Resolve the ProfileImageUrl to a complete URL
-        public string Resolve(ApplicationUser source, UserProfileDto destination, string destMember, ResolutionContext context)
+        public string Resolve(ApplicationUser source, TDestination destination, string destMember, ResolutionContext context)
         {
             // Check if ProfileImageUrl is null or empty
             if (string.IsNullOrEmpty(source.ProfileImageUrl))

@@ -5,6 +5,8 @@ using Evolvify.Application.Identity.Register;
 using Evolvify.Application.Identity.ResetPassword;
 using Evolvify.Application.Identity.UserProfile.Commands.UpdateProfileImage;
 using Evolvify.Application.Identity.UserProfile.Queries;
+using Evolvify.Application.Identity.UserProfile.Queries.ProfileImage;
+using Evolvify.Application.Identity.UserProfile.Queries.UserProfile;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -69,6 +71,14 @@ namespace Evolvify.API.Controllers
         public async Task<IActionResult> GetUserProfile()
         {
             var response = await mediator.Send(new GetUserProfileQuery());
+            return Ok(response);
+        }
+
+        [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("GetUserProfileImage")]
+        public async Task<IActionResult> GetUserProfileImage()
+        {
+            var response = await mediator.Send(new GetUserProfileImageQuery());
             return Ok(response);
         }
 

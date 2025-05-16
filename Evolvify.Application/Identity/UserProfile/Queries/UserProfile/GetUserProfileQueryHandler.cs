@@ -11,9 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Identity.UserProfile.Queries
+namespace Evolvify.Application.Identity.UserProfile.Queries.UserProfile
 {
-    public class GetUserProfileQueryHandler: IRequestHandler<GetUserProfileQuery, ApiResponse<UserProfileDto>>
+    public class GetUserProfileQueryHandler : IRequestHandler<GetUserProfileQuery, ApiResponse<UserProfileDto>>
     {
         private readonly IUserContext _userContext;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -30,11 +30,11 @@ namespace Evolvify.Application.Identity.UserProfile.Queries
             var user = await _userManager.FindByIdAsync(userId);
 
             var userProfile = _mapper.Map<UserProfileDto>(user);
-            
+
             return new ApiResponse<UserProfileDto>(userProfile);
-            
+
 
         }
     }
-   
+
 }

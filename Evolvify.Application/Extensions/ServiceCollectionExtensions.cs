@@ -5,7 +5,7 @@ using Evolvify.Application.Community.Posts.DTOs;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
-using Evolvify.Application.Identity.UserProfile.DTOs;
+using Evolvify.Application.Identity.UserProfile.Mapping;
 using Evolvify.Application.Token;
 using Evolvify.Domain.AppSettings;
 using Evolvify.Domain.Interfaces.ImageInterface;

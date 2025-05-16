@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Identity.UserProfile.Queries
+namespace Evolvify.Application.Identity.UserProfile.Queries.UserProfile
 {
-    public class GetUserProfileQuery:IRequest<ApiResponse<UserProfileDto>>
+    public class GetUserProfileQuery : IRequest<ApiResponse<UserProfileDto>>
     {
 
     }
