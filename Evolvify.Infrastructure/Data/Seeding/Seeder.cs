@@ -41,6 +41,12 @@ namespace Evolvify.Infrastructure.Data.Seeding
                     await context.Modules.AddRangeAsync(modules);
                     await context.SaveChangesAsync();
                 }
+                if (!context.Contents.Any())
+                {
+                    var contents = ContentSeeder.GetCourses();
+                    await context.Contents.AddRangeAsync(contents);
+                    await context.SaveChangesAsync();
+                }
             }
         }
 

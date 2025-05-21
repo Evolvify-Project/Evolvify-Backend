@@ -1,0 +1,407 @@
+[
+  {
+    "Title": "Introduction to Effective Communication",
+    "Description": "Learn the basics of clear and concise communication",
+    "Level": 1,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 80,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Active Listening Skills",
+    "Description": "Master the art of listening to improve conversations",
+    "Level": 1,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 85,
+    "ImageUrl": "https://images.unsplash.com/photo-1576267423429-569309b31e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Non-Verbal Communication Basics",
+    "Description": "Understand body language and facial expressions",
+    "Level": 1,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 90,
+    "ImageUrl": "https://images.unsplash.com/photo-1543269865-0a740d43b90c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Persuasive Communication Techniques",
+    "Description": "Learn to influence and persuade effectively",
+    "Level": 2,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 100,
+    "ImageUrl": "https://images.pexels.com/photos/3184297/pexels-photo-3184297.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Conflict Resolution Skills",
+    "Description": "Resolve disputes through effective communication",
+    "Level": 2,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 105,
+    "ImageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Cross-Cultural Communication",
+    "Description": "Navigate communication in diverse settings",
+    "Level": 2,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 110,
+    "ImageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Mastering Strategic Communication",
+    "Description": "Advanced techniques for high-stakes communication",
+    "Level": 3,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 120,
+    "ImageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Executive Presence in Communication",
+    "Description": "Develop a commanding communication style",
+    "Level": 3,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 125,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Crisis Communication Mastery",
+    "Description": "Handle communication during critical situations",
+    "Level": 3,
+    "SkillId": 1,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 130,
+    "ImageUrl": "https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Ace the Interview",
+    "Description": "Comprehensive interview preparation course",
+    "Level": 1,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 90,
+    "ImageUrl": "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Resume Building Basics",
+    "Description": "Craft a standout resume for interviews",
+    "Level": 1,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 85,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Common Interview Questions",
+    "Description": "Prepare answers for typical interview questions",
+    "Level": 1,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 80,
+    "ImageUrl": "https://images.unsplash.com/photo-1576267423429-569309b31e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Behavioral Interview Mastery",
+    "Description": "Excel in behavioral interview scenarios",
+    "Level": 2,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 100,
+    "ImageUrl": "https://images.unsplash.com/photo-1543269865-0a740d43b90c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Technical Interview Prep",
+    "Description": "Prepare for technical and role-specific interviews",
+    "Level": 2,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 105,
+    "ImageUrl": "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Virtual Interview Skills",
+    "Description": "Shine in online and remote interviews",
+    "Level": 2,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 110,
+    "ImageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Executive Interview Strategies",
+    "Description": "Advanced techniques for senior-level interviews",
+    "Level": 3,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 120,
+    "ImageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Negotiation During Interviews",
+    "Description": "Master salary and offer negotiations",
+    "Level": 3,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 125,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Panel Interview Expertise",
+    "Description": "Handle multi-interviewer scenarios with confidence",
+    "Level": 3,
+    "SkillId": 2,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 130,
+    "ImageUrl": "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Teamwork Essentials",
+    "Description": "Learn how to collaborate effectively with team members",
+    "Level": 1,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 100,
+    "ImageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Building Trust in Teams",
+    "Description": "Foster trust and respect in team settings",
+    "Level": 1,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 90,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Team Communication Basics",
+    "Description": "Improve communication within teams",
+    "Level": 1,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 85,
+    "ImageUrl": "https://images.unsplash.com/photo-1576267423429-569309b31e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Collaborative Problem Solving",
+    "Description": "Solve problems effectively as a team",
+    "Level": 2,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 105,
+    "ImageUrl": "https://images.unsplash.com/photo-1543269865-0a740d43b90c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Managing Team Conflicts",
+    "Description": "Handle and resolve team disputes",
+    "Level": 2,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 110,
+    "ImageUrl": "https://images.pexels.com/photos/3184431/pexels-photo-3184431.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Remote Team Collaboration",
+    "Description": "Work effectively in distributed teams",
+    "Level": 2,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 100,
+    "ImageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Leading High-Performance Teams",
+    "Description": "Drive exceptional team performance",
+    "Level": 3,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 125,
+    "ImageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Team Innovation Strategies",
+    "Description": "Foster creativity and innovation in teams",
+    "Level": 3,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 130,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Cross-Functional Team Leadership",
+    "Description": "Lead diverse teams across departments",
+    "Level": 3,
+    "SkillId": 3,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 120,
+    "ImageUrl": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Presentation Pro",
+    "Description": "Craft and deliver compelling presentations",
+    "Level": 1,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 110,
+    "ImageUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Creating Engaging Slides",
+    "Description": "Design visually appealing presentation slides",
+    "Level": 1,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 90,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Public Speaking Basics",
+    "Description": "Overcome fear and speak confidently",
+    "Level": 1,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 85,
+    "ImageUrl": "https://images.unsplash.com/photo-1576267423429-569309b31e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Storytelling in Presentations",
+    "Description": "Use storytelling to captivate audiences",
+    "Level": 2,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 105,
+    "ImageUrl": "https://images.unsplash.com/photo-1543269865-0a740d43b90c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Data Visualization for Presentations",
+    "Description": "Present data clearly and effectively",
+    "Level": 2,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 100,
+    "ImageUrl": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Interactive Presentations",
+    "Description": "Engage audiences with interactive techniques",
+    "Level": 2,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 110,
+    "ImageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Keynote Mastery",
+    "Description": "Deliver world-class keynote presentations",
+    "Level": 3,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 130,
+    "ImageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Persuasive Pitching",
+    "Description": "Craft pitches that win over stakeholders",
+    "Level": 3,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 125,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Virtual Presentation Excellence",
+    "Description": "Master online and hybrid presentations",
+    "Level": 3,
+    "SkillId": 4,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 120,
+    "ImageUrl": "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Time Management 101",
+    "Description": "Manage your time and tasks efficiently",
+    "Level": 1,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 80,
+    "ImageUrl": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Prioritization Techniques",
+    "Description": "Learn to prioritize tasks effectively",
+    "Level": 1,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 85,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Goal Setting Basics",
+    "Description": "Set and achieve personal and professional goals",
+    "Level": 1,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 90,
+    "ImageUrl": "https://images.unsplash.com/photo-1576267423429-569309b31e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Advanced Task Management",
+    "Description": "Optimize workflows for productivity",
+    "Level": 2,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 100,
+    "ImageUrl": "https://images.unsplash.com/photo-1543269865-0a740d43b90c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Delegation Skills",
+    "Description": "Delegate tasks to maximize efficiency",
+    "Level": 2,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 105,
+    "ImageUrl": "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  },
+  {
+    "Title": "Managing Distractions",
+    "Description": "Stay focused in a busy environment",
+    "Level": 2,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 110,
+    "ImageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Strategic Time Management",
+    "Description": "Master time allocation for long-term success",
+    "Level": 3,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 120,
+    "ImageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Productivity Systems Design",
+    "Description": "Create custom productivity frameworks",
+    "Level": 3,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 125,
+    "ImageUrl": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "Title": "Time Management for Leaders",
+    "Description": "Optimize time for leadership responsibilities",
+    "Level": 3,
+    "SkillId": 5,
+    "CreatedAt": "2025-05-22T01:09:00Z",
+    "Duration": 130,
+    "ImageUrl": "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&dpr=1"
+  }
+]

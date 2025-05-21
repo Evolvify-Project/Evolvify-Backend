@@ -40,11 +40,13 @@ namespace Evolvify.Infrastructure.Data.Seeding.Role
                 {
                     Email = seedUser.Email,
                     UserName = seedUser.UserName,
-                    EmailConfirmed=true
-                    
+                    EmailConfirmed = true,
+                    TrialStartDate = DateTime.UtcNow,
+                    TrialEndDate = DateTime.UtcNow.AddDays(7)
+
                 };
 
-                var userExists = await userManager.FindByEmailAsync(seedUser.Email);
+                var userExists = await userManager.FindByEmailAsync(user.Email);
 
                 if(userExists!=null)
                 {

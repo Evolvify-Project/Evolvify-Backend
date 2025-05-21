@@ -1,0 +1,22 @@
+﻿[
+  {
+    "name": "Communication",
+    "description": "The ability to clearly express ideas, actively listen, and engage in effective verbal and written communication."
+  },
+  {
+    "name": "Interview",
+    "description": "Techniques and strategies for confidently handling job interviews, answering questions effectively, and presenting oneself professionally."
+  },
+  {
+    "name": "Teamwork",
+    "description": "The ability to collaborate with others, work efficiently in a team environment, and contribute to group success."
+  },
+  {
+    "name": "Presentation",
+    "description": "The capability to create and deliver engaging presentations with confidence, clarity, and impact."
+  },
+  {
+    "name": "Time Management",
+    "description": "The skill of prioritizing tasks, managing deadlines, and optimizing productivity for efficient work completion."
+  }
+]

@@ -39,7 +39,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddDbContextService(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Remote");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<EvolvifyDbContext>(options => options.UseSqlServer(connectionString));
 
         return services;
