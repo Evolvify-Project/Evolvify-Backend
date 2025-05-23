@@ -49,7 +49,7 @@ namespace Evolvify.Application.Extensions
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.Configure<SeedUsersSettings>(configuration.GetSection("SeedUsersSettings"));
-            services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
+            services.Configure<StripeSettings>(configuration.GetSection("StripeSettings"));
 
             services.AddAutoMapper(applicatonsAssembly);
             services.AddAutoMapper(typeof(UserProfile));

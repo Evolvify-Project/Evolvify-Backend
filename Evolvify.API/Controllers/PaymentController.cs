@@ -14,13 +14,15 @@ namespace Evolvify.API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService paymentService;
+        private readonly IConfiguration configuration;
 
-        public PaymentController(IPaymentService paymentService)
+        public PaymentController(IPaymentService paymentService,IConfiguration configuration)
         {
+            
+            this.configuration = configuration;
             this.paymentService = paymentService;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("create-payment-intent")]
         public async Task<IActionResult> CreatePaymentIntent([FromBody]PaymentRequest paymentRequest)
         {
@@ -36,7 +38,8 @@ namespace Evolvify.API.Controllers
             // If you are testing with the CLI, find the secret by running 'stripe listen'
             // If you are using an endpoint defined with the API or dashboard, look in your webhook settings
             // at https://dashboard.stripe.com/webhooks
-            const string endpointSecret = "whsec_23f8a4716583fcf838b465290bef055990d38f27403f1bb1dd01690867182f95";
+            
+            var endpointSecret = configuration["Stripe:WebhookSecret"];
             try
             {
                 var stripeEvent = EventUtility.ParseEvent(json);
