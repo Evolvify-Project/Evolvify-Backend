@@ -1,7 +1,7 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

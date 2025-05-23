@@ -1,4 +1,4 @@
-﻿using Evolvify.Domain.Entities;
+﻿using Evolvify.Domain.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

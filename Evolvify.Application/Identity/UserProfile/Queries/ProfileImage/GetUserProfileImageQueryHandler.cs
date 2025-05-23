@@ -2,7 +2,7 @@
 using Evolvify.Application.Common.User;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Identity.UserProfile.DTOs;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

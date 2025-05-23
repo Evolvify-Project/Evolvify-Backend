@@ -1,6 +1,6 @@
 ﻿using Evolvify.Application.Common.User;
 using Evolvify.Application.DTOs.Response;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Interfaces.ImageInterface;
 using MediatR;
 using Microsoft.AspNetCore.Http;
