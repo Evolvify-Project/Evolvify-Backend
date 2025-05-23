@@ -41,8 +41,8 @@ namespace Evolvify.Infrastructure.Data.Context
         public DbSet<Quiz> Quizs { get; set; } 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        public DbSet<QuizResult> QuizResults { get; set; }
-        public DbSet<UserAnswers> UserAnswers { get; set; }
+        public DbSet<QuizAttempt> QuizAttempts { get; set; }
+        public DbSet<UserAnswer> UserAnswers { get; set; }
         public DbSet<ModuleProgress> ModuleProgresses { get; set; }
         public DbSet<CourseProgress> CourseProgresses { get; set; }
 

@@ -4,6 +4,7 @@ using Evolvify.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    partial class EvolvifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250513203338_UpdateQuizModuleEntites")]
+    partial class UpdateQuizModuleEntites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,8 +453,8 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Score")
-                        .HasColumnType("float");
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -480,12 +483,17 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
                     b.Property<int>("QuizAttemptId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnswerId");
+
+                    b.HasIndex("QuestionId");
 
                     b.HasIndex("QuizAttemptId");
 
@@ -844,6 +852,12 @@ namespace Evolvify.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Evolvify.Domain.Entities.Quiz.Question", "Question")
+                        .WithMany("UserAnswers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Evolvify.Domain.Entities.Quiz.QuizAttempt", "QuizAttempt")
                         .WithMany("UserAnswers")
                         .HasForeignKey("QuizAttemptId")
@@ -851,6 +865,8 @@ namespace Evolvify.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Answer");
+
+                    b.Navigation("Question");
 
                     b.Navigation("QuizAttempt");
                 });
@@ -933,6 +949,8 @@ namespace Evolvify.Infrastructure.Migrations
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.Question", b =>
                 {
                     b.Navigation("Answers");
+
+                    b.Navigation("UserAnswers");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.Quiz", b =>

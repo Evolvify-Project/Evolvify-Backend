@@ -4,6 +4,7 @@ using Evolvify.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    partial class EvolvifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523051908_RemoveQuestionFromUserAnswer")]
+    partial class RemoveQuestionFromUserAnswer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,8 +453,8 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Score")
-                        .HasColumnType("float");
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
