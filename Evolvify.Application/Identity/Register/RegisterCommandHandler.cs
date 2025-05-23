@@ -1,7 +1,7 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Domain.Constants;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Interfaces.ImageInterface;
 using FluentValidation;

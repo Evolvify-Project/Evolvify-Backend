@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Evolvify.Application.Identity.UserProfile.DTOs;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using Microsoft.AspNetCore.Http;
 using System;
 

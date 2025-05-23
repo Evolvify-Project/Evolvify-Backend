@@ -1,6 +1,6 @@
 ﻿using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Token;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;

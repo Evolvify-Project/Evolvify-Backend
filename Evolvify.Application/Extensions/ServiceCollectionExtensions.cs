@@ -6,6 +6,8 @@ using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
 using Evolvify.Application.Identity.UserProfile.Mapping;
+using Evolvify.Application.Payment;
+using Evolvify.Application.Payment.PaymentService;
 using Evolvify.Application.Token;
 using Evolvify.Domain.AppSettings;
 using Evolvify.Domain.Interfaces.ImageInterface;
@@ -21,6 +23,7 @@ namespace Evolvify.Application.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+
         public static void AddApplicationServices(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddHttpContextAccessor();
@@ -36,6 +39,7 @@ namespace Evolvify.Application.Extensions
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<IAssessmentApiService, AssessmentApiService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IPaymentService, PaymentService>();
            
 
             services.AddTransient<IEmailService, EmailService>();
@@ -45,6 +49,7 @@ namespace Evolvify.Application.Extensions
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.Configure<SeedUsersSettings>(configuration.GetSection("SeedUsersSettings"));
+            services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
 
             services.AddAutoMapper(applicatonsAssembly);
             services.AddAutoMapper(typeof(UserProfile));

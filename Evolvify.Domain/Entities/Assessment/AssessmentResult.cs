@@ -1,4 +1,5 @@
-﻿using Evolvify.Domain.Enums;
+﻿using Evolvify.Domain.Entities.User;
+using Evolvify.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

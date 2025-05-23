@@ -1,14 +1,8 @@
 ﻿using Evolvify.Domain.AppSettings;
-using Evolvify.Domain.Constants;
-using Evolvify.Domain.Entities;
+using Evolvify.Domain.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Evolvify.Infrastructure.Data.Seeding.Role
 {
