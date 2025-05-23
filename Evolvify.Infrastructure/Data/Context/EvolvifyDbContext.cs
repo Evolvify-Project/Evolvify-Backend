@@ -4,6 +4,7 @@ using Evolvify.Domain.Entities.Community;
 using Evolvify.Domain.Entities.Community.Likes;
 using Evolvify.Domain.Entities.Progress;
 using Evolvify.Domain.Entities.Quiz;
+using Evolvify.Domain.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

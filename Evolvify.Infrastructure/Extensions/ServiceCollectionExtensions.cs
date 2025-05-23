@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 namespace Evolvify.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding;
 using Evolvify.Infrastructure.UnitOfWork;
@@ -13,6 +12,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Assessment.Service;
+using Evolvify.Domain.Entities.User;
 
 public static class ServiceCollectionExtensions
 {
