@@ -1,8 +1,10 @@
 ﻿using Evolvify.Application.Progresses.Commands;
 using Evolvify.Application.Progresses.Queries.GetCourseProgressQuery;
+using Evolvify.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Evolvify.API.Controllers
 {
@@ -16,19 +18,45 @@ namespace Evolvify.API.Controllers
         {
             _mediator = mediator;
         }
-
-        [HttpGet("course/{userId}/{courseId}")]
-        public async Task<IActionResult> GetCourseProgress(string userId, int courseId)
+        [HttpGet("course/{courseId}")]
+        public async Task<IActionResult> GetCourseProgress(int courseId)
         {
-            var percentage = await _mediator.Send(new GetCourseProgressQuery { UserId = userId, CourseId = courseId });
-            return Ok(new { CourseId = courseId, ProgressPercentage = percentage });
+            try
+            {
+                var percentage = await _mediator.Send(new GetCourseProgressQuery { CourseId = courseId });
+                return Ok(new { CourseId = courseId, ProgressPercentage = percentage });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while retrieving course progress." });
+            }
         }
-
         [HttpPost("module")]
         public async Task<IActionResult> UpdateModuleProgress([FromBody] UpdateModuleProgressCommand command)
         {
-            var result = await _mediator.Send(command);
-            return result ? Ok() : BadRequest();
+            if (command == null)
+            {
+                return BadRequest(new { Message = "Invalid request data." });
+            }
+
+            try
+            {
+                var result = await _mediator.Send(command);
+                if (result)
+                {
+                    return Ok(new { Message = "Module progress updated successfully." });
+                }
+                return BadRequest(new { Message = "Failed to update module progress." });
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Message = "An error occurred while updating module progress." });
+            }
         }
     }
 }
