@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Services.Payment.DTOs
+namespace Evolvify.Application.Services.AppSubscription.DTOs
 {
     public class SubscriptionStatusDto
     {
@@ -13,6 +13,7 @@ namespace Evolvify.Application.Services.Payment.DTOs
         public bool IsActive { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string Interval { get; set; } 
         public int RemainingDays { get; set; }
     }
 }

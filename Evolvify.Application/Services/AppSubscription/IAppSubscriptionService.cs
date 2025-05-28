@@ -1,5 +1,5 @@
 ﻿using Evolvify.Application.DTOs.Response;
-using Evolvify.Application.Services.Payment.DTOs;
+using Evolvify.Application.Services.AppSubscription.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

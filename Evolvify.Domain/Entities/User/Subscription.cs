@@ -17,7 +17,7 @@ namespace Evolvify.Domain.Entities.User
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public SubscriptionStatus Status { get; set; } // "Active", "Expired", "Canceled"
-        public string? Interval { get; set; }
+        public SubscriptionInterval? Interval { get; set; }
 
     }
 }

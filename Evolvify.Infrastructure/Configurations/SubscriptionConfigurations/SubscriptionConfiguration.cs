@@ -27,6 +27,9 @@ namespace Evolvify.Infrastructure.Configurations.SubscriptionConfigurations
             builder.Property(s => s.Status)
                 .HasConversion(statusConverter);
 
+            var intervalConverter = new EnumToStringConverter<SubscriptionInterval>();
+            builder.Property(s => s.Interval)
+                .HasConversion(intervalConverter);
                 
             
 

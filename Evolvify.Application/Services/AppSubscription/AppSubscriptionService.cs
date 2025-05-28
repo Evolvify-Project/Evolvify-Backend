@@ -1,6 +1,7 @@
-﻿using Evolvify.Application.Common.User;
+﻿using AutoMapper;
+using Evolvify.Application.Common.User;
 using Evolvify.Application.DTOs.Response;
-using Evolvify.Application.Services.Payment.DTOs;
+using Evolvify.Application.Services.AppSubscription.DTOs;
 using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Enums;
 using Evolvify.Domain.Exceptions;
@@ -23,11 +24,13 @@ namespace Evolvify.Application.Services.AppSubscription
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUnitOfWork unitOfWork;
         private readonly IUserContext userContext;
-        public AppSubscriptionService(UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, IUserContext userContext)
+        private readonly IMapper mapper;
+        public AppSubscriptionService(UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, IUserContext userContext, IMapper mapper)
         {
             this.userManager = userManager;
             this.unitOfWork = unitOfWork;
             this.userContext = userContext;
+                this.mapper = mapper;
 
         }
 
@@ -48,23 +51,20 @@ namespace Evolvify.Application.Services.AppSubscription
             }
 
             // Check if the user already has an active subscription
-            var newSubscription = new Subscription
-            {
-                UserId = user.Id,
-                StripeSubscriptionId = stripeSubscriptionId,
-                StartDate = DateTime.UtcNow,
-                EndDate = interval switch
-                {
-                    "month" => DateTime.UtcNow.AddMonths(1),
-                    "year" => DateTime.UtcNow.AddYears(1),
-                    _ => DateTime.UtcNow.AddMonths(1), // Default to 3 months if interval is not recognized
-                },
-                Status = SubscriptionStatus.Active,
-                PlanType = PlanType.Premium,
-                Interval = interval,
-            };
+            var existingSubscription = await unitOfWork.Repository<Subscription, int>()
+                .GetByIdWithSpec(new UserSubscriptionSpecification(user.Id));
 
-            await unitOfWork.Repository<Subscription, int>().CreateAsync(newSubscription);
+            existingSubscription.Status = SubscriptionStatus.Active;
+            existingSubscription.StripeSubscriptionId = subscription.Id;
+            existingSubscription.PlanType = PlanType.Premium;
+            existingSubscription.StartDate = DateTime.UtcNow;
+            existingSubscription.EndDate = interval == "month"
+                ? DateTime.UtcNow.AddMonths(1)
+                : DateTime.UtcNow.AddYears(1);
+            existingSubscription.Interval= interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly;
+
+
+             unitOfWork.Repository<Subscription, int>().Update(existingSubscription);
             await unitOfWork.CompleteAsync();
 
         }
@@ -82,15 +82,7 @@ namespace Evolvify.Application.Services.AppSubscription
                 throw new NotFoundException("No subscription found for the current user.");
             }
 
-            var statusDto = new SubscriptionStatusDto
-            {
-                Plan = subscription.PlanType.ToString(),
-                Status = subscription.Status.ToString(),
-                IsActive =  subscription.Status == SubscriptionStatus.Active,
-                StartDate = subscription.StartDate.ToString("yyyy-MM-dd"),
-                EndDate = subscription.EndDate.ToString("yyyy-MM-dd"),
-                RemainingDays = (int)(Math.Ceiling((subscription.EndDate - DateTime.UtcNow).TotalDays))
-            };
+           var statusDto = mapper.Map<SubscriptionStatusDto>(subscription);
             return new ApiResponse<SubscriptionStatusDto>(statusDto);
 
         }
