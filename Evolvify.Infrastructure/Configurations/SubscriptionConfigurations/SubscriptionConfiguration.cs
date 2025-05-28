@@ -23,6 +23,9 @@ namespace Evolvify.Infrastructure.Configurations.SubscriptionConfigurations
             builder.Property(s => s.PlanType)
                 .HasConversion(converter);
 
+            var statusConverter = new EnumToStringConverter<SubscriptionStatus>();
+            builder.Property(s => s.Status)
+                .HasConversion(statusConverter);
 
                 
             

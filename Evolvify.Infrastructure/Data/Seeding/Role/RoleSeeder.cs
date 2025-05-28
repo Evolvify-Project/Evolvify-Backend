@@ -44,7 +44,7 @@ namespace Evolvify.Infrastructure.Data.Seeding.Role
                         PlanType = seedUser.PlanType,
                         StartDate = DateTime.UtcNow,
                         EndDate = seedUser.EndDate,
-                        Status = SubscriptionStatus.Active.ToString()
+                        Status = SubscriptionStatus.Active
                     },
                     
                 };
