@@ -1,11 +1,14 @@
 ﻿using Evolvify.API.Middlewares;
+using Evolvify.Application.Services.AppSubscription;
 using Evolvify.Domain.AppSettings;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding;
 using Evolvify.Infrastructure.Data.Seeding.Role;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Stripe;
 
 namespace Evolvify.API.Helper
 {
@@ -42,12 +45,17 @@ namespace Evolvify.API.Helper
             app.UseSwaggerUI();
             //}
 
+
             app.UseCors("AllowAll");
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            
+            app.UseHangfireDashboard("/hangfire");
+
+            HangfireJobsRegistration.RegisterHangfireJobs();
+           
+
             app.UseAuthentication(); 
             app.UseAuthorization();
 

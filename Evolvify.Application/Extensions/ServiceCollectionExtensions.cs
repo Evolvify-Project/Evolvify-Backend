@@ -15,11 +15,15 @@ using Evolvify.Domain.AppSettings;
 using Evolvify.Domain.Interfaces.ImageInterface;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 using System.Reflection;
+using FileService = Evolvify.Application.Common.Services.FileService;
 using JwtSettings = Evolvify.Domain.AppSettings.JwtSettings;
+using TokenService = Evolvify.Application.Token.TokenService;
 
 namespace Evolvify.Application.Extensions
 {
@@ -60,6 +64,10 @@ namespace Evolvify.Application.Extensions
             services.AddAutoMapper(typeof(UserProfile));
 
             services.AddHttpContextAccessor();
+
+            services.AddHangfireServices(configuration);
+            
+
         }
 
         private static void AddValiadiationErrorHandlingServices(this IServiceCollection services)
@@ -85,10 +93,21 @@ namespace Evolvify.Application.Extensions
                     return new BadRequestObjectResult(result);
                 };
 
-
-
             });
         }
 
+        private static void AddHangfireServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHangfire(config =>
+            {
+                config.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddHangfireServer();
+
+           
+
+
+        }
     }
 }
