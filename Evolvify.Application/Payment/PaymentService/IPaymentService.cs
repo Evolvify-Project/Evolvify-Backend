@@ -10,8 +10,9 @@ namespace Evolvify.Application.Payment.PaymentService
 {
     public interface IPaymentService
     {
-        Task<ApiResponse<PaymentIntentResponse>> CreatePaymentIntentAsync(decimal amount);
-        Task CreateSubscriptionAsync();
+        
+        Task<ApiResponse<StripeSubscriptionResponse>> CreateStripeSubscriptionAsync(string priceId);
+        Task ActivateSubscriptionAsync(string stripeSubscriptionId);
 
     }
 }

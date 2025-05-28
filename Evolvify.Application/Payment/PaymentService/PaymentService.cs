@@ -5,6 +5,9 @@ using Evolvify.Domain.Entities.Assessment;
 using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Enums;
 using Evolvify.Infrastructure.UnitOfWork;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Stripe;
 using System;
@@ -22,57 +25,115 @@ namespace Evolvify.Application.Payment.PaymentService
         private readonly IUserContext userContext;
 
         private readonly IUnitOfWork unitOfWork;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public PaymentService(IOptions<StripeSettings> stripeSettings,IUserContext userContext,IUnitOfWork unitOfWork)
+        public PaymentService(IOptions<StripeSettings> stripeSettings, IUserContext userContext, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
-           _stripeSettings = stripeSettings.Value;
+            _stripeSettings = stripeSettings.Value;
             StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
             this.userContext = userContext;
             this.unitOfWork = unitOfWork;
+            this.userManager = userManager;
 
         }
-        public async Task<ApiResponse<PaymentIntentResponse>> CreatePaymentIntentAsync(decimal amount)
+        
+
+        public async Task<ApiResponse<StripeSubscriptionResponse>> CreateStripeSubscriptionAsync(string priceId)
         {
-            
-            var options= new PaymentIntentCreateOptions
+            var currentUser = userContext.GetCurrentUser();
+
+            var user = await userManager.FindByIdAsync(currentUser.Id);
+
+            string customerId = user!.StripeCustomerId;
+            if (string.IsNullOrEmpty(customerId))
             {
-                
-                Amount =(long) (amount * 100), // Amount in cents
-                Currency = "usd",
-                PaymentMethodTypes = new List<string>
+                var options = new CustomerCreateOptions
                 {
-                    "card",
-                },
-            };
-
-            var service = new PaymentIntentService();
-            var paymentIntent = await service.CreateAsync(options);
-
-            var response = new PaymentIntentResponse
+                    Email = user.Email,
+                    Name = user.UserName,
+                };
+                var customerService = new CustomerService();
+                var customer = await customerService.CreateAsync(options);
+                user.StripeCustomerId = customer.Id;
+                await userManager.UpdateAsync(user);
+                customerId = customer.Id;
+            }
+            var subscriptionOptions = new SubscriptionCreateOptions
             {
-                ClientSecret = paymentIntent.ClientSecret,
-                PaymentIntentId = paymentIntent.Id,
+                Customer = customerId,
+                Items = new List<SubscriptionItemOptions>
+                {
+                    new SubscriptionItemOptions
+                    {
+                        Price = priceId,
+                    },
+                },
+                PaymentBehavior = "default_incomplete",
+                Expand = new List<string> { "latest_invoice.confirmation_secret" },
             };
 
-            return new ApiResponse<PaymentIntentResponse>(response);
+            var subscriptionService = new SubscriptionService();
+            var existingSubscriptions = await subscriptionService.ListAsync(new SubscriptionListOptions
+            {
+                Customer = customerId,
+                Status = "active" 
+            });
+
+            bool hasActiveSubscription = existingSubscriptions.Data.Any(sub=> sub.Items.Data.Any(item => item.Price.Id == priceId));
+            if (hasActiveSubscription) {
+                return new ApiResponse<StripeSubscriptionResponse>(false,StatusCodes.Status400BadRequest, message: "You already have an active subscription for this plan.");
+            }
+           
+            var subscription = await subscriptionService.CreateAsync(subscriptionOptions);
+            var response = new StripeSubscriptionResponse
+            {
+                StripeSubscriptionId = subscription.Id,
+                ClientSecret = subscription.LatestInvoice.ConfirmationSecret.ClientSecret,
+                StripeCustomerId = customerId,
+            };
+
+            return new ApiResponse<StripeSubscriptionResponse>(response);
+
 
         }
 
-        public async Task CreateSubscriptionAsync()
+        public async Task ActivateSubscriptionAsync(string stripeSubscriptionId)
         {
-            
-            var subscription = new Subscription
+            var subscriptionService = new SubscriptionService();
+            var subscription = await subscriptionService.GetAsync(stripeSubscriptionId);
+
+            var interval = subscription.Items.Data.FirstOrDefault()?.Price?.Recurring?.Interval;
+
+            var currentUser = userContext.GetCurrentUser();
+            var user = await userManager.Users.
+                FirstOrDefaultAsync(u => u.StripeCustomerId == subscription.CustomerId);
+
+            if (user != null)
             {
-                UserId = userContext.GetCurrentUser().Id,
-                Status = SubscriptionStatus.Active.ToString(),
-                StartDate = DateTime.UtcNow,
-                EndDate = DateTime.UtcNow.AddMonths(3),
-                PlanType = PlanType.Premium.ToString(),
-            };
-            var user = unitOfWork.Repository<Subscription,int>().CreateAsync(subscription);
-            await unitOfWork.CompleteAsync();
+                // Check if the user already has an active subscription
+
+                var newSubscription = new Subscription
+                {
+                    UserId = user.Id,
+                    StripeSubscriptionId = stripeSubscriptionId,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = interval switch
+                    {
+                        "month" => DateTime.UtcNow.AddMonths(1),
+                        "year" => DateTime.UtcNow.AddYears(1),
+                        _ => DateTime.UtcNow.AddMonths(1), // Default to 3 months if interval is not recognized
+                    },
+                    Status = subscription.Status,
+                    PlanType = PlanType.Premium,
+                    Interval = interval,
+                };
+
+                await unitOfWork.Repository<Subscription, int>().CreateAsync(newSubscription);
+                await unitOfWork.CompleteAsync();
 
 
+
+            }
         }
     }
 }
