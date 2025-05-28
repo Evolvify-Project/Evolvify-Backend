@@ -1,6 +1,9 @@
 ﻿using Evolvify.Domain.AppSettings;
+using Evolvify.Domain.Constants;
 using Evolvify.Domain.Entities.User;
+using Evolvify.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -32,21 +35,27 @@ namespace Evolvify.Infrastructure.Data.Seeding.Role
             {
                 var user = new ApplicationUser
                 {
+
                     Email = seedUser.Email,
                     UserName = seedUser.UserName,
                     EmailConfirmed = true,
-                    TrialStartDate = DateTime.UtcNow,
-                    TrialEndDate = DateTime.UtcNow.AddDays(7)
-
+                    Subscription= new Subscription
+                    {
+                        PlanType = seedUser.PlanType,
+                        StartDate = DateTime.UtcNow,
+                        EndDate = seedUser.EndDate,
+                        Status = SubscriptionStatus.Active.ToString()
+                    },
+                    
                 };
 
-                var userExists = await userManager.FindByEmailAsync(user.Email);
 
-                if(userExists!=null)
+                if (await userManager.FindByEmailAsync(user.Email) != null)
                 {
-                    continue;
+                    continue; // User already exists, skip to the next one
                 }
 
+               
                 var result = await userManager.CreateAsync(user, seedUser.Password);
 
                 if(result.Succeeded)

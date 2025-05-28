@@ -11,10 +11,18 @@ namespace Evolvify.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "SubscriptionId",
+            migrationBuilder.DropColumn(
+                name: "TrialEndDate",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "TrialStartDate",
+                table: "AspNetUsers");
+
+            migrationBuilder.AddColumn<string>(
+                name: "StripeCustomerId",
                 table: "AspNetUsers",
-                type: "int",
+                type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.CreateTable(
@@ -25,9 +33,12 @@ namespace Evolvify.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PlanType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StripeSubscriptionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Interval = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,40 +52,33 @@ namespace Evolvify.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_SubscriptionId",
-                table: "AspNetUsers",
-                column: "SubscriptionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Subscription_UserId",
                 table: "Subscription",
-                column: "UserId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_Subscription_SubscriptionId",
-                table: "AspNetUsers",
-                column: "SubscriptionId",
-                principalTable: "Subscription",
-                principalColumn: "Id");
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUsers_Subscription_SubscriptionId",
-                table: "AspNetUsers");
-
             migrationBuilder.DropTable(
                 name: "Subscription");
 
-            migrationBuilder.DropIndex(
-                name: "IX_AspNetUsers_SubscriptionId",
+            migrationBuilder.DropColumn(
+                name: "StripeCustomerId",
                 table: "AspNetUsers");
 
-            migrationBuilder.DropColumn(
-                name: "SubscriptionId",
-                table: "AspNetUsers");
+            migrationBuilder.AddColumn<DateTime>(
+                name: "TrialEndDate",
+                table: "AspNetUsers",
+                type: "datetime2",
+                nullable: true);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "TrialStartDate",
+                table: "AspNetUsers",
+                type: "datetime2",
+                nullable: true);
         }
     }
 }
