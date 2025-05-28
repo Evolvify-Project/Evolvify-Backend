@@ -9,7 +9,7 @@ namespace Evolvify.Domain.Enums
     public enum SubscriptionStatus
     {
         Active = 1,
-        Inactive = 2,
+        Expired = 2,
         Canceled = 3,
         
     }
