@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Payment
+namespace Evolvify.Application.Services.Payment
 {
     public class StripeSettings
     {

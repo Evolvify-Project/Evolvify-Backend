@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Payment.DTOs
+namespace Evolvify.Application.Services.Payment.DTOs
 {
     public class PaymentIntentResponse
     {

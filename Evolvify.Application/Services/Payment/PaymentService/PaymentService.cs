@@ -1,9 +1,13 @@
 ﻿using Evolvify.Application.Common.User;
 using Evolvify.Application.DTOs.Response;
-using Evolvify.Application.Payment.DTOs;
+using Evolvify.Application.Services.Payment;
+using Evolvify.Application.Services.Payment.DTOs;
+using Evolvify.Application.Services.Payment.PaymentService;
 using Evolvify.Domain.Entities.Assessment;
 using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Enums;
+using Evolvify.Domain.Exceptions;
+using Evolvify.Domain.Specification.Subscriptions;
 using Evolvify.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +40,7 @@ namespace Evolvify.Application.Payment.PaymentService
             this.userManager = userManager;
 
         }
-        
+
 
         public async Task<ApiResponse<StripeSubscriptionResponse>> CreateStripeSubscriptionAsync(string priceId)
         {
@@ -76,14 +80,15 @@ namespace Evolvify.Application.Payment.PaymentService
             var existingSubscriptions = await subscriptionService.ListAsync(new SubscriptionListOptions
             {
                 Customer = customerId,
-                Status = "active" 
+                Status = "active"
             });
 
-            bool hasActiveSubscription = existingSubscriptions.Data.Any(sub=> sub.Items.Data.Any(item => item.Price.Id == priceId));
-            if (hasActiveSubscription) {
-                return new ApiResponse<StripeSubscriptionResponse>(false,StatusCodes.Status400BadRequest, message: "You already have an active subscription for this plan.");
+            bool hasActiveSubscription = existingSubscriptions.Data.Any(sub => sub.Items.Data.Any(item => item.Price.Id == priceId));
+            if (hasActiveSubscription)
+            {
+                return new ApiResponse<StripeSubscriptionResponse>(false, StatusCodes.Status400BadRequest, message: "You already have an active subscription for this plan.");
             }
-           
+
             var subscription = await subscriptionService.CreateAsync(subscriptionOptions);
             var response = new StripeSubscriptionResponse
             {
@@ -97,43 +102,5 @@ namespace Evolvify.Application.Payment.PaymentService
 
         }
 
-        public async Task ActivateSubscriptionAsync(string stripeSubscriptionId)
-        {
-            var subscriptionService = new SubscriptionService();
-            var subscription = await subscriptionService.GetAsync(stripeSubscriptionId);
-
-            var interval = subscription.Items.Data.FirstOrDefault()?.Price?.Recurring?.Interval;
-
-            var currentUser = userContext.GetCurrentUser();
-            var user = await userManager.Users.
-                FirstOrDefaultAsync(u => u.StripeCustomerId == subscription.CustomerId);
-
-            if (user != null)
-            {
-                // Check if the user already has an active subscription
-
-                var newSubscription = new Subscription
-                {
-                    UserId = user.Id,
-                    StripeSubscriptionId = stripeSubscriptionId,
-                    StartDate = DateTime.UtcNow,
-                    EndDate = interval switch
-                    {
-                        "month" => DateTime.UtcNow.AddMonths(1),
-                        "year" => DateTime.UtcNow.AddYears(1),
-                        _ => DateTime.UtcNow.AddMonths(1), // Default to 3 months if interval is not recognized
-                    },
-                    Status = subscription.Status,
-                    PlanType = PlanType.Premium,
-                    Interval = interval,
-                };
-
-                await unitOfWork.Repository<Subscription, int>().CreateAsync(newSubscription);
-                await unitOfWork.CompleteAsync();
-
-
-
-            }
-        }
     }
 }

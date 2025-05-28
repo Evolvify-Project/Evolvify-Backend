@@ -49,7 +49,7 @@ namespace Evolvify.Application.Identity.Register
                     PlanType = PlanType.Free,
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(7), 
-                    Status = SubscriptionStatus.Active.ToString()                    
+                    Status = SubscriptionStatus.Active                    
                 },
             };
 
