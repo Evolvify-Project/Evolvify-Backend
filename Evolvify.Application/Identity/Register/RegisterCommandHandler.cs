@@ -2,6 +2,7 @@
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Domain.Constants;
 using Evolvify.Domain.Entities.User;
+using Evolvify.Domain.Enums;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Interfaces.ImageInterface;
 using FluentValidation;
@@ -43,6 +44,13 @@ namespace Evolvify.Application.Identity.Register
                 UserName = request.UserName,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
+                Subscription= new Subscription
+                {
+                    PlanType = PlanType.Free,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(7), 
+                    Status = SubscriptionStatus.Active.ToString()                    
+                },
             };
 
 
