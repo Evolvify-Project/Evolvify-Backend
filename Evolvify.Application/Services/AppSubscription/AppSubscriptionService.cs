@@ -50,6 +50,9 @@ namespace Evolvify.Application.Services.AppSubscription
                 throw new NotFoundException("User not found with the provided Stripe Customer ID.");
             }
 
+            
+            // If the user already has an active subscription, we can update it
+
             // Check if the user already has an active subscription
             var existingSubscription = await unitOfWork.Repository<Subscription, int>()
                 .GetByIdWithSpec(new UserSubscriptionSpecification(user.Id));
@@ -57,10 +60,10 @@ namespace Evolvify.Application.Services.AppSubscription
             existingSubscription.Status = SubscriptionStatus.Active;
             existingSubscription.StripeSubscriptionId = subscription.Id;
             existingSubscription.PlanType = PlanType.Premium;
-            existingSubscription.StartDate = DateTime.UtcNow;
+            existingSubscription.StartDate = DateTime.Now;
             existingSubscription.EndDate = interval == "month"
-                ? DateTime.UtcNow.AddMonths(1)
-                : DateTime.UtcNow.AddYears(1);
+                ? DateTime.Now.AddMonths(1)
+                : DateTime.Now.AddYears(1);
             existingSubscription.Interval= interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly;
 
 

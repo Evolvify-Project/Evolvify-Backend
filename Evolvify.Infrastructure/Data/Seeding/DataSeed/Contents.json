@@ -1,82 +1,272 @@
 ﻿[
-    {
-        "Title": "Video: How to Speak So People Want to Listen",
-        "Url": "https://www.youtube.com/watch?v=eIho2S0ZahI",
-        "Text": "This TED Talk by Julian Treasure explores techniques to enhance your speaking skills, focusing on tone, pace, and clarity to engage your audience effectively.",
-        "ContentType": 0,
-        "ModuleId": 1,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Key Takeaways: Clarity in Speech",
-        "Url": null,
-        "Text": "This summary outlines strategies for clear speech, including enunciation exercises and pacing techniques to ensure your message is understood.",
-        "ContentType": 1,
-        "ModuleId": 2,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Article: The Power of Active Listening",
-        "Url": "https://hbr.org/2016/07/what-great-listeners-actually-do",
-        "Text": "This Harvard Business Review article discusses how active listening builds trust and understanding, offering practical tips for improving listening skills.",
-        "ContentType": 2,
-        "ModuleId": 3,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "PDF: Guide to Understanding Tone",
-        "Url": "https://www.skillsyouneed.com/ps/voice-tone.pdf",
-        "Text": "This downloadable guide from SkillsYouNeed explains how tone affects communication and provides exercises to interpret and use tone effectively.",
-        "ContentType": 3,
-        "ModuleId": 4,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Video: The Art of Asking Questions",
-        "Url": "https://www.youtube.com/watch?v=3a9Jaw5j4nM",
-        "Text": "This video from Harvard Business Review explores how to ask thoughtful questions to drive engagement and clarity in conversations.",
-        "ContentType": 0,
-        "ModuleId": 5,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Key Takeaways: Building Rapport",
-        "Url": null,
-        "Text": "This summary covers techniques for building rapport, such as mirroring body language and showing genuine interest, to foster stronger connections.",
-        "ContentType": 1,
-        "ModuleId": 6,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Article: Overcoming Shyness in Communication",
-        "Url": "https://www.forbes.com/sites/forbescoachescouncil/2020/08/25/15-ways-to-overcome-shyness-in-professional-settings/",
-        "Text": "This Forbes article provides 15 strategies to overcome shyness, helping you communicate confidently in professional environments.",
-        "ContentType": 2,
-        "ModuleId": 7,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "PDF: Feedback Skills Guide",
-        "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Communication.pdf",
-        "Text": "This PDF from the U.S. Department of Labor offers practical exercises to develop effective feedback skills for better communication.",
-        "ContentType": 3,
-        "ModuleId": 8,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Video: Overcoming Communication Barriers",
-        "Url": "https://www.youtube.com/watch?v=slq1nAhzu7E",
-        "Text": "This video from LinkedIn Learning discusses common communication barriers and strategies to overcome them for effective interactions.",
-        "ContentType": 0,
-        "ModuleId": 9,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Key Takeaways: Practice Scenarios",
-        "Url": null,
-        "Text": "This summary provides scenarios to practice communication skills, helping you apply techniques in real-world situations.",
-        "ContentType": 1,
-        "ModuleId": 10,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    }
+  {
+    "Title": "Video: How to Speak So People Want to Listen",
+    "Url": "https://www.youtube.com/watch?v=eIho2S0ZahI",
+    "Text": "This TED Talk by Julian Treasure explores techniques to enhance speaking skills, focusing on tone, pace, and clarity to engage audiences effectively.",
+    "ContentType": 0,
+    "ModuleId": 1,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Communicate Clearly",
+    "Url": "https://hbr.org/2017/06/how-to-communicate-clearly-during-organizational-change",
+    "Text": "This Harvard Business Review article outlines strategies for clear communication, emphasizing transparency and consistency in professional settings.",
+    "ContentType": 2,
+    "ModuleId": 2,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Active Listening Guide",
+    "Url": "https://www.skillsyouneed.com/ps/active-listening.pdf",
+    "Text": "This downloadable guide from SkillsYouNeed explains how to develop active listening skills through practical exercises and techniques.",
+    "ContentType": 3,
+    "ModuleId": 3,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Your Body Language May Shape Who You Are",
+    "Url": "https://www.youtube.com/watch?v=Ks-_Mh1QhMc",
+    "Text": "Amy Cuddy’s TED Talk discusses how body language impacts communication and confidence, offering insights for effective interactions.",
+    "ContentType": 0,
+    "ModuleId": 4,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: The Art of Asking Questions",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2021/02/25/15-ways-to-improve-your-active-listening-skills/",
+    "Text": "This Forbes article provides strategies for asking thoughtful questions to foster engagement and clarity in conversations.",
+    "ContentType": 2,
+    "ModuleId": 5,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Communication Skills Guide",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Communication.pdf",
+    "Text": "This PDF from the U.S. Department of Labor offers exercises to develop effective communication skills for professional success.",
+    "ContentType": 3,
+    "ModuleId": 6,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Overcoming Shyness in Communication",
+    "Url": "https://www.youtube.com/watch?v=slq1nAhzu7E",
+    "Text": "This LinkedIn Learning video discusses strategies to overcome communication barriers, including shyness, for effective interactions.",
+    "ContentType": 0,
+    "ModuleId": 7,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Giving Effective Feedback",
+    "Url": "https://hbr.org/2019/03/the-feedback-fallacy",
+    "Text": "This Harvard Business Review article explores best practices for giving constructive feedback to improve communication and performance.",
+    "ContentType": 2,
+    "ModuleId": 8,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Overcoming Communication Barriers",
+    "Url": "https://www.skillsyouneed.com/ps/communication-barriers.pdf",
+    "Text": "This guide from SkillsYouNeed identifies common communication barriers and provides strategies to overcome them.",
+    "ContentType": 3,
+    "ModuleId": 9,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Effective Communication Practice",
+    "Url": "https://www.youtube.com/watch?v=7OSO4vymh8k",
+    "Text": "This video from CareerVidz provides practical scenarios to practice communication skills, helping you apply techniques in real-world settings.",
+    "ContentType": 0,
+    "ModuleId": 10,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: How to Ace an Interview",
+    "Url": "https://www.youtube.com/watch?v=7OSO4vymh8k",
+    "Text": "This video from CareerVidz provides practical tips for excelling in job interviews, covering preparation and common questions.",
+    "ContentType": 0,
+    "ModuleId": 61,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Write a Resume That Stands Out",
+    "Url": "https://www.fastcompany.com/90462803/how-to-write-a-resume-that-stands-out",
+    "Text": "This Fast Company article offers tips for crafting a compelling resume that highlights your skills and experience.",
+    "ContentType": 2,
+    "ModuleId": 62,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Job Interview Skills Guide",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Communication.pdf",
+    "Text": "This PDF from the U.S. Department of Labor provides exercises to improve communication skills for job interviews.",
+    "ContentType": 3,
+    "ModuleId": 63,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Body Language Tips for Interviews",
+    "Url": "https://www.youtube.com/watch?v=Ks-_Mh1QhMc",
+    "Text": "Amy Cuddy’s TED Talk explores how body language can boost confidence and improve your presence during interviews.",
+    "ContentType": 0,
+    "ModuleId": 64,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Dressing for Interview Success",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2020/08/25/15-ways-to-overcome-shyness-in-professional-settings/",
+    "Text": "This Forbes article provides guidance on professional attire and overcoming shyness for interview success.",
+    "ContentType": 2,
+    "ModuleId": 65,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Interview Preparation Guide",
+    "Url": "https://www.skillsyouneed.com/ps/interview-skills.pdf",
+    "Text": "This guide from SkillsYouNeed offers strategies and exercises to prepare effectively for job interviews.",
+    "ContentType": 3,
+    "ModuleId": 66,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Making a Great First Impression",
+    "Url": "https://www.youtube.com/watch?v=slq1nAhzu7E",
+    "Text": "This LinkedIn Learning video provides tips for making a strong first impression during interviews.",
+    "ContentType": 0,
+    "ModuleId": 67,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Handling Interview Nerves",
+    "Url": "https://hbr.org/2014/11/how-to-handle-interview-anxiety",
+    "Text": "This Harvard Business Review article offers techniques to manage anxiety and perform confidently in interviews.",
+    "ContentType": 2,
+    "ModuleId": 68,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Soft Skills for Interviews",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Communication.pdf",
+    "Text": "This PDF from the U.S. Department of Labor provides activities to develop communication skills for interviews.",
+    "ContentType": 3,
+    "ModuleId": 69,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Post-Interview Follow-Up",
+    "Url": "https://www.youtube.com/watch?v=7OSO4vymh8k",
+    "Text": "This CareerVidz video discusses how to follow up effectively after an interview to leave a positive impression.",
+    "ContentType": 0,
+    "ModuleId": 70,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Time Management Tips",
+    "Url": "https://www.youtube.com/watch?v=9o9mZmobs4c",
+    "Text": "This video from Thomas Frank offers practical strategies for effective time management to boost productivity.",
+    "ContentType": 0,
+    "ModuleId": 241,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Stop Procrastinating",
+    "Url": "https://hbr.org/2018/08/how-to-stop-procrastinating",
+    "Text": "This Harvard Business Review article provides strategies for overcoming procrastination and managing time effectively.",
+    "ContentType": 2,
+    "ModuleId": 242,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Time Management Guide",
+    "Url": "https://www.skillsyouneed.com/ps/time-management.pdf",
+    "Text": "This guide from SkillsYouNeed offers strategies and exercises for prioritizing tasks and managing time efficiently.",
+    "ContentType": 3,
+    "ModuleId": 243,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Prioritizing Your Tasks",
+    "Url": "https://www.youtube.com/watch?v=9o9mZmobs4c",
+    "Text": "This video from Thomas Frank discusses techniques for prioritizing tasks to maximize productivity.",
+    "ContentType": 0,
+    "ModuleId": 244,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Effective To-Do Lists",
+    "Url": "https://www.fastcompany.com/90573582/how-to-create-a-to-do-list-that-actually-works",
+    "Text": "This Fast Company article provides tips for creating to-do lists that help you stay organized and productive.",
+    "ContentType": 2,
+    "ModuleId": 245,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Productivity Skills Guide",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Productivity.pdf",
+    "Text": "This PDF from the U.S. Department of Labor offers activities to improve productivity and time management skills.",
+    "ContentType": 3,
+    "ModuleId": 246,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Avoiding Procrastination",
+    "Url": "https://www.youtube.com/watch?v=9o9mZmobs4c",
+    "Text": "This video from Thomas Frank explores strategies to avoid procrastination and stay focused on your tasks.",
+    "ContentType": 0,
+    "ModuleId": 247,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Time Blocking Techniques",
+    "Url": "https://hbr.org/2020/01/time-blocking-101",
+    "Text": "This Harvard Business Review article explains how time blocking can help you manage your schedule and increase productivity.",
+    "ContentType": 2,
+    "ModuleId": 248,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Time Management Workbook",
+    "Url": "https://www.skillsyouneed.com/ps/time-management.pdf",
+    "Text": "This workbook from SkillsYouNeed provides exercises to develop effective time management habits.",
+    "ContentType": 3,
+    "ModuleId": 249,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Building Productivity Habits",
+    "Url": "https://www.youtube.com/watch?v=9o9mZmobs4c",
+    "Text": "This video from Thomas Frank discusses how to build lasting productivity habits to manage your time effectively.",
+    "ContentType": 0,
+    "ModuleId": 250,
+    "CreatedAt": "2025-05-22T01:56:00Z",
+    "UpdatedAt": null
+  }
 ]

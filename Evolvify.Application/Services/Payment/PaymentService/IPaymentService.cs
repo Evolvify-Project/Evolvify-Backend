@@ -11,6 +11,6 @@ namespace Evolvify.Application.Services.Payment.PaymentService
     public interface IPaymentService
     {
 
-        Task<ApiResponse<StripeSubscriptionResponse>> CreateStripeSubscriptionAsync(string priceId);
+        Task<ApiResponse<CheckoutSessionResponse>> CreateStripeSubscriptionAsync(string priceId);
     }
 }

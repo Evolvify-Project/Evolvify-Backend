@@ -14,8 +14,8 @@ namespace Evolvify.API.Helper
            service => service.UpdateExpiredSubscriptionsAsync(),
            Cron.Daily());
 
-            //example of recurring job for payment processing console.writeLine("Recurring job for payment processing started");
-            RecurringJob.AddOrUpdate(() => Console.WriteLine("Recurring job for payment processing started"), Cron.Minutely());
+            ////example of recurring job for payment processing console.writeLine("Recurring job for payment processing started");
+            //RecurringJob.AddOrUpdate(() => Console.WriteLine("Recurring job for payment processing started"), Cron.Minutely());
         }
     }
 }

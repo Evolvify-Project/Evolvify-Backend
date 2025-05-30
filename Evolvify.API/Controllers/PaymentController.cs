@@ -1,9 +1,11 @@
-﻿using Evolvify.Application.Payment.DTOs;
-using Evolvify.Application.Payment.PaymentService;
+﻿using Evolvify.Application.Services.AppSubscription;
+using Evolvify.Application.Services.Payment;
+using Evolvify.Application.Services.Payment.PaymentService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Entitlements;
 
@@ -14,79 +16,87 @@ namespace Evolvify.API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService paymentService;
+        private readonly IAppSubscriptionService appSubscriptionService;
         private readonly IConfiguration configuration;
+        private readonly string _webhookSecret;
 
-        public PaymentController(IPaymentService paymentService,IConfiguration configuration)
+        public PaymentController(IPaymentService paymentService, IConfiguration configuration, IOptions<StripeSettings> stripeSettings,IAppSubscriptionService appSubscriptionService)
         {
-               
+
+            _webhookSecret = stripeSettings.Value.WebhookSecret;
             this.configuration = configuration;
             this.paymentService = paymentService;
+            this.appSubscriptionService = appSubscriptionService;
+            StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
         }
 
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("create-payment-intent")]
-        public async Task<IActionResult> CreatePaymentIntent([FromBody]PaymentRequest paymentRequest)
+        //[HttpPost("create-payment-intent")]
+        //public async Task<IActionResult> CreatePaymentIntent([FromBody] PaymentRequest paymentRequest)
+        //{
+        //    var response = await paymentService.CreatePaymentIntentAsync(paymentRequest.Amount);
+        //    return Ok(response);
+        //}
+
+        [HttpPost("create-subscription")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> CreateSubscription([FromBody] string priceId)
         {
-            var response = await paymentService.CreatePaymentIntentAsync(paymentRequest.Amount);
+            var response = await paymentService.CreateStripeSubscriptionAsync(priceId);
             return Ok(response);
         }
 
-        [HttpPost("webhooks")]
-        public async Task<IActionResult> Index()
-        {
 
+        [HttpPost("webhook")]
+        public async Task<IActionResult> Webhook()
+        {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-            var endpointSecret = configuration["StripeSettings:WebhookSecret"];
-            // Replace this endpoint secret with your endpoint's unique secret
-            // If you are testing with the CLI, find the secret by running 'stripe listen'
-            // If you are using an endpoint defined with the API or dashboard, look in your webhook settings
-            // at https://dashboard.stripe.com/webhooks
+            Event stripeEvent;
             try
             {
-                var stripeEvent = EventUtility.ParseEvent(json);
-                var signatureHeader = Request.Headers["Stripe-Signature"];
-                stripeEvent = EventUtility.ConstructEvent(json,
-                        signatureHeader, endpointSecret);
-                // If on SDK version < 46, use class Events instead of EventTypes
-
-                 if (stripeEvent.Type == EventTypes.CustomerSubscriptionCreated)
-                { 
-                    var subscription = stripeEvent.Data.Object as Subscription;
-                    Console.WriteLine("A subscription was created.", subscription.Id);
-
-
-                    await paymentService.CreateSubscriptionAsync();
-
-                }
-                else if (stripeEvent.Type == EventTypes.CustomerSubscriptionDeleted)
-                {
-                    var subscription = stripeEvent.Data.Object as Subscription;
-                    Console.WriteLine("A subscription was canceled.", subscription.Id);
-
-                }
-                else if (stripeEvent.Type == EventTypes.CustomerSubscriptionUpdated)
-                {
-                    var subscription = stripeEvent.Data.Object as Subscription;
-                    Console.WriteLine("A subscription was updated.", subscription.Id);
-
-                }
-                else if (stripeEvent.Type == EventTypes.CustomerSubscriptionCreated)
-                {
-                    var subscription = stripeEvent.Data.Object as Subscription;
-                    Console.WriteLine("A subscription was created.", subscription.Id);
-
-
-                    await paymentService.CreateSubscriptionAsync();
-
-                }
-                return Ok();
+                stripeEvent = EventUtility.ConstructEvent(
+                  json,
+                  Request.Headers["Stripe-Signature"],
+                  _webhookSecret,
+                  throwOnApiVersionMismatch: false
+                );
+                Console.WriteLine($"Webhook notification with type: {stripeEvent.Type} found for {stripeEvent.Id}");
             }
-            catch (StripeException e)
+            catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine($"Something failed {e}");
                 return BadRequest();
             }
+
+            // This event is sent when a new subscription is created.
+            if (stripeEvent.Type == "checkout.session.completed")
+            {
+
+                
+                // Handle the event
+                // Retrieve the session object from the event data
+                var session = stripeEvent.Data.Object as Stripe.Checkout.Session;
+
+                if (session != null)
+                {
+                    // Log the session details
+                    var subscriptionId = session.SubscriptionId;
+
+                    await appSubscriptionService.ActivateSubscriptionAsync(subscriptionId);
+                }
+            }
+
+            
+            return Ok();
+        }
+
+
+        [HttpGet("subscription-status")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> GetSubscriptionStatus()
+        {
+            var response = await appSubscriptionService.GetSubscriptionStatusAsync();
+            return Ok(response);
         }
     }
 }
-

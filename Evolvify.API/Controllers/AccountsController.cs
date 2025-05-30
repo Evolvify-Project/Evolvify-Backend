@@ -89,5 +89,7 @@ namespace Evolvify.API.Controllers
             var result= await mediator.Send(command);
             return Ok(result);
         }
+
+        
     }
 }

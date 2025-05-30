@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Services.Payment.DTOs
 {
-    public class PaymentIntentResponse
+    public class CheckoutSessionResponse
     {
-        public string PaymentIntentId { get; set; }
-        public string ClientSecret { get; set; }
+        public string CheckoutSessionUrl { get; set; }
     }
 }

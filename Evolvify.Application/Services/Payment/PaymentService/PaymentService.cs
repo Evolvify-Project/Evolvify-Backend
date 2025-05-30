@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Stripe;
+using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,10 +43,9 @@ namespace Evolvify.Application.Payment.PaymentService
         }
 
 
-        public async Task<ApiResponse<StripeSubscriptionResponse>> CreateStripeSubscriptionAsync(string priceId)
+        public async Task<ApiResponse<CheckoutSessionResponse>> CreateStripeSubscriptionAsync(string priceId)
         {
             var currentUser = userContext.GetCurrentUser();
-
             var user = await userManager.FindByIdAsync(currentUser.Id);
 
             string customerId = user!.StripeCustomerId;
@@ -62,45 +62,30 @@ namespace Evolvify.Application.Payment.PaymentService
                 await userManager.UpdateAsync(user);
                 customerId = customer.Id;
             }
-            var subscriptionOptions = new SubscriptionCreateOptions
+
+            var sessionOptions = new SessionCreateOptions
             {
                 Customer = customerId,
-                Items = new List<SubscriptionItemOptions>
+                PaymentMethodTypes = new List<string> { "card" }, 
+                Mode = "subscription", 
+                LineItems = new List<SessionLineItemOptions>
                 {
-                    new SubscriptionItemOptions
-                    {
-                        Price = priceId,
-                    },
+                new SessionLineItemOptions
+                {
+                    Price = priceId,
+                    Quantity = 1,
                 },
-                PaymentBehavior = "default_incomplete",
-                Expand = new List<string> { "latest_invoice.confirmation_secret" },
+
+            },
+                SuccessUrl = "https://evolvify-website.vercel.app/home", 
+                CancelUrl = "https://yourdomain.com/cancel",
+                
             };
 
-            var subscriptionService = new SubscriptionService();
-            var existingSubscriptions = await subscriptionService.ListAsync(new SubscriptionListOptions
-            {
-                Customer = customerId,
-                Status = "active"
-            });
+            var sessionService = new SessionService();
+            var session = await sessionService.CreateAsync(sessionOptions);          
 
-            bool hasActiveSubscription = existingSubscriptions.Data.Any(sub => sub.Items.Data.Any(item => item.Price.Id == priceId));
-            if (hasActiveSubscription)
-            {
-                return new ApiResponse<StripeSubscriptionResponse>(false, StatusCodes.Status400BadRequest, message: "You already have an active subscription for this plan.");
-            }
-
-            var subscription = await subscriptionService.CreateAsync(subscriptionOptions);
-            var response = new StripeSubscriptionResponse
-            {
-                StripeSubscriptionId = subscription.Id,
-                ClientSecret = subscription.LatestInvoice.ConfirmationSecret.ClientSecret,
-                StripeCustomerId = customerId,
-            };
-
-            return new ApiResponse<StripeSubscriptionResponse>(response);
-
-
+            return new ApiResponse<CheckoutSessionResponse>(new CheckoutSessionResponse { CheckoutSessionUrl=session.Url});
         }
-
     }
 }

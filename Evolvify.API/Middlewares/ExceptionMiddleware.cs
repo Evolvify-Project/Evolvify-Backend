@@ -24,6 +24,10 @@ namespace Evolvify.API.Middlewares
             {
                 await HandleExceptionAsync(context, StatusCodes.Status200OK, assessmentAlreadyCompleted.Message);
             }
+            catch (BadRequestException badRequest)
+            {
+                await HandleExceptionAsync(context, StatusCodes.Status400BadRequest, badRequest.Message);
+            }
             catch (ForbiddenException forbidden)
             {
                 await HandleExceptionAsync(context, StatusCodes.Status403Forbidden, forbidden.Message);

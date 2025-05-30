@@ -100,7 +100,7 @@ namespace Evolvify.Application.Extensions
         {
             services.AddHangfire(config =>
             {
-                config.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"));
+                config.UseSqlServerStorage(configuration.GetConnectionString("Remote"));
             });
 
             services.AddHangfireServer();

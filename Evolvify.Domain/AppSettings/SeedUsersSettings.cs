@@ -14,7 +14,7 @@ namespace Evolvify.Domain.AppSettings
         public string Password { get; set; }
         public string Role { get; set; }
         public PlanType PlanType { get; set; }
-        public DateTime EndDate { get; set; } = DateTime.UtcNow.AddMonths(1);
+        public DateTime EndDate { get; set; } = DateTime.Now.AddMonths(1);
 
     }
 
