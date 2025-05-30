@@ -21,7 +21,7 @@ namespace Evolvify.Application.Services.AppSubscription.Mapper
                 .ForMember(dest => dest.Interval, opt => opt.MapFrom(src => src.Interval.HasValue ? src.Interval.ToString() : null))
                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate))
-                .ForMember(dest => dest.RemainingDays, opt => opt.MapFrom(src => (int) Math.Ceiling((src.EndDate - DateTime.Now).TotalDays)));
+                .ForMember(dest => dest.RemainingDays, opt => opt.MapFrom(src => (int) Math.Ceiling((src.EndDate - DateTime.UtcNow).TotalDays)));
 
                 
 

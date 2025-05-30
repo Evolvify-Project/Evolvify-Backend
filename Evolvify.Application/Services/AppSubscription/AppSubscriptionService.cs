@@ -60,10 +60,10 @@ namespace Evolvify.Application.Services.AppSubscription
             existingSubscription.Status = SubscriptionStatus.Active;
             existingSubscription.StripeSubscriptionId = subscription.Id;
             existingSubscription.PlanType = PlanType.Premium;
-            existingSubscription.StartDate = DateTime.Now;
+            existingSubscription.StartDate = DateTime.UtcNow;
             existingSubscription.EndDate = interval == "month"
-                ? DateTime.Now.AddMonths(1)
-                : DateTime.Now.AddYears(1);
+                ? DateTime.UtcNow.AddMonths(1)
+                : DateTime.UtcNow.AddYears(1);
             existingSubscription.Interval= interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly;
 
 

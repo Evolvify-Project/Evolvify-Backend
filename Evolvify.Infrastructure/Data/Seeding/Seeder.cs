@@ -50,12 +50,12 @@ namespace Evolvify.Infrastructure.Data.Seeding
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.SubscriptionPlans.Any()|| context.SubscriptionPlans.Count() <  SubscriptionPlanSeeder.GetSubscriptionPlans().Result.Count())
-                {
-                    var subscriptionPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
-                    await context.SubscriptionPlans.AddRangeAsync(subscriptionPlans);
-                    await context.SaveChangesAsync();
-                }
+                //if (!context.SubscriptionPlans.Any()|| context.SubscriptionPlans.Count() < (await SubscriptionPlanSeeder.GetSubscriptionPlans()).Count())
+                //    {
+                //    var subscriptionPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
+                //    await context.SubscriptionPlans.AddRangeAsync(subscriptionPlans);
+                //    await context.SaveChangesAsync();
+                //}
             }
         }
 

@@ -47,8 +47,8 @@ namespace Evolvify.Application.Identity.Register
                 Subscription= new Subscription
                 {
                     PlanType = PlanType.Free,
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now.AddDays(7), 
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(7), 
                     Status = SubscriptionStatus.Active                    
                 },
             };

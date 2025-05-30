@@ -37,7 +37,7 @@ namespace Evolvify.Infrastructure.Data.Seeding.DataSeeder.StripePlan
                 var productService = new ProductService();
                 var product = await productService.GetAsync(price.ProductId);
 
-                var subscriptionPlanExists = subscriptionPlans.Any(sp => sp.StripePriceId == price.Id);
+                var subscriptionPlanExists =   subscriptionPlans.Any(sp => sp.StripePriceId == price.Id);
 
                 if (subscriptionPlanExists)
                 {

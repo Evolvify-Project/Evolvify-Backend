@@ -10,7 +10,7 @@ namespace Evolvify.Domain.Specification.Subscriptions
 {
     public class ExpiredSubscriptionSpacification:BaseSpecification<Subscription,int>
     {
-        public ExpiredSubscriptionSpacification():base(s => s.EndDate <= DateTime.Now && s.Status == SubscriptionStatus.Active)
+        public ExpiredSubscriptionSpacification():base(s => s.EndDate <= DateTime.UtcNow && s.Status == SubscriptionStatus.Active)
         {
             
         }

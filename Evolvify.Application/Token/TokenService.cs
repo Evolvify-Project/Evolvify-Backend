@@ -49,7 +49,7 @@ namespace Evolvify.Application.Token
             var token = new JwtSecurityToken(
                 issuer: jwtSettings.Issuer,
                 audience: jwtSettings.Audience,
-                expires: DateTime.Now.AddDays(double.Parse(jwtSettings.TokenExpiry.ToString())),
+                expires: DateTime.UtcNow.AddDays(double.Parse(jwtSettings.TokenExpiry.ToString())),
                 claims: claims,
                 signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
             );
