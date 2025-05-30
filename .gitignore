@@ -360,6 +360,5 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
-FodyWeavers.xsd
-/Evolvify.API/appsettings.json
-/Evolvify.API/appsettings.json
+
+*.json
