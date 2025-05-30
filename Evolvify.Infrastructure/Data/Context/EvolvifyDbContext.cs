@@ -29,6 +29,8 @@ namespace Evolvify.Infrastructure.Data.Context
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(modelBuilder);
+
+           
         }
 
 
@@ -48,7 +50,8 @@ namespace Evolvify.Infrastructure.Data.Context
         public DbSet<ModuleProgress> ModuleProgresses { get; set; }
         public DbSet<CourseProgress> CourseProgresses { get; set; }
         public DbSet<AssessmentResult> AssessmentResults { get; set; }
-
+        public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
        
 
     }

@@ -63,6 +63,7 @@ namespace Evolvify.Application.Payment.PaymentService
                 customerId = customer.Id;
             }
 
+
             var sessionOptions = new SessionCreateOptions
             {
                 Customer = customerId,

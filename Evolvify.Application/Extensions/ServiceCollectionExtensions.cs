@@ -68,6 +68,8 @@ namespace Evolvify.Application.Extensions
             services.AddHangfireServices(configuration);
             
 
+            StripeConfiguration.ApiKey = configuration["StripeSettings:SecretKey"];
+
         }
 
         private static void AddValiadiationErrorHandlingServices(this IServiceCollection services)
