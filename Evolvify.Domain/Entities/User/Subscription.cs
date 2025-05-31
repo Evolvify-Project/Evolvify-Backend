@@ -14,6 +14,7 @@ namespace Evolvify.Domain.Entities.User
         public string UserId { get; set; }
         public PlanType PlanType { get; set; } // "Free" or "Premium"
         public string? StripeSubscriptionId { get; set; }
+        public string? StripePriceId { get; set; } // The price ID from Stripe
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public SubscriptionStatus Status { get; set; } // "Active", "Expired", "Canceled"

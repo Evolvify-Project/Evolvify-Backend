@@ -30,14 +30,14 @@ namespace Evolvify.API.Controllers
             StripeConfiguration.ApiKey = stripeSettings.Value.SecretKey;
         }
 
+        [HttpGet("GetSubscriptionPlans")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        //[HttpPost("create-payment-intent")]
-        //public async Task<IActionResult> CreatePaymentIntent([FromBody] PaymentRequest paymentRequest)
-        //{
-        //    var response = await paymentService.CreatePaymentIntentAsync(paymentRequest.Amount);
-        //    return Ok(response);
-        //}
-
+        public async Task<IActionResult> GetSubscriptionPlans()
+        {
+            var response = await appSubscriptionService.GetSubscriptionPlansAsync();
+            return Ok(response);
+        }
+        
         [HttpPost("create-subscription")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateSubscription([FromBody] string priceId)
@@ -71,8 +71,6 @@ namespace Evolvify.API.Controllers
             // This event is sent when a new subscription is created.
             if (stripeEvent.Type == "checkout.session.completed")
             {
-
-                
                 // Handle the event
                 // Retrieve the session object from the event data
                 var session = stripeEvent.Data.Object as Stripe.Checkout.Session;

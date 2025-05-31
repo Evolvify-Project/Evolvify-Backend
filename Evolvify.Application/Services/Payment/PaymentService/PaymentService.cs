@@ -8,6 +8,7 @@ using Evolvify.Domain.Entities.User;
 using Evolvify.Domain.Enums;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Specification.Subscriptions;
+using Evolvify.Infrastructure.Configurations.SubscriptionConfigurations;
 using Evolvify.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -63,6 +64,16 @@ namespace Evolvify.Application.Payment.PaymentService
                 customerId = customer.Id;
             }
 
+            // Check if the user already has an active subscription
+            var existingSubscription = await unitOfWork.Repository<Subscription, int>()
+                .GetByIdWithSpec(new ActiveSubscriptionSpecification(priceId, user.Id));
+
+            if (existingSubscription != null)
+            {
+                throw new BadRequestException("You already have an active subscription for this plan.");
+            }
+
+
 
             var sessionOptions = new SessionCreateOptions
             {
@@ -78,8 +89,8 @@ namespace Evolvify.Application.Payment.PaymentService
                 },
 
             },
-                SuccessUrl = "https://evolvify-website.vercel.app/home", 
-                CancelUrl = "https://yourdomain.com/cancel",
+                SuccessUrl = "https://i.pinimg.com/736x/2b/33/bf/2b33bfaed90249bd305f638f076d4d97.jpg", 
+                CancelUrl = "https://evolvify-website.vercel.app/home",
                 
             };
 

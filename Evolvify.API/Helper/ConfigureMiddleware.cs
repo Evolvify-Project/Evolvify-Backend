@@ -55,7 +55,6 @@ namespace Evolvify.API.Helper
 
             HangfireJobsRegistration.RegisterHangfireJobs();
 
-            app.UseDeveloperExceptionPage();
 
             app.UseAuthentication(); 
             app.UseAuthorization();

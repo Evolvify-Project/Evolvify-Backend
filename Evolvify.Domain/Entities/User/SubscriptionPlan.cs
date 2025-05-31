@@ -11,7 +11,6 @@ namespace Evolvify.Domain.Entities.User
     public class SubscriptionPlan:BaseEntity<int>
     {
         public string Name { get; set; }
-
         public string Description { get; set; }
         public string StripePriceId { get; set; }
         public decimal Price { get; set; }
