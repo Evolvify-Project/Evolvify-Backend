@@ -44,17 +44,23 @@ namespace Evolvify.Infrastructure.Data.Seeding
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.Contents.Any()|| context.Contents.Count() < (await ContentSeeder.GetContents()).Count())
+                if (!context.Contents.Any())
                 {
                     var contents = await ContentSeeder.GetContents();
                     await context.Contents.AddRangeAsync(contents);
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.SubscriptionPlans.Any() || context.SubscriptionPlans.Count() < (await SubscriptionPlanSeeder.GetSubscriptionPlans()).Count())
+                var existingPlans = await context.SubscriptionPlans.Select(p => p.StripePriceId).ToListAsync();
+                var allPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
+
+                var newPlans = allPlans
+                    .Where(plan => !existingPlans.Contains(plan.StripePriceId))
+                    .ToList();
+
+                if (newPlans.Any())
                 {
-                    var subscriptionPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
-                    await context.SubscriptionPlans.AddRangeAsync(subscriptionPlans);
+                    await context.SubscriptionPlans.AddRangeAsync(newPlans);
                     await context.SaveChangesAsync();
                 }
             }

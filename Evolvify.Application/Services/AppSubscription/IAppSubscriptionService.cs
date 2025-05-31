@@ -13,5 +13,6 @@ namespace Evolvify.Application.Services.AppSubscription
         Task ActivateSubscriptionAsync(string stripeSubscriptionId);
         Task<ApiResponse<SubscriptionStatusDto>> GetSubscriptionStatusAsync();
         Task UpdateExpiredSubscriptionsAsync();
+        Task<ApiResponse<List<SubscriptionPlanDto>>> GetSubscriptionPlansAsync();
     }
 }

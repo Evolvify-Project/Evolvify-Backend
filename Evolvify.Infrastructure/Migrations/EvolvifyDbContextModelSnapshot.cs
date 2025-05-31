@@ -565,6 +565,9 @@ namespace Evolvify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StripePriceId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StripeSubscriptionId")
                         .HasColumnType("nvarchar(max)");
 

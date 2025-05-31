@@ -23,44 +23,33 @@ namespace Evolvify.Infrastructure.Data.Seeding.DataSeeder.StripePlan
 
         public static async Task<List<SubscriptionPlan>> GetSubscriptionPlans()
         {
-            var priceServic = new PriceService();
+            var productService = new ProductService();
+            var product= await productService.GetAsync("prod_SPHrXXeJNTRptB"); // Replace with your actual product ID
             var options = new PriceListOptions
             {
+                Product = product.Id ,// Get the first product's ID
                 Active = true,
-                Limit = 100, // Adjust the limit as needed
+                Limit = 5, // Adjust the limit as needed
             };
+            var priceServic = new PriceService();
             var prices = await priceServic.ListAsync(options);
             var subscriptionPlans = new List<SubscriptionPlan>();
 
             foreach (var price in prices)
-            {
-                var productService = new ProductService();
-                var product = await productService.GetAsync(price.ProductId);
-
-                var subscriptionPlanExists =   subscriptionPlans.Any(sp => sp.StripePriceId == price.Id);
-
-                if (subscriptionPlanExists)
-                {
-                    continue; 
-                }
-
-
+            {                
                 var subscriptionPlan = new SubscriptionPlan
                 {
                     Name = product.Name,
                     StripePriceId = price.Id,
                     Price = price.UnitAmount.HasValue ? (decimal)price.UnitAmount.Value / 100 : 0, // Convert cents to dollars
                     Currency = price.Currency,
-                    Interval = price.Recurring?.Interval =="month"? SubscriptionInterval.Monthly: SubscriptionInterval.Yearly
-                    ,Description = price.Nickname ?? "No description available",
-                    
+                    Interval = price.Recurring?.Interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly,
+                    Description = price.Nickname ?? "No description available",
                 };
-                
                 subscriptionPlans.Add(subscriptionPlan);
-
+                
             }
             return subscriptionPlans;
-
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Evolvify.Infrastructure.Data.Seeding.DataSeeder
 {
     public class ContentSeeder
     {
+
         public static async Task<List<Content>> GetContents()
         {
 

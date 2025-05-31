@@ -57,14 +57,39 @@ namespace Evolvify.Application.Services.AppSubscription
             var existingSubscription = await unitOfWork.Repository<Subscription, int>()
                 .GetByIdWithSpec(new UserSubscriptionSpecification(user.Id));
 
-            existingSubscription.Status = SubscriptionStatus.Active;
-            existingSubscription.StripeSubscriptionId = subscription.Id;
-            existingSubscription.PlanType = PlanType.Premium;
-            existingSubscription.StartDate = DateTime.UtcNow;
-            existingSubscription.EndDate = interval == "month"
-                ? DateTime.UtcNow.AddMonths(1)
-                : DateTime.UtcNow.AddYears(1);
-            existingSubscription.Interval= interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly;
+            if (existingSubscription == null)
+            {
+                // If no existing subscription, create a new one
+                existingSubscription = new Subscription
+                {
+                    UserId = user.Id,
+                    Status = SubscriptionStatus.Active,
+                    StripeSubscriptionId = subscription.Id,
+                    StripePriceId = subscription.Items.Data.FirstOrDefault()?.Price?.Id,
+                    PlanType = PlanType.Premium,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = interval == "month"
+                        ? DateTime.UtcNow.AddMonths(1)
+                        : DateTime.UtcNow.AddYears(1),
+                    Interval = interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly
+                };
+                await unitOfWork.Repository<Subscription, int>().CreateAsync(existingSubscription);
+
+                await unitOfWork.CompleteAsync();
+            }
+            
+                // Update existing subscription details
+                existingSubscription.StripeSubscriptionId = subscription.Id;
+                existingSubscription.StripePriceId = subscription.Items.Data.FirstOrDefault()?.Price?.Id;
+                existingSubscription.Status = SubscriptionStatus.Active;
+                existingSubscription.StripeSubscriptionId = subscription.Id;
+                existingSubscription.StripePriceId = subscription.Items.Data.FirstOrDefault()?.Price?.Id;
+                existingSubscription.PlanType = PlanType.Premium;
+                existingSubscription.StartDate = DateTime.UtcNow;
+                existingSubscription.EndDate = interval == "month"
+                    ? DateTime.UtcNow.AddMonths(1)
+                    : DateTime.UtcNow.AddYears(1);
+                existingSubscription.Interval= interval == "month" ? SubscriptionInterval.Monthly : SubscriptionInterval.Yearly;
 
 
              unitOfWork.Repository<Subscription, int>().Update(existingSubscription);
@@ -104,5 +129,22 @@ namespace Evolvify.Application.Services.AppSubscription
             await unitOfWork.CompleteAsync();
             
         }
+
+        public async Task<ApiResponse<List<SubscriptionPlanDto>>> GetSubscriptionPlansAsync()
+        {
+            var subscriptionPlans=await unitOfWork.Repository<SubscriptionPlan,int>().GetAllAsync();
+
+            if (subscriptionPlans == null|| !subscriptionPlans.Any())
+            {
+                throw new NotFoundException("SubscriptionPlans Not Found");
+            }
+
+            var plansDto=  mapper.Map<List<SubscriptionPlanDto>>(subscriptionPlans);
+
+            return new ApiResponse<List<SubscriptionPlanDto>>(plansDto);
+
+             
+        }
+
     }
 }

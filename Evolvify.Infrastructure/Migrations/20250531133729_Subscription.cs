@@ -11,14 +11,6 @@ namespace Evolvify.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "TrialEndDate",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "TrialStartDate",
-                table: "AspNetUsers");
-
             migrationBuilder.AddColumn<string>(
                 name: "StripeCustomerId",
                 table: "AspNetUsers",
@@ -53,6 +45,7 @@ namespace Evolvify.Infrastructure.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PlanType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StripeSubscriptionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StripePriceId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -89,18 +82,6 @@ namespace Evolvify.Infrastructure.Migrations
             migrationBuilder.DropColumn(
                 name: "StripeCustomerId",
                 table: "AspNetUsers");
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "TrialEndDate",
-                table: "AspNetUsers",
-                type: "datetime2",
-                nullable: true);
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "TrialStartDate",
-                table: "AspNetUsers",
-                type: "datetime2",
-                nullable: true);
         }
     }
 }
