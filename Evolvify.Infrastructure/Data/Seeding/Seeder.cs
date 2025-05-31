@@ -1,5 +1,6 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
+using Evolvify.Infrastructure.Data.Seeding.DataSeeder;
 using Evolvify.Infrastructure.Data.Seeding.DataSeeder.StripePlan;
 using Evolvify.Infrastructure.Data.Seeding.Skills;
 using Microsoft.EntityFrameworkCore;
@@ -43,19 +44,19 @@ namespace Evolvify.Infrastructure.Data.Seeding
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.Contents.Any()|| context.Contents.Count()<ContentSeeder.GetCourses().Count())
+                if (!context.Contents.Any()|| context.Contents.Count() < (await ContentSeeder.GetContents()).Count())
                 {
-                    var contents = ContentSeeder.GetCourses();
+                    var contents = await ContentSeeder.GetContents();
                     await context.Contents.AddRangeAsync(contents);
                     await context.SaveChangesAsync();
                 }
 
-                //if (!context.SubscriptionPlans.Any()|| context.SubscriptionPlans.Count() < (await SubscriptionPlanSeeder.GetSubscriptionPlans()).Count())
-                //    {
-                //    var subscriptionPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
-                //    await context.SubscriptionPlans.AddRangeAsync(subscriptionPlans);
-                //    await context.SaveChangesAsync();
-                //}
+                if (!context.SubscriptionPlans.Any() || context.SubscriptionPlans.Count() < (await SubscriptionPlanSeeder.GetSubscriptionPlans()).Count())
+                {
+                    var subscriptionPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
+                    await context.SubscriptionPlans.AddRangeAsync(subscriptionPlans);
+                    await context.SaveChangesAsync();
+                }
             }
         }
 

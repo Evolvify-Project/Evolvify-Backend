@@ -17,7 +17,6 @@ namespace Evolvify.Infrastructure.Data.Seeding.Skills
         {
             var typesData = File.ReadAllText(@"..\Evolvify.Infrastructure\Data\Seeding\DataSeed\Courses.json");
 
-
             // Deserialize the JSON data into a list of Course objects
             var courses = JsonConvert.DeserializeObject<List<Course>>(typesData);
 
