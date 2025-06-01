@@ -11,12 +11,8 @@ namespace Evolvify.Domain.Entities.User
 {
     public class ApplicationUser : IdentityUser
     {
-        public DateTime? TrialStartDate { get; set; }
-        public DateTime? TrialEndDate { get; set; }
         public string? ProfileImageUrl { get; set; }
-
-        [ForeignKey("Subscription")]
-        public int? SubscriptionId { get; set; }
-        public Subscription? Subscription { get; set; }
+        public Subscription Subscription { get; set; }
+        public string? StripeCustomerId { get; set; }
     }
 }

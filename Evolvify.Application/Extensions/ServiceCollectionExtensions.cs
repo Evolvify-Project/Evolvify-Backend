@@ -6,18 +6,24 @@ using Evolvify.Application.DTOs.Response;
 using Evolvify.Application.Email.EmailServices;
 using Evolvify.Application.Email.EmailSettings;
 using Evolvify.Application.Identity.UserProfile.Mapping;
-using Evolvify.Application.Payment;
 using Evolvify.Application.Payment.PaymentService;
+using Evolvify.Application.Services.AppSubscription;
+using Evolvify.Application.Services.Payment;
+using Evolvify.Application.Services.Payment.PaymentService;
 using Evolvify.Application.Token;
 using Evolvify.Domain.AppSettings;
 using Evolvify.Domain.Interfaces.ImageInterface;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 using System.Reflection;
+using FileService = Evolvify.Application.Common.Services.FileService;
 using JwtSettings = Evolvify.Domain.AppSettings.JwtSettings;
+using TokenService = Evolvify.Application.Token.TokenService;
 
 namespace Evolvify.Application.Extensions
 {
@@ -40,7 +46,10 @@ namespace Evolvify.Application.Extensions
             services.AddScoped<IAssessmentApiService, AssessmentApiService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IAppSubscriptionService, AppSubscriptionService>();
            
+
+
 
             services.AddTransient<IEmailService, EmailService>();
 
@@ -55,6 +64,12 @@ namespace Evolvify.Application.Extensions
             services.AddAutoMapper(typeof(UserProfile));
 
             services.AddHttpContextAccessor();
+
+            services.AddHangfireServices(configuration);
+            
+
+            StripeConfiguration.ApiKey = configuration["StripeSettings:SecretKey"];
+
         }
 
         private static void AddValiadiationErrorHandlingServices(this IServiceCollection services)
@@ -80,10 +95,21 @@ namespace Evolvify.Application.Extensions
                     return new BadRequestObjectResult(result);
                 };
 
-
-
             });
         }
 
+        private static void AddHangfireServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHangfire(config =>
+            {
+                config.UseSqlServerStorage(configuration.GetConnectionString("Remote"));
+            });
+
+            services.AddHangfireServer();
+
+           
+
+
+        }
     }
 }

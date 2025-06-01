@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Evolvify.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,13 +10,15 @@ namespace Evolvify.Domain.Entities.User
 {
     public class Subscription:BaseEntity<int>
     {
-       
-         public ApplicationUser User { get; set; }
-        [ForeignKey("User")]
+        public ApplicationUser User { get; set; }
         public string UserId { get; set; }
-        public string PlanType { get; set; } // "Free" or "Premium"
+        public PlanType PlanType { get; set; } // "Free" or "Premium"
+        public string? StripeSubscriptionId { get; set; }
+        public string? StripePriceId { get; set; } // The price ID from Stripe
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public string Status { get; set; } // "Active", "Expired", "Canceled"
+        public DateTime EndDate { get; set; }
+        public SubscriptionStatus Status { get; set; } // "Active", "Expired", "Canceled"
+        public SubscriptionInterval? Interval { get; set; }
+
     }
 }

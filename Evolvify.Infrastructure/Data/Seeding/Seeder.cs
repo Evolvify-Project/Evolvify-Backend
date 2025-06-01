@@ -1,5 +1,7 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
+using Evolvify.Infrastructure.Data.Seeding.DataSeeder;
+using Evolvify.Infrastructure.Data.Seeding.DataSeeder.StripePlan;
 using Evolvify.Infrastructure.Data.Seeding.Skills;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,10 +43,24 @@ namespace Evolvify.Infrastructure.Data.Seeding
                     await context.Modules.AddRangeAsync(modules);
                     await context.SaveChangesAsync();
                 }
+
                 if (!context.Contents.Any())
                 {
-                    var contents = ContentSeeder.GetCourses();
+                    var contents = await ContentSeeder.GetContents();
                     await context.Contents.AddRangeAsync(contents);
+                    await context.SaveChangesAsync();
+                }
+
+                var existingPlans = await context.SubscriptionPlans.Select(p => p.StripePriceId).ToListAsync();
+                var allPlans = await SubscriptionPlanSeeder.GetSubscriptionPlans();
+
+                var newPlans = allPlans
+                    .Where(plan => !existingPlans.Contains(plan.StripePriceId))
+                    .ToList();
+
+                if (newPlans.Any())
+                {
+                    await context.SubscriptionPlans.AddRangeAsync(newPlans);
                     await context.SaveChangesAsync();
                 }
             }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    [Migration("20250523143106_Subscription")]
+    [Migration("20250531133729_Subscription")]
     partial class Subscription
     {
         /// <inheritdoc />
@@ -517,14 +517,8 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubscriptionId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("TrialEndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TrialStartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("StripeCustomerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -543,8 +537,6 @@ namespace Evolvify.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("SubscriptionId");
-
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
@@ -556,8 +548,14 @@ namespace Evolvify.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Interval")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PlanType")
                         .IsRequired()
@@ -570,15 +568,61 @@ namespace Evolvify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StripePriceId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StripeSubscriptionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("Subscription");
+                    b.ToTable("Subscriptions");
+                });
+
+            modelBuilder.Entity("Evolvify.Domain.Entities.User.SubscriptionPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Interval")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("StripePriceId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubscriptionPlans");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -947,20 +991,11 @@ namespace Evolvify.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Evolvify.Domain.Entities.User.ApplicationUser", b =>
-                {
-                    b.HasOne("Evolvify.Domain.Entities.User.Subscription", "Subscription")
-                        .WithMany()
-                        .HasForeignKey("SubscriptionId");
-
-                    b.Navigation("Subscription");
-                });
-
             modelBuilder.Entity("Evolvify.Domain.Entities.User.Subscription", b =>
                 {
                     b.HasOne("Evolvify.Domain.Entities.User.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne("Subscription")
+                        .HasForeignKey("Evolvify.Domain.Entities.User.Subscription", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1055,6 +1090,12 @@ namespace Evolvify.Infrastructure.Migrations
             modelBuilder.Entity("Evolvify.Domain.Entities.Skill", b =>
                 {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("Evolvify.Domain.Entities.User.ApplicationUser", b =>
+                {
+                    b.Navigation("Subscription")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

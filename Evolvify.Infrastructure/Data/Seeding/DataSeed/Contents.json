@@ -1,82 +1,362 @@
-ï»¿[
-    {
-        "Title": "Video: How to Speak So People Want to Listen",
-        "Url": "https://www.youtube.com/watch?v=eIho2S0ZahI",
-        "Text": "This TED Talk by Julian Treasure explores techniques to enhance your speaking skills, focusing on tone, pace, and clarity to engage your audience effectively.",
-        "ContentType": 0,
-        "ModuleId": 1,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Key Takeaways: Clarity in Speech",
-        "Url": null,
-        "Text": "This summary outlines strategies for clear speech, including enunciation exercises and pacing techniques to ensure your message is understood.",
-        "ContentType": 1,
-        "ModuleId": 2,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Article: The Power of Active Listening",
-        "Url": "https://hbr.org/2016/07/what-great-listeners-actually-do",
-        "Text": "This Harvard Business Review article discusses how active listening builds trust and understanding, offering practical tips for improving listening skills.",
-        "ContentType": 2,
-        "ModuleId": 3,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "PDF: Guide to Understanding Tone",
-        "Url": "https://www.skillsyouneed.com/ps/voice-tone.pdf",
-        "Text": "This downloadable guide from SkillsYouNeed explains how tone affects communication and provides exercises to interpret and use tone effectively.",
-        "ContentType": 3,
-        "ModuleId": 4,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Video: The Art of Asking Questions",
-        "Url": "https://www.youtube.com/watch?v=3a9Jaw5j4nM",
-        "Text": "This video from Harvard Business Review explores how to ask thoughtful questions to drive engagement and clarity in conversations.",
-        "ContentType": 0,
-        "ModuleId": 5,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Key Takeaways: Building Rapport",
-        "Url": null,
-        "Text": "This summary covers techniques for building rapport, such as mirroring body language and showing genuine interest, to foster stronger connections.",
-        "ContentType": 1,
-        "ModuleId": 6,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Article: Overcoming Shyness in Communication",
-        "Url": "https://www.forbes.com/sites/forbescoachescouncil/2020/08/25/15-ways-to-overcome-shyness-in-professional-settings/",
-        "Text": "This Forbes article provides 15 strategies to overcome shyness, helping you communicate confidently in professional environments.",
-        "ContentType": 2,
-        "ModuleId": 7,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "PDF: Feedback Skills Guide",
-        "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Communication.pdf",
-        "Text": "This PDF from the U.S. Department of Labor offers practical exercises to develop effective feedback skills for better communication.",
-        "ContentType": 3,
-        "ModuleId": 8,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Video: Overcoming Communication Barriers",
-        "Url": "https://www.youtube.com/watch?v=slq1nAhzu7E",
-        "Text": "This video from LinkedIn Learning discusses common communication barriers and strategies to overcome them for effective interactions.",
-        "ContentType": 0,
-        "ModuleId": 9,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    },
-    {
-        "Title": "Key Takeaways: Practice Scenarios",
-        "Url": null,
-        "Text": "This summary provides scenarios to practice communication skills, helping you apply techniques in real-world situations.",
-        "ContentType": 1,
-        "ModuleId": 10,
-        "CreatedAt": "2025-05-22T01:31:00Z"
-    }
+[
+  {
+    "Title": "Video: How to Speak So People Want to Listen",
+    "Url": "https://www.youtube.com/watch?v=eIho2S0ZahI",
+    "Text": "Julian Treasure’s TED Talk explores techniques to enhance speaking skills, focusing on tone, pace, and clarity for effective communication.",
+    "ContentType": 0,
+    "ModuleId": 1,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: The Art of Public Speaking",
+    "Url": "https://www.youtube.com/watch?v=3a9Jaw5j4nM",
+    "Text": "This Harvard Business Review video provides tips for clear and confident public speaking, ideal for professional settings.",
+    "ContentType": 0,
+    "ModuleId": 2,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: What Great Listeners Actually Do",
+    "Url": "https://hbr.org/2016/07/what-great-listeners-actually-do",
+    "Text": "This Harvard Business Review article discusses how active listening builds trust and understanding.",
+    "ContentType": 2,
+    "ModuleId": 3,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Communicate Clearly",
+    "Url": "https://hbr.org/2017/06/how-to-communicate-clearly-during-organizational-change",
+    "Text": "This Harvard Business Review article outlines strategies for clear communication in professional contexts.",
+    "ContentType": 2,
+    "ModuleId": 4,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Communication Skills Guide",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Communication.pdf",
+    "Text": "This U.S. Department of Labor PDF offers exercises to develop effective communication skills.",
+    "ContentType": 3,
+    "ModuleId": 5,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Your Body Language May Shape Who You Are",
+    "Url": "https://www.youtube.com/watch?v=Ks-_Mh1QhMc",
+    "Text": "Amy Cuddy’s TED Talk discusses how body language impacts communication and confidence.",
+    "ContentType": 0,
+    "ModuleId": 6,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Overcoming Communication Barriers",
+    "Url": "https://www.youtube.com/watch?v=slq1nAhzu7E",
+    "Text": "This LinkedIn Learning video discusses strategies to overcome communication barriers.",
+    "ContentType": 0,
+    "ModuleId": 7,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: The Feedback Fallacy",
+    "Url": "https://hbr.org/2019/03/the-feedback-fallacy",
+    "Text": "This Harvard Business Review article explores best practices for giving constructive feedback.",
+    "ContentType": 2,
+    "ModuleId": 8,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: 15 Ways to Overcome Shyness",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2020/08/25/15-ways-to-overcome-shyness-in-professional-settings/",
+    "Text": "This Forbes article provides strategies to overcome shyness in professional communication.",
+    "ContentType": 2,
+    "ModuleId": 9,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Effective Communication Practice",
+    "Url": "https://www.youtube.com/watch?v=7OSO4vymh8k",
+    "Text": "This video from CareerVidz provides scenarios to practice communication skills.",
+    "ContentType": 0,
+    "ModuleId": 10,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: How to Ace an Interview",
+    "Url": "https://www.youtube.com/watch?v=7OSO4vymh8k",
+    "Text": "This video from CareerVidz provides practical tips for excelling in job interviews.",
+    "ContentType": 0,
+    "ModuleId": 61,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Interview Preparation Tips",
+    "Url": "https://www.youtube.com/watch?v=HG68Ymazo18",
+    "Text": "This LinkedIn Learning video offers strategies for preparing for job interviews.",
+    "ContentType": 0,
+    "ModuleId": 62,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Answer Tough Interview Questions",
+    "Url": "https://hbr.org/2016/02/how-to-answer-tough-questions-in-an-interview",
+    "Text": "This Harvard Business Review article provides techniques for handling challenging interview questions.",
+    "ContentType": 2,
+    "ModuleId": 63,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Write a Resume That Stands Out",
+    "Url": "https://www.fastcompany.com/90462803/how-to-write-a-resume-that-stands-out",
+    "Text": "This Fast Company article offers tips for crafting a compelling resume.",
+    "ContentType": 2,
+    "ModuleId": 64,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Interview Skills Guide",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Interviewing.pdf",
+    "Text": "This U.S. Department of Labor PDF provides exercises to improve interviewing skills.",
+    "ContentType": 3,
+    "ModuleId": 65,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Behavioral Interview Questions",
+    "Url": "https://www.youtube.com/watch?v=6bJTEZnTT5A",
+    "Text": "This video from The Muse explains how to answer behavioral interview questions effectively.",
+    "ContentType": 0,
+    "ModuleId": 66,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Common Interview Mistakes",
+    "Url": "https://www.youtube.com/watch?v=1mHjMNZZvFo",
+    "Text": "This video from Linda Raynier highlights common interview mistakes and how to avoid them.",
+    "ContentType": 0,
+    "ModuleId": 67,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Follow Up After an Interview",
+    "Url": "https://hbr.org/2017/05/how-to-follow-up-after-an-interview",
+    "Text": "This Harvard Business Review article provides guidance on effective post-interview follow-up.",
+    "ContentType": 2,
+    "ModuleId": 68,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Dressing for Interview Success",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2021/03/10/15-tips-for-dressing-for-an-interview/",
+    "Text": "This Forbes article offers tips for choosing appropriate attire for job interviews.",
+    "ContentType": 2,
+    "ModuleId": 69,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Interview Confidence Tips",
+    "Url": "https://www.youtube.com/watch?v=9mXG7JU_vyI",
+    "Text": "This video from Andrew LaCivita provides strategies for building confidence during interviews.",
+    "ContentType": 0,
+    "ModuleId": 70,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: How to Build Trust in Teams",
+    "Url": "https://www.youtube.com/watch?v=jmVPLwQhY_g",
+    "Text": "This video from Simon Sinek explores strategies for building trust within teams.",
+    "ContentType": 0,
+    "ModuleId": 121,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: The Power of Teamwork",
+    "Url": "https://www.youtube.com/watch?v=1qzzYrCTKuk",
+    "Text": "This TEDx video discusses the importance of collaboration and teamwork in achieving goals.",
+    "ContentType": 0,
+    "ModuleId": 122,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Building High-Performing Teams",
+    "Url": "https://hbr.org/2020/06/how-to-build-a-high-performing-team",
+    "Text": "This HBR article discusses strategies for fostering effective teamwork.",
+    "ContentType": 2,
+    "ModuleId": 123,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Effective Team Communication",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2021/01/28/15-strategies-for-effective-communication-in-teams/",
+    "Text": "This Forbes article provides strategies for improving communication within teams.",
+    "ContentType": 2,
+    "ModuleId": 124,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Teamwork Skills Guide",
+    "Url": "https://www.dol.gov/sites/dolgov/files/odep/topics/youth/softskills/Teamwork.pdf",
+    "Text": "This U.S. Department of Labor PDF provides activities to enhance teamwork skills.",
+    "ContentType": 3,
+    "ModuleId": 125,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Resolving Team Conflicts",
+    "Url": "https://www.youtube.com/watch?v=Z7qG15C6fCY",
+    "Text": "This LinkedIn Learning video offers strategies for resolving conflicts within teams.",
+    "ContentType": 0,
+    "ModuleId": 126,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Team Leadership Skills",
+    "Url": "https://www.youtube.com/watch?v=9G7H2a1b9k8",
+    "Text": "This video from MindTools discusses essential leadership skills for effective teamwork.",
+    "ContentType": 0,
+    "ModuleId": 127,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Motivating Team Members",
+    "Url": "https://hbr.org/2019/09/how-to-motivate-your-team",
+    "Text": "This Harvard Business Review article provides techniques for motivating team members.",
+    "ContentType": 2,
+    "ModuleId": 128,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Collaboration in Teams",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2020/09/15/15-ways-to-foster-collaboration-in-teams/",
+    "Text": "This Forbes article offers strategies for fostering collaboration within teams.",
+    "ContentType": 2,
+    "ModuleId": 129,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Team Dynamics Explained",
+    "Url": "https://www.youtube.com/watch?v=1qzzYrCTKuk",
+    "Text": "This TEDx video explores the dynamics of effective teamwork and collaboration.",
+    "ContentType": 0,
+    "ModuleId": 130,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: How to Give a Great Presentation",
+    "Url": "https://www.youtube.com/watch?v=805f4WGIvCo",
+    "Text": "This TEDx video provides tips for delivering engaging presentations.",
+    "ContentType": 0,
+    "ModuleId": 181,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Presentation Skills Masterclass",
+    "Url": "https://www.youtube.com/watch?v=MnIPpUiTcRc",
+    "Text": "This video from Chris Anderson (TED) shares secrets to delivering impactful presentations.",
+    "ContentType": 0,
+    "ModuleId": 182,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: 15 Ways to Create Engaging Presentations",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2021/03/25/15-ways-to-create-engaging-presentations/",
+    "Text": "This Forbes article provides strategies for designing engaging presentations.",
+    "ContentType": 2,
+    "ModuleId": 183,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: How to Engage Your Audience",
+    "Url": "https://hbr.org/2013/03/how-to-make-presentations",
+    "Text": "This Harvard Business Review article offers techniques for captivating presentation audiences.",
+    "ContentType": 2,
+    "ModuleId": 184,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "PDF: Presentation Skills Guide",
+    "Url": "https://www.skillsyouneed.com/ps/presentation-skills.pdf",
+    "Text": "This guide from SkillsYouNeed provides tips for delivering effective presentations.",
+    "ContentType": 3,
+    "ModuleId": 185,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Visual Design for Presentations",
+    "Url": "https://www.youtube.com/watch?v=O8i7OKbWmRM",
+    "Text": "This video from Visme offers tips for creating visually appealing presentation slides.",
+    "ContentType": 0,
+    "ModuleId": 186,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Storytelling in Presentations",
+    "Url": "https://www.youtube.com/watch?v=vjr5k99xNOI",
+    "Text": "This TEDx video discusses how to use storytelling to make presentations more engaging.",
+    "ContentType": 0,
+    "ModuleId": 187,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Avoiding Presentation Pitfalls",
+    "Url": "https://hbr.org/2016/10/how-to-avoid-common-presentation-mistakes",
+    "Text": "This Harvard Business Review article highlights common presentation mistakes and how to avoid them.",
+    "ContentType": 2,
+    "ModuleId": 188,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Article: Designing Effective Slides",
+    "Url": "https://www.forbes.com/sites/forbescoachescouncil/2020/07/15/15-tips-for-creating-effective-presentation-slides/",
+    "Text": "This Forbes article provides strategies for designing effective presentation slides.",
+    "ContentType": 2,
+    "ModuleId": 189,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  },
+  {
+    "Title": "Video: Presentation Confidence Tips",
+    "Url": "https://www.youtube.com/watch?v=wp4ho9raVjA",
+    "Text": "This video from Amy Cuddy provides strategies for building confidence during presentations.",
+    "ContentType": 0,
+    "ModuleId": 190,
+    "CreatedAt": "2025-05-31T11:45:00Z",
+    "UpdatedAt": null
+  }
 ]

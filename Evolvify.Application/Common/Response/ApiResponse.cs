@@ -45,7 +45,7 @@ namespace Evolvify.Application.DTOs.Response
                 403 => "The client does not have access rights to the content.",
                 404 => "The server can not find the requested resource.",
                 405 => "The method specified in the request is not allowed.",
-                500 => "The server has encountered a situation it doesn't know how to handle.",
+                500 => "The server has encountered a situation it doesn't kUtcNow how to handle.",
                 _ => "An error occurred while processing the request."
             };
         }

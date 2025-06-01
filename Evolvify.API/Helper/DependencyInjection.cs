@@ -13,6 +13,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using Evolvify.Domain.AppSettings;
 using Evolvify.Application.Extensions;
+using Evolvify.Application.Services.AppSubscription;
+using Hangfire;
 
 namespace Evolvify.API.Helper
 {
@@ -83,11 +85,13 @@ namespace Evolvify.API.Helper
         }
 
 
+
         private static void MiddlewareService(this IServiceCollection services)
         {
             services.AddScoped<ExceptionMiddleware>();
         }
       
+        
 
     }
 }

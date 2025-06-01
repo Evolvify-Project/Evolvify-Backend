@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolvify.Application.Payment
+namespace Evolvify.Application.Services.Payment
 {
     public class StripeSettings
     {
         public string SecretKey { get; set; }
         public string PublishableKey { get; set; }
+        public string WebhookSecret { get; set; }
     }
 }

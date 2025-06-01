@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Domain.Enums
 {
-    public enum SubscriptionStatus
+    public enum SubscriptionInterval
     {
-        Active = 1,
-        Expired = 2,
-        Canceled = 3,
-        
+        Monthly,
+        Yearly
     }
 }
