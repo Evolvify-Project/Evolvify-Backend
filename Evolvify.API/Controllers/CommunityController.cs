@@ -1,5 +1,4 @@
-﻿using Evolvify.Application.Community.Comments.Commands;
-using Evolvify.Application.Community.Comments.Commands.CreateComment;
+﻿using Evolvify.Application.Community.Comments.Commands.CreateComment;
 using Evolvify.Application.Community.Comments.Commands.DeleteComment;
 using Evolvify.Application.Community.Comments.Commands.UpdateComment;
 using Evolvify.Application.Community.Comments.DTOs;
@@ -16,7 +15,6 @@ using Evolvify.Application.Community.Replies.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Evolvify.API.Controllers

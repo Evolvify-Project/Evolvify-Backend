@@ -1,5 +1,6 @@
 ﻿using Evolvify.Application.Services.AppSubscription;
 using Evolvify.Application.Services.Payment;
+using Evolvify.Application.Services.Payment.DTOs;
 using Evolvify.Application.Services.Payment.PaymentService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -40,9 +41,9 @@ namespace Evolvify.API.Controllers
         
         [HttpPost("create-subscription")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateSubscription([FromBody] string priceId)
+        public async Task<IActionResult> CreateSubscription([FromBody] CreateSubscriptionRequest request)
         {
-            var response = await paymentService.CreateStripeSubscriptionAsync(priceId);
+            var response = await paymentService.CreateStripeSubscriptionAsync(request.PriceId);
             return Ok(response);
         }
 
