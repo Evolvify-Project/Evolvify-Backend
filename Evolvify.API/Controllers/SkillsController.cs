@@ -1,6 +1,7 @@
 ﻿using Evolvify.Application.Skills.Commands.CreateSkill;
 using Evolvify.Application.Skills.Commands.DeleteSkill;
 using Evolvify.Application.Skills.Commands.UpdateSkill;
+using Evolvify.Application.Skills.DTO;
 using Evolvify.Application.Skills.Queries.GetById;
 using Evolvify.Application.Skills.Query.GetAll;
 using MediatR;
@@ -25,7 +26,7 @@ namespace Evolvify.API.Controllers
         {   
             var response = await mediator.Send(new GetAllSkillsQuery());
 
-            return response.Success ? Ok(response) : NotFound(response);
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -33,7 +34,8 @@ namespace Evolvify.API.Controllers
         {
             var response = await mediator.Send(new GetSkillByIdQuery(id));
 
-            return response.Success ? Ok(response) : NotFound(response);
+            return Ok(response);
+
         }
 
         [HttpPost]
@@ -41,22 +43,23 @@ namespace Evolvify.API.Controllers
         {
             var response = await mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetSkill), new { id = response.Data.Id }, null);
+            return CreatedAtAction(nameof(GetSkill), new { id = response.Data.Id }, response);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSkill([FromRoute]int id, [FromBody] UpdateSkillCommand command)
+        public async Task<IActionResult> UpdateSkill([FromRoute]int id, [FromBody] UpdateSkillRequest request)
         {
-            command.Id = id;
-             await mediator.Send(command);
+
+            await mediator.Send(new UpdateSkillCommand(id, request.Name, request.Description));
 
             return NoContent();
         }
+       
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSkill([FromRoute]int id)
         {
-           await mediator.Send(new DeleteSkillCommand(id));
+            await mediator.Send(new DeleteSkillCommand(id));
 
             return NoContent();
         }
