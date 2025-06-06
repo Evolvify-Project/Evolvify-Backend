@@ -1,18 +1,16 @@
-﻿using Evolvify.Domain.Entities;
+﻿using Evolvify.API.Middlewares;
+using Evolvify.Application.Assessment.Service;
+using Evolvify.Application.DTOs.Response;
+using Evolvify.Application.Extensions;
+using Evolvify.Application.QuizModule.UserAnswers.Queries.GetUserAnswerById;
+using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
+using Evolvify.Infrastructure.Data.Seeding;
+using Evolvify.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Text.Json;
-using Evolvify.Application.DTOs.Response;
-using Evolvify.API.Middlewares;
-using Evolvify.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Evolvify.Domain.AppSettings;
-using Evolvify.Application.Extensions;
 
 namespace Evolvify.API.Helper
 {
@@ -22,11 +20,25 @@ namespace Evolvify.API.Helper
         {
             services.AddBuildInService();
             services.AddSwaggerService();
-            services.AddInfrastructure(configuration);
+            services.AddAutoMapper(typeof(GetUserAnswerByIdQueryHandler).Assembly);
             services.AddApplicationServices(configuration);
             services.AddValiadiationErrorHandlingServices();
             services.MiddlewareService();
             services.AddCorsServices();
+            services.AddHttpClient<IIAssessmentApiService, AssessmentApiService>();
+            services.AddDbContext<EvolvifyDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("Bashar")));
+
+            // 2. إضافة الـ Identity
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<EvolvifyDbContext>()
+                .AddDefaultTokenProviders();
+
+            // 3. إضافة الـ UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ISeeder, Seeder>();
+            // 4. إضافة MediatR
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUserAnswerByIdQueryHandler).Assembly));
             return services;
         }
        

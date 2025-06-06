@@ -1,14 +1,7 @@
 
 using Evolvify.API.Helper;
-using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
-using Evolvify.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Net;
-using System.Text;
+using Evolvify.Infrastructure.Data.Seeding;
 
 namespace Evolvify.API
 {
@@ -19,8 +12,16 @@ namespace Evolvify.API
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDependency(builder.Configuration);
-
             var app = builder.Build();
+
+            
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<ISeeder>();
+                var context = scope.ServiceProvider.GetRequiredService<EvolvifyDbContext>();
+                await seeder.SeedAsync(context, scope.ServiceProvider);
+            }
+            
            
             await app.ConfigureMiddlewareAsync();
             app.Run();

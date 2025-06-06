@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Pqc.Crypto.Lms;
+﻿using Evolvify.Infrastructure.Data.Context;
+using Org.BouncyCastle.Pqc.Crypto.Lms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Evolvify.Infrastructure.Data.Seeding
 {
     public interface ISeeder
     {
+        Task SeedAsync(EvolvifyDbContext context, IServiceProvider services);
         Task SeedAsync();
     }
 }

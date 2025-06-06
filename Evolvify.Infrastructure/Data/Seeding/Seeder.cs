@@ -1,7 +1,9 @@
 ﻿using Evolvify.Domain.Entities;
 using Evolvify.Infrastructure.Data.Context;
 using Evolvify.Infrastructure.Data.Seeding.Skills;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,14 @@ namespace Evolvify.Infrastructure.Data.Seeding
     {
         private readonly EvolvifyDbContext context;
 
+        public async Task SeedAsync(EvolvifyDbContext context, IServiceProvider services)
+        {
+            
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+            await Task.CompletedTask;
+        }
         public Seeder(EvolvifyDbContext context)
         {
             this.context = context;
