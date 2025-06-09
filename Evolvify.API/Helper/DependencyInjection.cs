@@ -11,9 +11,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Evolvify.Domain.AppSettings;
-
-
 
 namespace Evolvify.API.Helper
 {
@@ -25,9 +22,10 @@ namespace Evolvify.API.Helper
             services.AddSwaggerService();
             services.AddAutoMapper(typeof(GetUserAnswerByIdQueryHandler).Assembly);
             services.AddApplicationServices(configuration);
+            services.AddValiadiationErrorHandlingServices();
             services.MiddlewareService();
             services.AddCorsServices();
-            
+            services.AddHttpClient<IIAssessmentApiService, AssessmentApiService>();
             services.AddDbContext<EvolvifyDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Bashar")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -38,7 +36,7 @@ namespace Evolvify.API.Helper
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUserAnswerByIdQueryHandler).Assembly));
             return services;
         }
-       
+
 
         private static void AddBuildInService(this IServiceCollection services) =>
              services.AddControllers();
@@ -93,13 +91,38 @@ namespace Evolvify.API.Helper
         }
 
 
-
         private static void MiddlewareService(this IServiceCollection services)
         {
             services.AddScoped<ExceptionMiddleware>();
         }
-      
-        
+        private static void AddValiadiationErrorHandlingServices(this IServiceCollection services)
+        {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                        .Where(e => e.Value.Errors.Count > 0)
+                        .SelectMany(x => x.Value.Errors)
+                        .Select(x => x.ErrorMessage).ToList();
+
+                    var result = new ApiResponse<string>(
+                        success: false,
+                        statusCode: 400,
+                        message: "Validation errors",
+                        errors: errors
+                        );
+
+
+                    return new BadRequestObjectResult(result);
+                };
+
+
+
+            });
+        }
+
 
     }
 }

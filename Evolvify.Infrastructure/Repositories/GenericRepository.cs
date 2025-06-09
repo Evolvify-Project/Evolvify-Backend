@@ -22,16 +22,16 @@ namespace Evolvify.Infrastructure.Repositories
         public GenericRepository(EvolvifyDbContext context)
         {
             _context = context;
-            _dbSet=_context.Set<TEntity>();
+            _dbSet = _context.Set<TEntity>();
         }
-        public async Task CreateAsync(TEntity entity)=> await _dbSet.AddAsync(entity);
+        public async Task CreateAsync(TEntity entity) => await _dbSet.AddAsync(entity);
 
         public async Task CreateAsync(IEnumerable<TEntity> entities) => await _dbSet.AddRangeAsync(entities);
         public async Task AddRangeAsync(IEnumerable<TEntity> entities) => await _dbSet.AddRangeAsync(entities);
 
         public async Task<TEntity> GetByIdAsync(TKey id) => await _dbSet.FindAsync(id);
         public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
-        public void Delete(TEntity entity)=> _dbSet.Remove(entity);
+        public void Delete(TEntity entity) => _dbSet.Remove(entity);
 
         public void DeleteRange(IEnumerable<TEntity> entities)
         {
@@ -40,7 +40,7 @@ namespace Evolvify.Infrastructure.Repositories
 
 
 
-      
+
         public void Update(TEntity entity) => _dbSet.Update(entity);
 
 
@@ -48,7 +48,7 @@ namespace Evolvify.Infrastructure.Repositories
         {
             return await ApplySpecification(specification).ToListAsync();
         }
-        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity,TKey> specification)
+        public async Task<TEntity> GetByIdWithSpec(ISpecification<TEntity, TKey> specification)
         {
             return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
@@ -63,6 +63,6 @@ namespace Evolvify.Infrastructure.Repositories
             return SpecificationEvaluator<TEntity, TKey>.GetQuery(_dbSet, spec);
         }
 
-        
+
     }
 }
