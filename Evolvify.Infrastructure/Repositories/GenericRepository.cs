@@ -25,13 +25,20 @@ namespace Evolvify.Infrastructure.Repositories
             _dbSet=_context.Set<TEntity>();
         }
         public async Task CreateAsync(TEntity entity)=> await _dbSet.AddAsync(entity);
+
         public async Task CreateAsync(IEnumerable<TEntity> entities) => await _dbSet.AddRangeAsync(entities);
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities) => await _dbSet.AddRangeAsync(entities);
+
+        public async Task<TEntity> GetByIdAsync(TKey id) => await _dbSet.FindAsync(id);
+        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
         public void Delete(TEntity entity)=> _dbSet.Remove(entity);
 
         public void DeleteRange(IEnumerable<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
         }
+
+
 
       
         public void Update(TEntity entity) => _dbSet.Update(entity);
@@ -46,10 +53,16 @@ namespace Evolvify.Infrastructure.Repositories
             return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
+        public async Task<int> CountAsync(ISpecification<TEntity, TKey> specification)
+        {
+            return await ApplySpecification(specification).CountAsync();
+        }
+
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity, TKey> spec)
         {
             return SpecificationEvaluator<TEntity, TKey>.GetQuery(_dbSet, spec);
         }
-       
+
+        
     }
 }
