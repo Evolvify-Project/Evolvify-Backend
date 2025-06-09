@@ -28,16 +28,11 @@ namespace Evolvify.API.Helper
             services.AddHttpClient<IIAssessmentApiService, AssessmentApiService>();
             services.AddDbContext<EvolvifyDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Bashar")));
-
-            // 2. إضافة الـ Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<EvolvifyDbContext>()
                 .AddDefaultTokenProviders();
-
-            // 3. إضافة الـ UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISeeder, Seeder>();
-            // 4. إضافة MediatR
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUserAnswerByIdQueryHandler).Assembly));
             return services;
         }
