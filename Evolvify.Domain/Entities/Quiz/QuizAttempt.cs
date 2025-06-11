@@ -1,18 +1,21 @@
-﻿using System;
+﻿using Evolvify.Domain.Entities.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Evolvify.Domain.Entities.User;
 
 namespace Evolvify.Domain.Entities.Quiz
 {
-    public class QuizResult : BaseEntity<int>
+    public class QuizAttempt : BaseEntity<int>
     {
-        public int Score { get; set; } 
+        public double Score { get; set; }
+        public string? Duration { get; set; }
         public string UserId { get; set; } = string.Empty;
         public ApplicationUser User { get; set; } = new ApplicationUser();
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; } = new Quiz();
+        public List<UserAnswer> UserAnswers { get; set; } = new List<UserAnswer>();
+
     }
 }

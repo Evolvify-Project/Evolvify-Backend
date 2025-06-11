@@ -13,9 +13,11 @@ namespace Evolvify.Infrastructure.Configurations.QuizConfigurations
     {
         public void Configure(EntityTypeBuilder<Answer> builder)
         {
-            builder.HasOne(A => A.Question)
-                .WithMany(Question => Question.Answers)
-                .HasForeignKey(A => A.QuestionId);
+            builder
+                .HasOne(a => a.Question)
+                .WithMany(question => question.Answers)
+                .HasForeignKey(a => a.QuestionId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

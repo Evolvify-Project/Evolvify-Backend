@@ -4,6 +4,7 @@ using Evolvify.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Evolvify.Infrastructure.Migrations
 {
     [DbContext(typeof(EvolvifyDbContext))]
-    partial class EvolvifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250611203907_UpdateModelConfigurations")]
+    partial class UpdateModelConfigurations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
