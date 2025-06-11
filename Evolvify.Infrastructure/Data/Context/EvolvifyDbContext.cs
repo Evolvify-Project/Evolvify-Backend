@@ -29,8 +29,12 @@ namespace Evolvify.Infrastructure.Data.Context
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<UserAnswer>()
+              .HasOne(ua => ua.QuizAttempt)
+              .WithMany(qa => qa.UserAnswers)
+              .HasForeignKey(ua => ua.QuizAttemptId)
+              .OnDelete(DeleteBehavior.NoAction);
 
-           
         }
 
 
@@ -45,8 +49,8 @@ namespace Evolvify.Infrastructure.Data.Context
         public DbSet<Quiz> Quizs { get; set; } 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        public DbSet<QuizResult> QuizResults { get; set; }
-        public DbSet<UserAnswers> UserAnswers { get; set; }
+        public DbSet<QuizAttempt> QuizResults { get; set; }
+        public DbSet<UserAnswer> UserAnswers { get; set; }
         public DbSet<ModuleProgress> ModuleProgresses { get; set; }
         public DbSet<CourseProgress> CourseProgresses { get; set; }
         public DbSet<AssessmentResult> AssessmentResults { get; set; }

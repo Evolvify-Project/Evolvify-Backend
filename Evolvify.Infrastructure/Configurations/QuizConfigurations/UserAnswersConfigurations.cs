@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Infrastructure.Configurations.QuizConfigurations
 {
-    public class UserAnswersConfigurations : IEntityTypeConfiguration<UserAnswers>
+    public class UserAnswersConfigurations : IEntityTypeConfiguration<UserAnswer>
     {
-        public void Configure(EntityTypeBuilder<UserAnswers> builder)
+        public void Configure(EntityTypeBuilder<UserAnswer> builder)
         {
             builder.HasOne(UA => UA.Question)
                 .WithMany()
