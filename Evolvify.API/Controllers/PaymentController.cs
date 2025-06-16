@@ -1,15 +1,4 @@
-﻿using Evolvify.Application.Services.AppSubscription;
-using Evolvify.Application.Services.Payment;
 using Evolvify.Application.Services.Payment.DTOs;
-using Evolvify.Application.Services.Payment.PaymentService;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Stripe;
-using Stripe.Entitlements;
-
 namespace Evolvify.API.Controllers
 {
     [Route("api/[controller]")]
@@ -21,7 +10,7 @@ namespace Evolvify.API.Controllers
         private readonly IConfiguration configuration;
         private readonly string _webhookSecret;
 
-        public PaymentController(IPaymentService paymentService, IConfiguration configuration, IOptions<StripeSettings> stripeSettings,IAppSubscriptionService appSubscriptionService)
+        public PaymentController(IPaymentService paymentService, IConfiguration configuration, IOptions<StripeSettings> stripeSettings, IAppSubscriptionService appSubscriptionService)
         {
 
             _webhookSecret = stripeSettings.Value.WebhookSecret;
@@ -38,7 +27,7 @@ namespace Evolvify.API.Controllers
             var response = await appSubscriptionService.GetSubscriptionPlansAsync();
             return Ok(response);
         }
-        
+
         [HttpPost("create-subscription")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateSubscription([FromBody] CreateSubscriptionRequest request)
@@ -85,7 +74,7 @@ namespace Evolvify.API.Controllers
                 }
             }
 
-            
+
             return Ok();
         }
 

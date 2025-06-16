@@ -23,14 +23,14 @@ namespace Evolvify.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetSkills()
-        {   
+        {
             var response = await mediator.Send(new GetAllSkillsQuery());
 
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSkill([FromRoute]int id)
+        public async Task<IActionResult> GetSkill([FromRoute] int id)
         {
             var response = await mediator.Send(new GetSkillByIdQuery(id));
 
@@ -47,17 +47,17 @@ namespace Evolvify.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSkill([FromRoute]int id, [FromBody] UpdateSkillRequest request)
+        public async Task<IActionResult> UpdateSkill([FromRoute] int id, [FromBody] UpdateSkillRequest request)
         {
 
             await mediator.Send(new UpdateSkillCommand(id, request.Name, request.Description));
 
             return NoContent();
         }
-       
+
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSkill([FromRoute]int id)
+        public async Task<IActionResult> DeleteSkill([FromRoute] int id)
         {
             await mediator.Send(new DeleteSkillCommand(id));
 
