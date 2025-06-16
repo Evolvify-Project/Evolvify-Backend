@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Services.Payment.DTOs
 {
-    public class PaymentRequest
+    public class CreateSubscriptionRequest
     {
-        public decimal Amount { get; set; }
+        public string PriceId { get; set; }
     }
 }
