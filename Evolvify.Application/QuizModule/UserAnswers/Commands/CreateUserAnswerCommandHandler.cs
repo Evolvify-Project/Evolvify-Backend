@@ -24,7 +24,7 @@ namespace Evolvify.Application.QuizModule.UserAnswers.Commands
                        throw new NotFoundException(nameof(Answer), request.AnswerId.ToString());
 
 
-            var userAnswer = new UserAnswer { AnswerId = request.AnswerId, Answer = answer, QuizAttemptId = request.QuizAttemptId };
+            var userAnswer = new UserAnswer { AnswerId = request.AnswerId, Answer = answer, QuizAttemptId = request.QuizAttemptId,QuestionId=answer.QuestionId};
 
             var userAnswerRepo = unitOfWork.Repository<UserAnswer, int>();
 

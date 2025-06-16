@@ -1,4 +1,5 @@
 ﻿using Evolvify.Application.DTOs.Response;
+using Evolvify.Application.QuizModule.Quizzes.Dtos;
 using Evolvify.Domain.Entities.Quiz;
 using Evolvify.Domain.Exceptions;
 using Evolvify.Domain.Interfaces;
@@ -9,9 +10,9 @@ using MediatR;
 namespace Evolvify.Application.QuizModule.QuizAttempts.Commands.CalculateQuizAttemptResult
 {
     public class CalculateQuizAttemptResultCommandHandler(IUnitOfWork unitOfWork)
-        : IRequestHandler<CalculateQuizAttemptResultCommand, ApiResponse<double>>
+        : IRequestHandler<CalculateQuizAttemptResultCommand, ApiResponse<QuizResultDto>>
     {
-        public async Task<ApiResponse<double>> Handle(CalculateQuizAttemptResultCommand request,
+        public async Task<ApiResponse<QuizResultDto>> Handle(CalculateQuizAttemptResultCommand request,
             CancellationToken cancellationToken)
         {
             var quizAttemptRepo = unitOfWork.Repository<QuizAttempt, int>();
@@ -28,11 +29,21 @@ namespace Evolvify.Application.QuizModule.QuizAttempts.Commands.CalculateQuizAtt
                     CorrectAnswersCount++;
             }
 
-            var result = questionsCount > 0 ? (double)CorrectAnswersCount / questionsCount * 100 : 0;
+            var result = questionsCount > 0 ? ((double)CorrectAnswersCount / questionsCount) * 100 : 0;
             quizAttempt.Score = result;
 
             await unitOfWork.CompleteAsync();
-            return new ApiResponse<double>(result);
+
+           var score = new QuizResultDto
+            {
+                Score = new ScoreDto
+                {
+                    Correct = CorrectAnswersCount,
+                    Total = questionsCount
+                },
+                Percentage = $"{result:F2}%" // Format to two decimal places
+            };
+            return new ApiResponse<QuizResultDto>(score);
         }
     }
 }

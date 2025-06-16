@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Evolvify.Application.QuizModule.Quizzes.Dtos;
+using Evolvify.Application.QuizModule.UserAnswers.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +12,12 @@ namespace Evolvify.Application.QuizModule.QuizAttempts.Dtos
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
-        public double Score { get; set; }
+        public QuizResultDto Result { get; set; } = new QuizResultDto();
         public string? Duration { get; set; }
         public string UserId { get; set; }
         public int QuizId { get; set; }
+
+        public List<UserAnswerDto> userAnswers { get; set; } = new List<UserAnswerDto>();
 
     }
 }
