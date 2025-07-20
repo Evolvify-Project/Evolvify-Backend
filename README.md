@@ -85,4 +85,9 @@ Evolvify is a graduation project designed to create a robust platform for develo
 - **Email**: MailKit
 - **API Docs**: Swagger
 
+## Deployment
+
+This API is hosted on **MonsterAPI**. You can access the live deployment here:
+[Evolvify](https://evolvify.runasp.net/swagger/index.html)
+---
 
