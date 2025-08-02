@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Progresses.Commands
 {
-    public class UpdateModuleProgressCommand : IRequest<bool>
+    public class UpdateModuleProgressCommand : IRequest
     {
         public int ModuleId { get; set; }
         public bool IsCompleted { get; set; }

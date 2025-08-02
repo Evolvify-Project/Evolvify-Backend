@@ -38,7 +38,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AssessmentResults", (string)null);
+                    b.ToTable("AssessmentResults");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Comment", b =>
@@ -74,7 +74,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.CommentLike", b =>
@@ -100,7 +100,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommentLikes", (string)null);
+                    b.ToTable("CommentLikes");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Likes.PostLike", b =>
@@ -126,7 +126,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PostLikes", (string)null);
+                    b.ToTable("PostLikes");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Community.Post", b =>
@@ -152,7 +152,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Content", b =>
@@ -187,7 +187,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("ModuleId");
 
-                    b.ToTable("Contents", (string)null);
+                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Course", b =>
@@ -227,7 +227,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Module", b =>
@@ -252,7 +252,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Modules", (string)null);
+                    b.ToTable("Modules");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Progress.CourseProgress", b =>
@@ -276,7 +276,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CourseProgresses", (string)null);
+                    b.ToTable("CourseProgresses");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Progress.ModuleProgress", b =>
@@ -300,7 +300,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ModuleProgresses", (string)null);
+                    b.ToTable("ModuleProgresses");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.Answer", b =>
@@ -328,7 +328,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.Question", b =>
@@ -356,7 +356,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.Quiz", b =>
@@ -384,7 +384,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quizs", (string)null);
+                    b.ToTable("Quizs");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.QuizAttempt", b =>
@@ -417,7 +417,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("QuizResults", (string)null);
+                    b.ToTable("QuizResults");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Quiz.UserAnswer", b =>
@@ -454,7 +454,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAnswers", (string)null);
+                    b.ToTable("UserAnswers");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.Skill", b =>
@@ -478,7 +478,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills", (string)null);
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.User.ApplicationUser", b =>
@@ -595,7 +595,7 @@ namespace Evolvify.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Subscriptions", (string)null);
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("Evolvify.Domain.Entities.User.SubscriptionPlan", b =>
@@ -634,7 +634,7 @@ namespace Evolvify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubscriptionPlans", (string)null);
+                    b.ToTable("SubscriptionPlans");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

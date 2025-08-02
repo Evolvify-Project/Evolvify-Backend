@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Courses\Commands\" />
     <Folder Include="Identity\UserProfile\Commands\UpdateUserProfile\" />
   </ItemGroup>
 

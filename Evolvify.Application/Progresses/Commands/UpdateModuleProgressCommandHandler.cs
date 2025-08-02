@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Evolvify.Application.Progresses.Commands
 {
-    public class UpdateModuleProgressCommandHandler : IRequestHandler<UpdateModuleProgressCommand, bool>
+    public class UpdateModuleProgressCommandHandler : IRequestHandler<UpdateModuleProgressCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
@@ -21,7 +21,7 @@ namespace Evolvify.Application.Progresses.Commands
             _userContext = userContext;
         }
 
-        public async Task<bool> Handle(UpdateModuleProgressCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateModuleProgressCommand request, CancellationToken cancellationToken)
         {
             if (!await _unitOfWork.Modules.ModuleExistsAsync(request.ModuleId))
                 throw new NotFoundException($"Module with ID {request.ModuleId} not found.");
@@ -32,7 +32,6 @@ namespace Evolvify.Application.Progresses.Commands
             await _unitOfWork.Progress.UpdateModuleProgressAsync(user, request.ModuleId, request.IsCompleted);
             await _unitOfWork.Progress.UpdateCourseProgressAsync(user, module.CourseId);
             await _unitOfWork.SaveChangesAsync();
-            return true;
         }
     }
 }

@@ -28,7 +28,6 @@ namespace Evolvify.Application.Assessment.Service
         public async Task<PredictionResponse> GetPredictionAsync(SkillAnswer answers)
         {
 
-
             var response = await _httpClient.PostAsJsonAsync(ApiUrl, answers);
             
             response.EnsureSuccessStatusCode();

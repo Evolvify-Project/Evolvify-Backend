@@ -56,14 +56,18 @@ namespace Evolvify.Application.Identity.Register
 
             var result = await userManager.CreateAsync(newUser, request.Password);
 
-            var roleResult = await userManager.AddToRoleAsync(newUser, UserRole.User);
-
-            if(!result.Succeeded)
+            if (!result.Succeeded)
             {
-                return new ApiResponse<string>(false,StatusCodes.Status400BadRequest,"Failed to create user",null, result.Errors.Select(e=>e.Description).ToList());
+                return new ApiResponse<string>(false, StatusCodes.Status400BadRequest, "Failed to create user", null, result.Errors.Select(e => e.Description).ToList());
             }
 
-           
+            var roleResult = await userManager.AddToRoleAsync(newUser, UserRole.User);
+
+            if (!roleResult.Succeeded)
+            {
+                return new ApiResponse<string>(false, StatusCodes.Status400BadRequest, "Failed to add user to role", null, roleResult.Errors.Select(e => e.Description).ToList());
+            }
+
             //var code=await userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
               //await emailService.SendEmailConfirmed(newUser.Email, code);
